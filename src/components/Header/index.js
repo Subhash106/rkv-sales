@@ -28,12 +28,32 @@ const Header = () => {
               </li>
               <li>
                 <NavLink
+                  to="/sales"
+                  className={({ isActive }) => {
+                    return isActive ? 'active' : '';
+                  }}
+                >
+                  Sales
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   to="/orders"
                   className={({ isActive }) => {
                     return isActive ? 'active' : '';
                   }}
                 >
                   Orders
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/purchases"
+                  className={({ isActive }) => {
+                    return isActive ? 'active' : '';
+                  }}
+                >
+                  Purchases
                 </NavLink>
               </li>
             </ul>

@@ -7,8 +7,6 @@ const SalesFormFields = props => {
   const { values, handleChange, setFieldValue, handleSubmit } = props;
   const { mobile, firstName, lastName, address, items, subTotal, date } = values;
 
-  console.log('date', date);
-
   useEffect(() => {
     const subTotal = items.reduce((total, next) => {
       return next.rate * next.quantity + total;
@@ -20,7 +18,6 @@ const SalesFormFields = props => {
   const addItemHandler = () => {
     const itemsCopy = [...items];
     itemsCopy.push({ item: '', quantity: '', rate: 0, total: 0 });
-    console.log('updatedItems', itemsCopy);
     setFieldValue('items', itemsCopy);
   };
 
