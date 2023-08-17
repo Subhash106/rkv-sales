@@ -1,5 +1,5 @@
 import React from 'react';
-import SalesForm from './SalesForm/Index';
+import SalesForm from '../SalesForm/Index';
 import './style.css';
 
 const Main = () => {

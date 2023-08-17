@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -23,10 +22,10 @@ module.exports = {
       }
     ]
   },
-  resolve: { extensions: ['*', '.js', '.jsx'] },
+  resolve: { extensions: ['.*', '.js', '.jsx'] },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     clean: true
   },
   plugins: [
@@ -34,10 +33,10 @@ module.exports = {
       template: path.resolve(__dirname, 'public/index.html'),
       inject: true
     })
-  ]
-  //   optimization: {
-  //     splitChunks: {
-  //       chunks: 'all'
-  //     }
-  //   }
+  ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  }
 };

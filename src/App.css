@@ -52,6 +52,10 @@ body {
 .container {
   width: 80%;
   margin: 0 auto;
+
+  @media (max-width: 37.5em) {
+    width: 100%;
+  }
 }
 
 .bg-gray {
@@ -128,5 +132,16 @@ body {
 
   .col-sm-6 {
     grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.home {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (max-width: 44rem) {
+  .home {
+    grid-template-columns: 1fr;
   }
 }

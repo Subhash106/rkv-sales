@@ -2,7 +2,7 @@ import { Formik } from 'formik';
 import moment from 'moment';
 // import Yup from 'yup';
 import React from 'react';
-import { DB, isOffline } from '../../shared/utilities';
+import { DB, isOffline } from '../shared/utilities';
 import SalesFormFields from './form';
 import './style.css';
 
@@ -46,15 +46,17 @@ const SalesForm = () => {
   };
 
   return (
-    <Formik
-      initialValues={formData}
-      onSubmit={(values, { resetForm }) => {
-        submitHandler(values);
-        resetForm({ ...formData, items: [] });
-      }}
-    >
-      {formProps => <SalesFormFields {...formProps} />}
-    </Formik>
+    <div className="sales">
+      <Formik
+        initialValues={formData}
+        onSubmit={(values, { resetForm }) => {
+          submitHandler(values);
+          resetForm({ ...formData, items: [] });
+        }}
+      >
+        {formProps => <SalesFormFields {...formProps} />}
+      </Formik>
+    </div>
   );
 };
 
