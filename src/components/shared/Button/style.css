@@ -1,0 +1,32 @@
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.6rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--white);
+  background-color: var(--main-primary);
+  border: none;
+  border-radius: 100rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--main-secondary);
+}
+
+.btn-small {
+  font-size: 1.2rem;
+  padding: 0.4rem 0.8rem;
+}
+
+.btn-large {
+  padding: 1.6rem 2.4rem;
+}
+
+.btn-gray {
+  background-color: var(--tint-gray);
+}
+
+.btn-gray:hover {
+  background-color: var(--primary-gray);
+}

@@ -1,0 +1,40 @@
+.orders {
+  padding: 3.2rem;
+}
+
+.filters{
+  padding: 2rem 0;
+}
+
+.orders-table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--tertiary-gray);
+  margin-bottom: 6.4rem;
+}
+
+.orders-table th,
+.orders-table td {
+  padding: 0.8rem;
+  font-size: 1.2rem;
+}
+
+.orders-table thead,
+.orders-table tfoot {
+  background-color: var(--tertiary-gray);
+}
+
+.orders-table tbody tr:nth-child(odd) {
+  background-color: var(--white);
+}
+
+.orders-table tbody tr:nth-child(even) {
+  background-color: var(--tertiary-gray);
+}
+
+.table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

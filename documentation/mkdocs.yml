@@ -1,0 +1,10 @@
+site_name: React set up from scratch
+theme:
+  name: "material"
+  palette:
+    primary: "blue"
+    accesnt: "blue"
+nav:
+  - Home: index.md
+  - Architecture:
+      - Overview: architecture.md
