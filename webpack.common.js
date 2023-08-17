@@ -33,10 +33,10 @@ module.exports = {
       template: path.resolve(__dirname, 'public/index.html'),
       inject: true
     })
-  ],
-  optimization: {
-    splitChunks: {
-      chunks: 'all'
-    }
-  }
+  ]
+  // optimization: {
+  //   splitChunks: {
+  //     chunks: 'all'
+  //   }
+  // }
 };
