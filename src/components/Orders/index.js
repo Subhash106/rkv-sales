@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../Header';
 import Button from '../shared/Button';
 import { DB } from '../shared/utilities';
 import OrdersTable from './ordersTable';
@@ -104,31 +103,24 @@ const Orders = () => {
   };
 
   useEffect(() => {
-    console.log('onlineOrders', onlineOrders);
-
     const filteredData = onlineOrders.filter(
       order => moment(order.date, 'YYYY-MM-DD').format('YYYY-MM-DD') === moment(date, 'YYYY-MM-DD').format('YYYY-MM-DD')
     );
-
-    console.log('filteredData', filteredData);
 
     setFilteredOrders(filteredData);
   }, [date]);
 
   return (
-    <>
-      <Header />
-      <div className="container orders bg-gray">
-        <div className="bg-white" style={{ padding: '2rem', borderRadius: '1.2rem' }}>
-          <h1 className="heading-primary">Orders</h1>
-          <div className="filters">
-            <TextInput value={date} onChange={dateChangeHandler} type="date" id="date" label="Select Date" />
-          </div>
-          <OrdersTable title={offlineTableHeader()} orders={offlineOrders} />
-          <OrdersTable title={onlineTableHeader()} orders={filteredOrders} />
+    <div className="orders">
+      <div className="bg-white" style={{ padding: '2rem', borderRadius: '1.2rem' }}>
+        <h1 className="heading-primary">Orders</h1>
+        <div className="filters">
+          <TextInput value={date} onChange={dateChangeHandler} type="date" id="date" label="Select Date" />
         </div>
+        <OrdersTable title={offlineTableHeader()} orders={offlineOrders} />
+        <OrdersTable title={onlineTableHeader()} orders={filteredOrders} />
       </div>
-    </>
+    </div>
   );
 };
 
