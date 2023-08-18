@@ -6,7 +6,7 @@ import { DB, isOffline } from '../shared/utilities';
 import SalesFormFields from './form';
 import './style.css';
 
-const SalesForm = () => {
+const Sales = () => {
   const formData = {
     date: moment().format('YYYY-MM-DD'),
     mobile: '',
@@ -60,4 +60,4 @@ const SalesForm = () => {
   );
 };
 
-export default SalesForm;
+export default Sales;
