@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -32,11 +33,19 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public/index.html'),
       inject: true
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        path.resolve(__dirname, 'public/_redirects'),
+        path.resolve(__dirname, 'public/manifest.json'),
+        path.resolve(__dirname, 'public/rkv-service-worker.js'),
+        { from: path.resolve(__dirname, 'public/img'), to: path.resolve(__dirname, 'dist/img') }
+      ]
     })
-  ]
-  // optimization: {
-  //   splitChunks: {
-  //     chunks: 'all'
-  //   }
-  // }
+  ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  }
 };
