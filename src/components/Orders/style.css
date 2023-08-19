@@ -1,8 +1,12 @@
 .orders {
   padding: 3.2rem;
+
+  @media (max-width: 37.5em) {
+    padding: 0;
+  }
 }
 
-.filters{
+.filters {
   padding: 2rem 0;
 }
 
