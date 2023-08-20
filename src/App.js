@@ -1,16 +1,22 @@
 import React from 'react';
-import Header from './components/Header';
+import { Provider } from 'react-redux';
 import { Outlet } from 'react-router-dom';
+
+import Header from './components/Header';
+import store from './store';
+
 import './App.css';
 
 const App = () => {
   return (
-    <div className="home">
-      <Header />
-      <div className="container bg-gray">
-        <Outlet />
+    <Provider store={store}>
+      <div className="home">
+        <Header />
+        <div className="container bg-gray">
+          <Outlet />
+        </div>
       </div>
-    </div>
+    </Provider>
   );
 };
 

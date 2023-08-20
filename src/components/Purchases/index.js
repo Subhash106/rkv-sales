@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid';
 import { TextField, Button } from '@mui/material';
 import moment from 'moment';
 import './style.css';
+import PurchasesTable from './PurchasesTable';
 
 const Purchases = () => {
   const [purchase, setPurchase] = useState({ date: moment().format('YYYY-MM-DD'), amount: '' });
@@ -32,7 +33,7 @@ const Purchases = () => {
     <div className="purchases">
       <div className="bg-white" style={{ padding: '2rem', borderRadius: '1.2rem' }}>
         <h1 className="heading-primary">Purchases</h1>
-        <form onSubmit={submitHandler}>
+        <form onSubmit={submitHandler} style={{ marginBottom: '4rem' }}>
           <Grid container spacing={2}>
             <Grid item xs={12} md={3}>
               <TextField onChange={chnageHandler} name="date" type="date" id="date" value={date} />
@@ -50,6 +51,12 @@ const Purchases = () => {
             </Grid>
           </Grid>
         </form>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={12}>
+            <h1 style={{ marginBottom: '2rem' }}>All Purchases</h1>
+            <PurchasesTable />
+          </Grid>
+        </Grid>
       </div>
     </div>
   );
