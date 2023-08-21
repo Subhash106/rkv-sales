@@ -5,21 +5,40 @@ import moment from 'moment';
 import './style.css';
 import PurchasesTable from './PurchasesTable';
 
+const toBase64 = file =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+  });
+
 const Purchases = () => {
-  const [purchase, setPurchase] = useState({ date: moment().format('YYYY-MM-DD'), amount: '' });
+  const [purchase, setPurchase] = useState({
+    date: moment().format('YYYY-MM-DD'),
+    amount: '',
+    invoice,
+    invoiceName: ''
+  });
 
-  const { date, amount } = purchase;
+  const { date, amount, invoice } = purchase;
 
-  const chnageHandler = e => {
+  const changeHandler = async e => {
     const {
       target: { value, name }
     } = e;
 
-    setPurchase({ ...purchase, [name]: value });
+    if (name === 'invoice') {
+      const file = e.target.files[0];
+      setPurchase({ ...purchase, [name]: await toBase64(file), invoiceName: file.name });
+    } else {
+      setPurchase({ ...purchase, [name]: value });
+    }
   };
 
   const submitHandler = e => {
     e.preventDefault();
+
     const url = 'https://basic-react-a8d88-default-rtdb.firebaseio.com/purchases.json';
     fetch(url, {
       method: 'POST',
@@ -33,16 +52,23 @@ const Purchases = () => {
     <div className="purchases">
       <div className="bg-white" style={{ padding: '2rem', borderRadius: '1.2rem' }}>
         <h1 className="heading-primary">Purchases</h1>
-        <form onSubmit={submitHandler} style={{ marginBottom: '4rem' }}>
+        <form encType="multipart/form-data" onSubmit={submitHandler} style={{ marginBottom: '4rem' }}>
           <Grid container spacing={2}>
             <Grid item xs={12} md={3}>
-              <TextField onChange={chnageHandler} name="date" type="date" id="date" value={date} />
+              <TextField onChange={changeHandler} name="date" type="date" id="date" value={date} label="Date" />
             </Grid>
             <Grid item xs={12} md={3}>
-              <TextField onChange={chnageHandler} name="amount" type="number" id="amount" value={amount} />
+              <TextField
+                onChange={changeHandler}
+                name="amount"
+                type="number"
+                id="amount"
+                value={amount}
+                label="Amount"
+              />
             </Grid>
             <Grid item xs={12} md={3}>
-              file to upload
+              <TextField type="file" name="invoice" min="0" id="invoice" onChange={changeHandler} label="Invoice" />
             </Grid>
             <Grid item xs={12} md={3}>
               <Button onClick={submitHandler} variant="contained" color="success">
