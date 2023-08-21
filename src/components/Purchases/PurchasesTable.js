@@ -30,7 +30,7 @@ export default function PurchasesTable() {
           <TableRow>
             <TableCell>Date</TableCell>
             <TableCell align="right">Amount</TableCell>
-            <TableCell align="right">File</TableCell>
+            <TableCell align="right">Invoice</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -39,7 +39,11 @@ export default function PurchasesTable() {
               <TableRow key={`${row.date}_${row.amount}`} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell>{row.date}</TableCell>
                 <TableCell align="right">{row.amount}</TableCell>
-                <TableCell align="right">{row.file}</TableCell>
+                <TableCell align="right">
+                  <a download={row.invoiceName} href={row.invoice}>
+                    {row.invoiceName}
+                  </a>
+                </TableCell>
               </TableRow>
             ))}
         </TableBody>
