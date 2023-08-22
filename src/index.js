@@ -7,6 +7,7 @@ import Error from './components/Error';
 import Orders from './components/Orders';
 import Sales from './components/Sales';
 import Purchases from './components/Purchases';
+import Dashboard from './components/Dashboard';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <Error />,
     children: [
+      {
+        index: true,
+        element: <Dashboard />
+      },
       {
         path: '/sales',
         element: <Sales />

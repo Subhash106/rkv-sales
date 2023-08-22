@@ -145,3 +145,102 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* utils */
+/* margins */
+.m-xs {
+  margin: 1rem;
+}
+.mt-xs {
+  margin-top: 1rem;
+}
+
+.mb-xs {
+  margin-bottom: 1rem;
+}
+
+.ml-xs {
+  margin-left: 1rem;
+}
+
+.mr-xs {
+  margin-right: 1rem;
+}
+
+.m-sm {
+  margin: 2rem;
+}
+.mt-sm {
+  margin-top: 2rem;
+}
+
+.mb-sm {
+  margin-bottom: 2rem;
+}
+
+.ml-sm {
+  margin-left: 2rem;
+}
+
+.mr-sm {
+  margin-right: 2rem;
+}
+
+.m-lg {
+  margin: 4rem;
+}
+.mt-lg {
+  margin-top: 4rem;
+}
+
+.mb-lg {
+  margin-bottom: 4rem;
+}
+
+.ml-lg {
+  margin-left: 4rem;
+}
+
+.mr-lg {
+  margin-right: 4rem;
+}
+
+/* paddings */
+
+.p-sm {
+  padding: 2rem;
+}
+.pt-sm {
+  padding-top: 2rem;
+}
+
+.pb-sm {
+  padding-bottom: 2rem;
+}
+
+.pl-sm {
+  padding-left: 2rem;
+}
+
+.pr-sm {
+  padding-right: 2rem;
+}
+
+.p-lg {
+  padding: 4rem;
+}
+.pt-lg {
+  padding-top: 4rem;
+}
+
+.pb-lg {
+  padding-bottom: 4rem;
+}
+
+.pl-lg {
+  padding-left: 4rem;
+}
+
+.pr-lg {
+  padding-right: 4rem;
+}
