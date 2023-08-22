@@ -8,9 +8,12 @@ const baseAPIs = createApi({
   endpoints: builder => ({
     getPurchases: builder.query({
       query: () => 'purchases.json'
+    }),
+    getOrders: builder.query({
+      query: () => 'orders.json'
     })
   })
 });
 
-export const { useGetPurchasesQuery } = baseAPIs;
+export const { useGetPurchasesQuery, useGetOrdersQuery } = baseAPIs;
 export default baseAPIs;
