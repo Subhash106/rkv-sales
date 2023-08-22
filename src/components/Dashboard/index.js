@@ -18,9 +18,6 @@ const Dashboard = () => {
   const { isLoading: loadingOrders, data: orders } = useGetOrdersQuery();
   const { isLoading: loadingPurchases, data: purchases } = useGetPurchasesQuery();
 
-  console.log('orders', orders);
-  console.log('purchases', purchases);
-
   const handleChange = e => {
     const {
       target: { name, value }
