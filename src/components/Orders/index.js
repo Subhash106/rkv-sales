@@ -5,25 +5,19 @@ import OrdersTable from './ordersTable';
 import getOfflineStatus from '../shared/getOfflineStatus';
 import TextInput from '../shared/TextInput';
 import moment from 'moment';
+import { useGetOrdersQuery } from '../../store/base';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const Orders = () => {
+  const navigate = useNavigate();
+  const [params] = useSearchParams();
   const isOffline = getOfflineStatus();
-  const [onlineOrders, setOnlineOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [offlineOrders, setOfflineOrders] = useState([]);
   const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
+  const { data: onlineOrders = [] } = useGetOrdersQuery();
 
-  const getOnlineOrders = async () => {
-    const orderResponse = await fetch('https://basic-react-a8d88-default-rtdb.firebaseio.com/orders.json');
-    const orderData = await orderResponse.json();
-    const formatedData = [];
-
-    for (const data in orderData) {
-      formatedData.push(orderData[data]);
-    }
-
-    return formatedData;
-  };
+  console.log('onlineOrders', onlineOrders);
 
   const getOfflineOrders = async () => {
     const transactionDB = DB.getTransactionDB();
@@ -37,9 +31,6 @@ const Orders = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const data = await getOnlineOrders();
-      setOnlineOrders(data);
-
       const offOrders = await getOfflineOrders();
       setOfflineOrders(offOrders);
     };
@@ -73,9 +64,6 @@ const Orders = () => {
 
     const offOrders = await getOfflineOrders();
     setOfflineOrders(offOrders);
-
-    const data = await getOnlineOrders();
-    setOnlineOrders(data);
   };
 
   const offlineTableHeader = () => {
@@ -100,15 +88,31 @@ const Orders = () => {
       target: { value }
     } = e;
     setDate(value);
+    navigate('/orders');
   };
 
   useEffect(() => {
-    const filteredData = onlineOrders.filter(
-      order => moment(order.date, 'YYYY-MM-DD').format('YYYY-MM-DD') === moment(date, 'YYYY-MM-DD').format('YYYY-MM-DD')
-    );
+    const filteredData = Object.values(onlineOrders).filter(order => {
+      const orderDateArray = order?.date?.split('-');
+      const dateArray = date?.split('-');
+      console.log('orderDateArray', orderDateArray);
+      console.log('dateArray', dateArray);
+
+      if (params.get('month') && params.get('year')) {
+        return +orderDateArray?.[0] === +params.get('year') && +orderDateArray?.[1] === +params.get('month');
+      }
+
+      return (
+        orderDateArray?.[0] === dateArray?.[0] &&
+        orderDateArray?.[1] === dateArray?.[1] &&
+        orderDateArray?.[2] === dateArray?.[2]
+      );
+    });
+
+    console.log('filteredData', filteredData);
 
     setFilteredOrders(filteredData);
-  }, [date]);
+  }, [date, onlineOrders]);
 
   return (
     <div className="orders">
