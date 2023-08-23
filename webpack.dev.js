@@ -11,5 +11,6 @@ module.exports = merge(common, {
     hot: true,
     historyApiFallback: true
   },
+  devtool: 'eval',
   plugins: [new webpack.HotModuleReplacementPlugin()]
 });

@@ -22,9 +22,6 @@ const Dashboard = () => {
     const {
       target: { name, value }
     } = e;
-
-    console.log(name, value, e);
-
     setFilters({ ...filters, [name]: value });
   };
 
@@ -112,7 +109,7 @@ const Dashboard = () => {
               <PurchasesSummary purchasesCount={purchasesCount} purchasesAmount={purchasesAmount} />
             </Grid>
             <Grid item xs={12} lg={6}>
-              <SalesSummary ordersCount={ordersCount} ordersAmount={ordersAmount} />
+              <SalesSummary month={month} year={year} ordersCount={ordersCount} ordersAmount={ordersAmount} />
             </Grid>
           </Grid>
         </div>
