@@ -17,8 +17,6 @@ const Orders = () => {
   const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
   const { data: onlineOrders = [] } = useGetOrdersQuery();
 
-  console.log('onlineOrders', onlineOrders);
-
   const getOfflineOrders = async () => {
     const transactionDB = DB.getTransactionDB();
     const offlineOrders = [];
@@ -95,8 +93,6 @@ const Orders = () => {
     const filteredData = Object.values(onlineOrders).filter(order => {
       const orderDateArray = order?.date?.split('-');
       const dateArray = date?.split('-');
-      console.log('orderDateArray', orderDateArray);
-      console.log('dateArray', dateArray);
 
       if (params.get('month') && params.get('year')) {
         return +orderDateArray?.[0] === +params.get('year') && +orderDateArray?.[1] === +params.get('month');
@@ -108,9 +104,6 @@ const Orders = () => {
         orderDateArray?.[2] === dateArray?.[2]
       );
     });
-
-    console.log('filteredData', filteredData);
-
     setFilteredOrders(filteredData);
   }, [date, onlineOrders]);
 
