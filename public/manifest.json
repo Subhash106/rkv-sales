@@ -43,7 +43,7 @@
       "sizes": "1024x1024"
     }
   ],
-  "start_url": "./index.html",
+  "start_url": "/",
   "scope": ".",
   "display": "standalone",
   "orientation": "portrait-primary",
