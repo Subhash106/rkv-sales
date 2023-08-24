@@ -6,5 +6,7 @@ This is an application to tract the inventory and store the billing details.
 
 - Add login
 - Dashboard
-  - Add summary for monthy (current month) sales and purchases
+  - Add summary for monthy (current month by default) sales and purchases
   - Summary can be filtered by month and year (last three years)
+  - On clicking sales count it should show the sales for entire month
+  - On clicking purchases count it should show the purchases of entire month
