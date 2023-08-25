@@ -1,8 +1,32 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuth, signOut } from 'firebase/auth';
+
 import './style.css';
+import { logout } from '../../store/auth';
 
 const Header = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.auth.idToken) || localStorage.getItem('token');
+  const logoutHandler = e => {
+    e.preventDefault();
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        dispatch(logout());
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('expiresIn');
+        navigate('/');
+      })
+      .catch(error => {
+        // An error happened.
+        console.error('logout error', error);
+      });
+  };
   return (
     <div className="header">
       <div className="container">
@@ -17,13 +41,13 @@ const Header = () => {
             <ul>
               <li>
                 <NavLink
-                  to="/"
+                  to="/dashboard"
                   className={({ isActive }) => {
                     return isActive ? 'active' : '';
                   }}
                   end
                 >
-                  Home
+                  Dashboard
                 </NavLink>
               </li>
               <li>
@@ -56,6 +80,13 @@ const Header = () => {
                   Purchases
                 </NavLink>
               </li>
+              {token && (
+                <li>
+                  <a href="#" onClick={logoutHandler}>
+                    Logout
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
         </header>

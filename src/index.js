@@ -8,6 +8,8 @@ import Orders from './components/Orders';
 import Sales from './components/Sales';
 import Purchases from './components/Purchases';
 import Dashboard from './components/Dashboard';
+import Login from './components/Login';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -17,19 +19,39 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Dashboard />
+        element: <Login />
+      },
+      {
+        path: '/dashboard',
+        element: (
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        )
       },
       {
         path: '/sales',
-        element: <Sales />
+        element: (
+          <ProtectedRoute>
+            <Sales />
+          </ProtectedRoute>
+        )
       },
       {
         path: '/orders',
-        element: <Orders />
+        element: (
+          <ProtectedRoute>
+            <Orders />
+          </ProtectedRoute>
+        )
       },
       {
         path: '/purchases',
-        element: <Purchases />
+        element: (
+          <ProtectedRoute>
+            <Purchases />
+          </ProtectedRoute>
+        )
       }
     ]
   }
