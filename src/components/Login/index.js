@@ -5,6 +5,8 @@ import { Navigate } from 'react-router-dom';
 
 import { login } from '../../store/auth';
 
+import './style.css';
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
@@ -71,26 +73,31 @@ export default function Login() {
   if (token) return <Navigate to="/dashboard" />;
 
   return (
-    <div className="sales-form bg-white">
-      <div className="row col-md-1">
-        <h1 className="heading-primary">Login</h1>
-      </div>
-      <form>
-        <div className="row col-md-3 col-sm-1">
-          <TextField variant="outlined" onChange={handleChange} value={email} id="email" name="email" label="Email" />
-          <TextField
-            variant="outlined"
-            onChange={handleChange}
-            value={password}
-            id="password"
-            name="password"
-            label="Password"
-          />
-          <Button onClick={loginHandler} variant="contained" color="success">
-            Login
-          </Button>
+    <div className="login bg-white">
+      <div className="login__container">
+        <div className="logo__container">
+          <img src="./img/logo.jpg" alt="logo" className="logo" />
         </div>
-      </form>
+        <div className="row col-md-1">
+          <h1 className="heading-primary">Login</h1>
+        </div>
+        <form>
+          <div className="row col-md-1 col-sm-1">
+            <TextField variant="outlined" onChange={handleChange} value={email} id="email" name="email" label="Email" />
+            <TextField
+              variant="outlined"
+              onChange={handleChange}
+              value={password}
+              id="password"
+              name="password"
+              label="Password"
+            />
+            <Button onClick={loginHandler} variant="contained" color="success">
+              Login
+            </Button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

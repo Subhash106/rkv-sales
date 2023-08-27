@@ -1,0 +1,21 @@
+.login {
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+
+  &__container {
+    width: 40rem;
+  }
+}
+
+.logo {
+  width: 6rem;
+
+  &__container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.6rem;
+  }
+}
