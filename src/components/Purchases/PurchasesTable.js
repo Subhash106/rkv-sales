@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 import { useSearchParams } from 'react-router-dom';
 import { Grid } from '@mui/material';
 
-import { useGetPurchasesQuery } from '../../store/base';
+import { useGetPurchasesQuery } from '../../services/base';
 
 export default function PurchasesTable() {
   const [params] = useSearchParams();

@@ -6,7 +6,7 @@ import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import moment from 'moment';
 
 import './style.css';
-import { useGetOrdersQuery, useGetPurchasesQuery } from '../../store/base';
+import { useGetOrdersQuery, useGetPurchasesQuery } from '../../services/base';
 
 const Dashboard = () => {
   const [filters, setFilters] = useState({ month: moment().month() + 1, year: moment().year() });
@@ -15,8 +15,8 @@ const Dashboard = () => {
   const [ordersAmount, setOrdersAmount] = useState(0);
   const [purchasesCount, setPurchasesCount] = useState(0);
   const [purchasesAmount, setPurchasesAmount] = useState(0);
-  const { isLoading: loadingOrders, data: orders } = useGetOrdersQuery();
-  const { isLoading: loadingPurchases, data: purchases } = useGetPurchasesQuery();
+  const { isLoading: loadingOrders, data: orders = {} } = useGetOrdersQuery();
+  const { isLoading: loadingPurchases, data: purchases = {} } = useGetPurchasesQuery();
 
   const handleChange = e => {
     const {
