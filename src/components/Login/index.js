@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { TextField, Button } from '@mui/material';
 import { Navigate } from 'react-router-dom';
+import { useTranslation, Trans } from 'react-i18next';
 
 import { login } from '../../store/auth';
 
@@ -37,10 +38,14 @@ console.log('analytics', analytics);
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const { email, password } = credentials;
-
   const token = useSelector(state => state.auth.idToken) || localStorage.getItem('token');
+
+  const changeLanguage = lng => {
+    i18n.changeLanguage(lng);
+  };
 
   const handleChange = e => {
     const {
@@ -75,11 +80,20 @@ export default function Login() {
   return (
     <div className="login bg-white">
       <div className="login__container">
+        <div className="change-language">
+          <p className="change-language--paragraph">{t('login.chooseLanguage')}</p>
+          <div className="change-language--buttons">
+            <button onClick={() => changeLanguage('hi')}>हिंदी</button>
+            <button onClick={() => changeLanguage('en')}>English</button>
+          </div>
+        </div>
         <div className="logo__container">
           <img src="./img/logo.jpg" alt="logo" className="logo" />
         </div>
         <div className="row col-md-1">
-          <h1 className="heading-primary">Login</h1>
+          <h1 className="heading-primary" style={{ marginBottom: '0' }}>
+            {t('login.title')}
+          </h1>
         </div>
         <form>
           <div className="row col-md-1 col-sm-1">
@@ -90,7 +104,7 @@ export default function Login() {
               id="email"
               name="email"
               type="text"
-              label="Email"
+              label={t('login.email')}
             />
             <TextField
               variant="outlined"
@@ -98,11 +112,11 @@ export default function Login() {
               value={password}
               id="password"
               name="password"
-              label="Password"
+              label={t('login.password')}
               type="password"
             />
             <Button onClick={loginHandler} variant="contained" color="success">
-              Login
+              {t('login.loginBtn')}
             </Button>
           </div>
         </form>
