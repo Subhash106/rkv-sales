@@ -83,7 +83,15 @@ export default function Login() {
         </div>
         <form>
           <div className="row col-md-1 col-sm-1">
-            <TextField variant="outlined" onChange={handleChange} value={email} id="email" name="email" label="Email" />
+            <TextField
+              variant="outlined"
+              onChange={handleChange}
+              value={email}
+              id="email"
+              name="email"
+              type="text"
+              label="Email"
+            />
             <TextField
               variant="outlined"
               onChange={handleChange}
@@ -91,6 +99,7 @@ export default function Login() {
               id="password"
               name="password"
               label="Password"
+              type="password"
             />
             <Button onClick={loginHandler} variant="contained" color="success">
               Login
