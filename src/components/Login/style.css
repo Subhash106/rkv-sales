@@ -19,3 +19,21 @@
     margin-bottom: 1.6rem;
   }
 }
+
+.change-language {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+  margin-bottom: 6.4rem;
+
+  &--paragraph {
+    font-size: 1.6rem;
+  }
+
+  &--buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.6rem;
+  }
+}
