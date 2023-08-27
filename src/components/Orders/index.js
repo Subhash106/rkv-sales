@@ -5,7 +5,7 @@ import OrdersTable from './ordersTable';
 import getOfflineStatus from '../shared/getOfflineStatus';
 import TextInput from '../shared/TextInput';
 import moment from 'moment';
-import { useGetOrdersQuery } from '../../store/base';
+import { useGetOrdersQuery } from '../../services/base';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const Orders = () => {
