@@ -4,13 +4,12 @@ This is an application to tract the inventory and store the billing details.
 
 ## To-Do
 
-- Add login
+- Auto refresh token
 - Dashboard
-  - Add summary for monthy (current month by default) sales and purchases
-  - Summary can be filtered by month and year (last three years)
-  - On clicking sales count it should show the sales for entire month
-  - On clicking purchases count it should show the purchases of entire month
-- Add Hindi Language support
+  - Increase the font size of total count and total Amount
+- Add Hindi Language support to all pages
 - Webpack optimization
-- Side navigation should be closed on selection of item
-- Error handling on login page
+- Validation on Sales form
+- Convert storing sales and purchases to RTK Query
+- Modify side menu opening and closing
+- Add auth to purchases page

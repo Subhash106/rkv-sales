@@ -37,6 +37,7 @@ body {
   color: var(--primary-gray);
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
+  font-size: var(--default-font-size);
 }
 
 .heading-primary {
