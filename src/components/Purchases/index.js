@@ -4,7 +4,7 @@ import { TextField, Button } from '@mui/material';
 import moment from 'moment';
 import './style.css';
 import PurchasesTable from './PurchasesTable';
-import { useSelector } from 'react-redux';
+import { useStorePurchasesMutation } from '../../services/base';
 
 const toBase64 = file =>
   new Promise((resolve, reject) => {
@@ -15,7 +15,7 @@ const toBase64 = file =>
   });
 
 const Purchases = () => {
-  const token = useSelector(state => state.auth.idToken) || localStorage.getItem('token');
+  const [addPurchase] = useStorePurchasesMutation();
   const [purchase, setPurchase] = useState({
     date: moment().format('YYYY-MM-DD'),
     amount: '',
@@ -41,13 +41,7 @@ const Purchases = () => {
   const submitHandler = e => {
     e.preventDefault();
 
-    const url = `https://basic-react-a8d88-default-rtdb.firebaseio.com/purchases.json?auth=${token}`;
-    fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(purchase)
-    })
-      .then(res => res.json())
-      .then(data => console.log(data));
+    addPurchase(purchase);
   };
 
   return (

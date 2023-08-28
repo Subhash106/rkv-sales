@@ -19,12 +19,12 @@ export default function PurchasesTable() {
   const year = params.get('year');
 
   if (month && year) {
-    rows = Object.values(data).filter(purchase => {
+    rows = Object.values(data || {}).filter(purchase => {
       const dateArray = purchase?.date?.split('-');
       return +month === +dateArray?.[1] && +year === +dateArray?.[0];
     });
   } else {
-    rows = Object.values(data);
+    rows = Object.values(data || {});
   }
 
   if (error) {

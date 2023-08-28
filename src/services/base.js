@@ -25,14 +25,21 @@ const baseAPIs = createApi({
       query: () => 'orders.json'
     }),
     storeOrders: builder.mutation({
-      query: post => ({
+      query: order => ({
         url: 'orders.json',
         method: 'POST',
-        body: post
+        body: order
+      })
+    }),
+    storePurchases: builder.mutation({
+      query: purchase => ({
+        url: 'purchases.json',
+        method: 'POST',
+        body: purchase
       })
     })
   })
 });
 
-export const { useGetPurchasesQuery, useGetOrdersQuery, useStoreOrdersMutation } = baseAPIs;
+export const { useGetPurchasesQuery, useGetOrdersQuery, useStoreOrdersMutation, useStorePurchasesMutation } = baseAPIs;
 export default baseAPIs;
