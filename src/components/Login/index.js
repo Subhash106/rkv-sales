@@ -68,6 +68,12 @@ export default function Login() {
         localStorage.setItem('refreshToken', tokenResponse.refreshToken);
         localStorage.setItem('expiresIn', tokenResponse.expiresIn);
         dispatch(login(tokenResponse));
+        // Auto refresh and update token before expiration
+        setTimeout(() => {
+          localStorage.removeItem('token', tokenResponse.idToken);
+          localStorage.removeItem('refreshToken', tokenResponse.refreshToken);
+          localStorage.removeItem('expiresIn', tokenResponse.expiresIn);
+        }, tokenResponse.refreshToken * 1000);
         navigate('/dashboard');
       })
       .catch(error => {

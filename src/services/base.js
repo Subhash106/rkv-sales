@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const rawBaseQuery = fetchBaseQuery({
-  baseUrl: 'https://basic-react-a8d88-default-rtdb.firebaseio.com/'
+  baseUrl: process.env.API_BASE_URL || 'https://food-order-app-e5c31-default-rtdb.firebaseio.com/'
 });
 
 const dynamicBaseQuery = async (args, api, extraOptions) => {
