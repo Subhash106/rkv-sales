@@ -11,3 +11,4 @@ This is an application to tract the inventory and store the billing details.
 - Convert storing sales and purchases to RTK Query
 - Modify side menu opening and closing
 - Add auth to purchases page
+- Setting dev environment
