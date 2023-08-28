@@ -15,7 +15,9 @@ i18n
             title: 'Login',
             email: 'Email',
             password: 'Password',
-            loginBtn: 'Login'
+            loginBtn: 'Login',
+            noInternet: 'No internet connection. Please check internet and try again.',
+            wrongCredentials: 'Email or password is incorrect. Please check and try again.'
           }
         }
       },
@@ -26,7 +28,9 @@ i18n
             title: 'लॉग इन',
             email: 'ईमेल',
             password: 'पासवर्ड',
-            loginBtn: 'लॉग इन करें'
+            loginBtn: 'लॉग इन करें',
+            noInternet: 'कोई इंटरनेट कनेक्शन नहीं। कृपया इंटरनेट जांचें और पुनः प्रयास करें।',
+            wrongCredentials: 'ईमेल या पासवर्ड गलत है। कृपया जाँच करें और पुनः प्रयास करें।'
           }
         }
       }

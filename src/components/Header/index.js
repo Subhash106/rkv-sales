@@ -63,6 +63,7 @@ const Header = () => {
             <ul>
               <li>
                 <NavLink
+                  onClick={closeClickHandler}
                   to="/dashboard"
                   className={({ isActive }) => {
                     return isActive ? 'active' : '';
@@ -74,6 +75,7 @@ const Header = () => {
               </li>
               <li>
                 <NavLink
+                  onClick={closeClickHandler}
                   to="/sales"
                   className={({ isActive }) => {
                     return isActive ? 'active' : '';
@@ -84,6 +86,7 @@ const Header = () => {
               </li>
               <li>
                 <NavLink
+                  onClick={closeClickHandler}
                   to="/orders"
                   className={({ isActive }) => {
                     return isActive ? 'active' : '';
@@ -94,6 +97,7 @@ const Header = () => {
               </li>
               <li>
                 <NavLink
+                  onClick={closeClickHandler}
                   to="/purchases"
                   className={({ isActive }) => {
                     return isActive ? 'active' : '';

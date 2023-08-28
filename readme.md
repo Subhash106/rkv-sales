@@ -12,3 +12,5 @@ This is an application to tract the inventory and store the billing details.
   - On clicking purchases count it should show the purchases of entire month
 - Add Hindi Language support
 - Webpack optimization
+- Side navigation should be closed on selection of item
+- Error handling on login page

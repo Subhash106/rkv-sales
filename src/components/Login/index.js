@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { TextField, Button } from '@mui/material';
 import { Navigate } from 'react-router-dom';
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 import { login } from '../../store/auth';
 
@@ -32,7 +32,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-
 console.log('analytics', analytics);
 
 export default function Login() {
@@ -40,6 +39,7 @@ export default function Login() {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const [loginError, setLoginError] = useState('');
   const { email, password } = credentials;
   const token = useSelector(state => state.auth.idToken) || localStorage.getItem('token');
 
@@ -72,6 +72,11 @@ export default function Login() {
       })
       .catch(error => {
         console.log('error', error);
+        if (/network-request-failed/.test(error.message)) {
+          setLoginError(t('login.noInternet'));
+        } else {
+          setLoginError(t('login.wrongCredentials'));
+        }
       });
   };
 
@@ -95,6 +100,7 @@ export default function Login() {
             {t('login.title')}
           </h1>
         </div>
+        {loginError && <p className="error--paragraph mb-sm">{loginError}</p>}
         <form>
           <div className="row col-md-1 col-sm-1">
             <TextField
