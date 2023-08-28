@@ -19,6 +19,8 @@
   --main-primary: #2b8a3e;
   --main-secondary: #277c38;
   --main-tertiary: #409651;
+  --error: #d32f2f;
+  --default-font-size: 16px;
 }
 
 * {
@@ -243,4 +245,9 @@ body {
 
 .pr-lg {
   padding-right: 4rem;
+}
+
+.error--paragraph {
+  color: var(--error);
+  font-size: var(--default-font-size);
 }
