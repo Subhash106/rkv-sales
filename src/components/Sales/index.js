@@ -2,6 +2,7 @@ import { Formik } from 'formik';
 import moment from 'moment';
 // import Yup from 'yup';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { DB, isOffline } from '../shared/utilities';
 import SalesFormFields from './form';
 import './style.css';
@@ -17,6 +18,8 @@ const Sales = () => {
     subTotal: 0
   };
 
+  const token = useSelector(state => state.auth.idToken) || localStorage.getItem('token');
+
   //   const getValidationSchema = () =>
   //     Yup.object().shape({
   //       firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
@@ -26,7 +29,7 @@ const Sales = () => {
 
   const submitHandler = async payload => {
     if (!isOffline()) {
-      const orderData = await fetch('https://basic-react-a8d88-default-rtdb.firebaseio.com/orders.json', {
+      const orderData = await fetch(`https://basic-react-a8d88-default-rtdb.firebaseio.com/orders.json?auth=${token}`, {
         method: 'POST',
         body: JSON.stringify({ ...payload })
       });
