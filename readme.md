@@ -8,7 +8,7 @@ This is an application to tract the inventory and store the billing details.
 - Add Hindi Language support to all pages
 - Webpack optimization
 - Validation on Sales form
-- Convert storing sales and purchases to RTK Query
 - Modify side menu opening and closing
-- Add auth to purchases page
 - Setting dev environment
+- Fix online and offline status on order sync
+- Show Error message when offline order is not sync successfully

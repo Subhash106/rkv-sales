@@ -5,7 +5,7 @@ import OrdersTable from './ordersTable';
 import getOfflineStatus from '../shared/getOfflineStatus';
 import TextInput from '../shared/TextInput';
 import moment from 'moment';
-import { useGetOrdersQuery } from '../../services/base';
+import { useGetOrdersQuery, useStoreOrdersMutation } from '../../services/base';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const Orders = () => {
@@ -15,7 +15,8 @@ const Orders = () => {
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [offlineOrders, setOfflineOrders] = useState([]);
   const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
-  const { data: onlineOrders = [] } = useGetOrdersQuery();
+  const { data: onlineOrders = [] } = useGetOrdersQuery(null, { refetchOnMountOrArgChange: true });
+  const [addOrder] = useStoreOrdersMutation();
 
   const getOfflineOrders = async () => {
     const transactionDB = DB.getTransactionDB();
@@ -44,19 +45,16 @@ const Orders = () => {
 
     await Promise.all(
       offlineOrders.map(async ([key, order]) => {
-        return await fetch('https://basic-react-a8d88-default-rtdb.firebaseio.com/orders.json', {
-          method: 'POST',
-          body: JSON.stringify({
-            ...order
-          })
-        })
-          .then(function (res) {
-            return res.json();
-          })
-          .then(function (data) {
-            console.log(data);
+        try {
+          const { error } = await addOrder(order);
+          if (!error) {
             transactionDB.removeItem(key);
-          });
+          }
+
+          return true;
+        } catch (e) {
+          throw new Error(e.message);
+        }
       })
     );
 
