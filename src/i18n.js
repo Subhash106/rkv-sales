@@ -18,6 +18,21 @@ i18n
             loginBtn: 'Login',
             noInternet: 'No internet connection. Please check internet and try again.',
             wrongCredentials: 'Email or password is incorrect. Please check and try again.'
+          },
+          dashboard: {
+            title: 'Welcome, Radha Krishna Vastralaya!',
+            month: 'Month',
+            year: 'Year',
+            purchasesSummary: {
+              title: 'Purchases Summary',
+              purchasesCount: 'Purchases Count',
+              totalPurchases: 'Total Purchases'
+            },
+            salesSummary: {
+              title: 'Sales Summary',
+              salesCount: 'Sales Count',
+              totalSales: 'Total Sales'
+            }
           }
         }
       },
@@ -31,6 +46,21 @@ i18n
             loginBtn: 'लॉग इन करें',
             noInternet: 'कोई इंटरनेट कनेक्शन नहीं। कृपया इंटरनेट जांचें और पुनः प्रयास करें।',
             wrongCredentials: 'ईमेल या पासवर्ड गलत है। कृपया जाँच करें और पुनः प्रयास करें।'
+          },
+          dashboard: {
+            title: 'स्वागत है, राधा कृष्ण वस्त्रालय!',
+            month: 'महीना',
+            year: 'वर्ष',
+            purchasesSummary: {
+              title: 'खरीद सारांश',
+              purchasesCount: 'खरीद गिनती',
+              totalPurchases: 'कुल खरीद'
+            },
+            salesSummary: {
+              title: 'बिक्री सारांश',
+              salesCount: 'बिक्री गणना',
+              totalSales: 'कुल बिक्री'
+            }
           }
         }
       }

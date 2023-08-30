@@ -4,11 +4,13 @@ import SalesSummary from './SalesSummary';
 import PurchasesSummary from './PurchasesSummary';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
 
 import './style.css';
 import { useGetOrdersQuery, useGetPurchasesQuery } from '../../services/base';
 
 const Dashboard = () => {
+  const { t } = useTranslation();
   const [filters, setFilters] = useState({ month: moment().month() + 1, year: moment().year() });
   const { month, year } = filters;
   const [ordersCount, setOrdersCount] = useState(0);
@@ -68,14 +70,21 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <div className="bg-white" style={{ padding: '2rem', borderRadius: '1.2rem' }}>
-        <h1 style={{ marginBottom: '4rem' }}>Welcome, Radha Krishana Vastralaya!</h1>
+        <h1 style={{ marginBottom: '4rem' }}>{t('dashboard.title')}</h1>
         <div style={{ paddingBottom: '2rem' }}>
           <form className="mb-sm">
             <Grid container spacing={2}>
               <Grid item xs={12} lg={6}>
                 <FormControl fullWidth>
-                  <InputLabel id="month">Month</InputLabel>
-                  <Select labelId="month" id="month" name="month" value={month} label="Age" onChange={handleChange}>
+                  <InputLabel id="month">{t('dashboard.month')}</InputLabel>
+                  <Select
+                    labelId="month"
+                    id="month"
+                    name="month"
+                    value={month}
+                    label={t('dashboard.month')}
+                    onChange={handleChange}
+                  >
                     {Array(12)
                       .fill()
                       .map((_, i) => i + 1)
@@ -89,8 +98,15 @@ const Dashboard = () => {
               </Grid>
               <Grid item xs={12} lg={6}>
                 <FormControl fullWidth>
-                  <InputLabel id="month">Year</InputLabel>
-                  <Select labelId="month" id="year" name="year" value={year} label="Age" onChange={handleChange}>
+                  <InputLabel id="month">{t('dashboard.year')}</InputLabel>
+                  <Select
+                    labelId="month"
+                    id="year"
+                    name="year"
+                    value={year}
+                    label={t('dashboard.year')}
+                    onChange={handleChange}
+                  >
                     {Array(3)
                       .fill()
                       .map((_, i) => moment().year() - i)
