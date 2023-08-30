@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -16,11 +17,7 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader', options: { importLoaders: 1 } },
-          { loader: 'postcss-loader' }
-        ]
+        use: [{ loader: MiniCssExtractPlugin.loader }, { loader: 'css-loader' }, { loader: 'postcss-loader' }]
       }
     ]
   },
@@ -45,11 +42,12 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env.API_BASE_URL': JSON.stringify(process.env.API_BASE_URL)
-    })
-  ],
-  optimization: {
-    splitChunks: {
-      chunks: 'all'
-    }
-  }
+    }),
+    new MiniCssExtractPlugin()
+  ]
+  // optimization: {
+  //   splitChunks: {
+  //     chunks: 'all'
+  //   }
+  // }
 };
