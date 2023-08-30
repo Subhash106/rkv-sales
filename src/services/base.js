@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const rawBaseQuery = fetchBaseQuery({
-  baseUrl: 'https://basic-react-a8d88-default-rtdb.firebaseio.com/'
+  baseUrl: process.env.API_BASE_URL || 'https://food-order-app-e5c31-default-rtdb.firebaseio.com/'
 });
 
 const dynamicBaseQuery = async (args, api, extraOptions) => {
@@ -23,9 +23,23 @@ const baseAPIs = createApi({
     }),
     getOrders: builder.query({
       query: () => 'orders.json'
+    }),
+    storeOrders: builder.mutation({
+      query: order => ({
+        url: 'orders.json',
+        method: 'POST',
+        body: order
+      })
+    }),
+    storePurchases: builder.mutation({
+      query: purchase => ({
+        url: 'purchases.json',
+        method: 'POST',
+        body: purchase
+      })
     })
   })
 });
 
-export const { useGetPurchasesQuery, useGetOrdersQuery } = baseAPIs;
+export const { useGetPurchasesQuery, useGetOrdersQuery, useStoreOrdersMutation, useStorePurchasesMutation } = baseAPIs;
 export default baseAPIs;

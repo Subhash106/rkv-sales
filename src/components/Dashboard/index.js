@@ -28,13 +28,13 @@ const Dashboard = () => {
   useEffect(() => {
     if (!loadingOrders) {
       setOrdersCount(
-        Object.values(orders).filter(order => {
+        Object.values(orders || {}).filter(order => {
           const dateArray = order?.date?.split('-');
           return month === +dateArray?.[1] && year === +dateArray?.[0];
         }).length
       );
       setOrdersAmount(
-        Object.values(orders)
+        Object.values(orders || {})
           .filter(order => {
             const dateArray = order?.date?.split('-');
             return month === +dateArray?.[1] && year === +dateArray?.[0];
@@ -47,13 +47,13 @@ const Dashboard = () => {
 
     if (!loadingPurchases) {
       setPurchasesCount(
-        Object.values(purchases).filter(purchase => {
+        Object.values(purchases || {}).filter(purchase => {
           const dateArray = purchase?.date?.split('-');
           return month === +dateArray?.[1] && year === +dateArray?.[0];
         }).length
       );
       setPurchasesAmount(
-        Object.values(purchases)
+        Object.values(purchases || {})
           .filter(purchase => {
             const dateArray = purchase?.date?.split('-');
             return month === +dateArray?.[1] && year === +dateArray?.[0];

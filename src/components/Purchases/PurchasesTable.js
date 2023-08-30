@@ -19,12 +19,12 @@ export default function PurchasesTable() {
   const year = params.get('year');
 
   if (month && year) {
-    rows = Object.values(data).filter(purchase => {
+    rows = Object.values(data || {}).filter(purchase => {
       const dateArray = purchase?.date?.split('-');
       return +month === +dateArray?.[1] && +year === +dateArray?.[0];
     });
   } else {
-    rows = Object.values(data);
+    rows = Object.values(data || {});
   }
 
   if (error) {
@@ -37,9 +37,9 @@ export default function PurchasesTable() {
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12}>
+      <Grid item sm={12} xs={12} lg={12}>
         <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <Table aria-label="Purchases table">
             <TableHead>
               <TableRow>
                 <TableCell>Date</TableCell>
