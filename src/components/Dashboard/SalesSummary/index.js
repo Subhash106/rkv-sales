@@ -3,19 +3,22 @@ import Card from '@mui/material/Card';
 import { number } from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
 
 export default function SalesSummary({ ordersCount, ordersAmount, month, year }) {
+  const { t } = useTranslation();
+
   return (
     <Card className="p-sm" variant="outlined">
-      <h2 className="mb-sm">Sales Summary</h2>
+      <h2 className="mb-sm">{t('dashboard.salesSummary.title')}</h2>
       <dl>
-        <dt>Total Orders</dt>
+        <dt>{t('dashboard.salesSummary.salesCount')}</dt>
         <dd className="mb-xs">
           <strong>
             <NavLink to={`/orders?month=${month}&year=${year}`}>{ordersCount}</NavLink>
           </strong>
         </dd>
-        <dt>Total Sales</dt>
+        <dt>{t('dashboard.salesSummary.totalSales')}</dt>
         <dd>
           <strong>{ordersAmount}</strong>
         </dd>

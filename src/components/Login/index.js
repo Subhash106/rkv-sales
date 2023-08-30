@@ -69,11 +69,11 @@ export default function Login() {
         localStorage.setItem('expiresIn', tokenResponse.expiresIn);
         dispatch(login(tokenResponse));
         // Auto refresh and update token before expiration
-        setTimeout(() => {
-          localStorage.removeItem('token', tokenResponse.idToken);
-          localStorage.removeItem('refreshToken', tokenResponse.refreshToken);
-          localStorage.removeItem('expiresIn', tokenResponse.expiresIn);
-        }, tokenResponse.refreshToken * 1000);
+        // setTimeout(() => {
+        //   localStorage.removeItem('token', tokenResponse.idToken);
+        //   localStorage.removeItem('refreshToken', tokenResponse.refreshToken);
+        //   localStorage.removeItem('expiresIn', tokenResponse.expiresIn);
+        // }, tokenResponse.refreshToken * 1000);
         navigate('/dashboard');
       })
       .catch(error => {
