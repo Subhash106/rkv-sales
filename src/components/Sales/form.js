@@ -2,9 +2,11 @@ import { func, object, shape } from 'prop-types';
 import React, { useEffect } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import { useTranslation } from 'react-i18next';
 
 const SalesFormFields = props => {
-  const { values, handleChange, setFieldValue, handleSubmit } = props;
+  const { t } = useTranslation();
+  const { values, handleChange, setFieldValue, handleSubmit, errors, touched } = props;
   const { mobile, firstName, lastName, address, items, subTotal, date } = values;
 
   useEffect(() => {
@@ -21,20 +23,37 @@ const SalesFormFields = props => {
     setFieldValue('items', itemsCopy);
   };
 
+  const errorHandling = fieldName => {
+    const error = touched?.[fieldName] && !!errors?.[fieldName];
+    const helperText = touched?.[fieldName] && errors?.[fieldName];
+    return { error, helperText };
+  };
+
   return (
     <div className="sales-form bg-white">
       <div className="row col-md-1">
-        <h1 className="heading-primary">Enter sale details and save</h1>
+        <h1 className="heading-primary">{t('sales.title')}</h1>
       </div>
       <div className="row col-md-3 col-sm-1">
-        <TextField variant="outlined" onChange={handleChange} value={mobile} id="mobile" name="mobile" label="Mobile" />
+        <TextField
+          variant="outlined"
+          onChange={handleChange}
+          value={mobile}
+          id="mobile"
+          name="mobile"
+          label={t('sales.mobile')}
+          required={true}
+          {...errorHandling('mobile')}
+        />
         <TextField
           variant="outlined"
           onChange={handleChange}
           value={firstName}
           id="firstName"
           name="firstName"
-          label="First Name"
+          label={t('sales.firstName')}
+          required={true}
+          {...errorHandling('firstName')}
         />
         <TextField
           variant="outlined"
@@ -42,7 +61,9 @@ const SalesFormFields = props => {
           value={lastName}
           id="lastName"
           name="lastName"
-          label="Last Name"
+          label={t('sales.lastName')}
+          required={true}
+          {...errorHandling('lastName')}
         />
       </div>
       <div className="row col-md-2">
@@ -52,7 +73,9 @@ const SalesFormFields = props => {
           value={address}
           id="address"
           name="address"
-          label="Address"
+          label={t('sales.address')}
+          required={true}
+          {...errorHandling('address')}
         />
         <TextField
           variant="outlined"
@@ -63,7 +86,7 @@ const SalesFormFields = props => {
           pattern="\d{4}-\d{2}-\d{2}"
           id="date"
           name="date"
-          label="Date"
+          label={t('sales.date')}
         />
       </div>
 
@@ -71,18 +94,18 @@ const SalesFormFields = props => {
         <table>
           <thead>
             <tr>
-              <th className="text-left">SNo.</th>
-              <th className="text-left">Item</th>
-              <th className="text-left quantity">Quantity</th>
-              <th className="text-left rate">Rate</th>
-              <th className="text-right">Total</th>
+              <th className="text-left">{t('sales.serialNumber')}</th>
+              <th className="text-center">{t('sales.item')}</th>
+              <th className="text-left quantity">{t('sales.quantity')}</th>
+              <th className="text-left rate">{t('sales.rate')}</th>
+              <th className="text-right">{t('sales.total')}</th>
             </tr>
           </thead>
           <tbody>
             {items.map((el, index) => (
               <tr key={index}>
                 <th>{index + 1}</th>
-                <th>
+                <th className="text-center">
                   <TextField
                     variant="outlined"
                     onChange={handleChange}
@@ -90,6 +113,7 @@ const SalesFormFields = props => {
                     id={`items[${index}].item`}
                     name={`items[${index}].item`}
                     type="text"
+                    required={true}
                   />
                 </th>
                 <th>
@@ -101,6 +125,7 @@ const SalesFormFields = props => {
                     id={`items[${index}].quantity`}
                     name={`items[${index}].quantity`}
                     type="number"
+                    required={true}
                   />
                 </th>
                 <th>
@@ -112,6 +137,7 @@ const SalesFormFields = props => {
                     id={`items[${index}].rate`}
                     name={`items[${index}].rate`}
                     type="number"
+                    required={true}
                   />
                 </th>
                 <th className="text-right">{el.rate * el.quantity}</th>
@@ -119,7 +145,7 @@ const SalesFormFields = props => {
             ))}
             <tr>
               <th colSpan={3} className="text-left sub-total">
-                Sub Total
+                {t('sales.subTotal')}
               </th>
               <th colSpan={2} className="text-right sub-total">
                 &#8377;{subTotal}
@@ -132,10 +158,10 @@ const SalesFormFields = props => {
         <div />
         <div className="row col-md-2">
           <Button color="success" variant="contained" onClick={() => handleSubmit(values)} className="btn-gray">
-            Save
+            {t('sales.save')}
           </Button>
           <Button color="secondary" variant="contained" onClick={() => addItemHandler()}>
-            Add Item
+            {t('sales.addItem')}
           </Button>
         </div>
       </div>
@@ -148,7 +174,9 @@ SalesFormFields.propTypes = {
   handleChange: func,
   setFieldValue: func,
   handleSubmit: func,
-  resetForm: func
+  resetForm: func,
+  errors: shape(object),
+  touched: shape(object)
 };
 
 export default SalesFormFields;
