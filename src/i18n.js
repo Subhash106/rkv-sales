@@ -10,6 +10,7 @@ i18n
     resources: {
       en: {
         translations: {
+          required: 'Required',
           login: {
             chooseLanguage: 'Choose Language',
             title: 'Login',
@@ -33,11 +34,28 @@ i18n
               salesCount: 'Sales Count',
               totalSales: 'Total Sales'
             }
+          },
+          sales: {
+            title: 'Enter sales details and save',
+            firstName: 'First name',
+            lastName: 'Last name',
+            mobile: 'Mobile Number',
+            address: 'Address',
+            date: 'Date',
+            serialNumber: 'SNo.',
+            total: 'Total',
+            subTotal: 'Sub Total',
+            item: 'Item',
+            quantity: 'Quantity',
+            rate: 'Rate',
+            save: 'Save',
+            addItem: 'Add Item'
           }
         }
       },
       hi: {
         translations: {
+          required: 'आवश्यक',
           login: {
             chooseLanguage: 'भाषा चुनें',
             title: 'लॉग इन',
@@ -61,6 +79,22 @@ i18n
               salesCount: 'बिक्री गणना',
               totalSales: 'कुल बिक्री'
             }
+          },
+          sales: {
+            title: 'बिक्री विवरण दर्ज करें और सहेजें',
+            firstName: 'पहला नाम',
+            lastName: 'उपनाम',
+            mobile: 'मोबाइल नंबर',
+            address: 'पता',
+            date: 'तारीख',
+            serialNumber: 'क्र.सं.',
+            total: 'कुल',
+            subTotal: 'उप योग',
+            item: 'समान',
+            quantity: 'मात्रा',
+            rate: 'दर',
+            save: 'जोड़ना',
+            addItem: 'नया समान जोड़ें'
           }
         }
       }
