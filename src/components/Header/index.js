@@ -1,10 +1,9 @@
 import React, { useRef } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAuth, signOut } from 'firebase/auth';
 
 import './style.css';
-import { logout } from '../../store/auth';
+import signout from '../../utils/logout';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -15,20 +14,7 @@ const Header = () => {
   const token = useSelector(state => state.auth.idToken) || localStorage.getItem('token');
   const logoutHandler = e => {
     e.preventDefault();
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        dispatch(logout());
-        localStorage.removeItem('token');
-        localStorage.removeItem('refreshToken');
-        localStorage.removeItem('expiresIn');
-        navigate('/');
-      })
-      .catch(error => {
-        // An error happened.
-        console.error('logout error', error);
-      });
+    signout(dispatch, navigate);
   };
 
   const hamburgerClickHandler = () => {

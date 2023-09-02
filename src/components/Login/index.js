@@ -3,36 +3,13 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { TextField, Button } from '@mui/material';
 import { Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
-import { login } from '../../store/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 import './style.css';
 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
-import { getAnalytics } from 'firebase/analytics';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: 'AIzaSyBADITX6fzdS0kND2XsAW4p_gIMU4zNCCQ',
-  authDomain: 'basic-react-a8d88.firebaseapp.com',
-  databaseURL: 'https://basic-react-a8d88-default-rtdb.firebaseio.com',
-  projectId: 'basic-react-a8d88',
-  storageBucket: 'basic-react-a8d88.appspot.com',
-  messagingSenderId: '46136678640',
-  appId: '1:46136678640:web:1511ada39fdede04d5ca35',
-  measurementId: 'G-P97BZSSRCH'
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-console.log('analytics', analytics);
+import signout from '../../utils/logout';
+import { login } from '../../store/auth';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -69,11 +46,9 @@ export default function Login() {
         localStorage.setItem('expiresIn', tokenResponse.expiresIn);
         dispatch(login(tokenResponse));
         // Auto refresh and update token before expiration
-        // setTimeout(() => {
-        //   localStorage.removeItem('token', tokenResponse.idToken);
-        //   localStorage.removeItem('refreshToken', tokenResponse.refreshToken);
-        //   localStorage.removeItem('expiresIn', tokenResponse.expiresIn);
-        // }, tokenResponse.refreshToken * 1000);
+        setTimeout(() => {
+          signout(dispatch, navigate);
+        }, +tokenResponse.expiresIn * 1000);
         navigate('/dashboard');
       })
       .catch(error => {

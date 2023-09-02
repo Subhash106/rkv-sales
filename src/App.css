@@ -30,7 +30,7 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 70%;
 }
 
 body {
@@ -189,22 +189,22 @@ body {
   margin-right: 2rem;
 }
 
-.m-lg {
+.m-md {
   margin: 4rem;
 }
-.mt-lg {
+.mt-md {
   margin-top: 4rem;
 }
 
-.mb-lg {
+.mb-md {
   margin-bottom: 4rem;
 }
 
-.ml-lg {
+.ml-md {
   margin-left: 4rem;
 }
 
-.mr-lg {
+.mr-md {
   margin-right: 4rem;
 }
 
@@ -229,22 +229,22 @@ body {
   padding-right: 2rem;
 }
 
-.p-lg {
+.p-md {
   padding: 4rem;
 }
-.pt-lg {
+.pt-md {
   padding-top: 4rem;
 }
 
-.pb-lg {
+.pb-md {
   padding-bottom: 4rem;
 }
 
-.pl-lg {
+.pl-md {
   padding-left: 4rem;
 }
 
-.pr-lg {
+.pr-md {
   padding-right: 4rem;
 }
 

@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+require('dotenv').config({ path: './.env' });
 
 module.exports = {
   entry: './src/index.js',
@@ -41,7 +42,7 @@ module.exports = {
       ]
     }),
     new webpack.DefinePlugin({
-      'process.env.API_BASE_URL': JSON.stringify(process.env.API_BASE_URL)
+      'process.env': JSON.stringify(process.env)
     }),
     new MiniCssExtractPlugin()
   ]
