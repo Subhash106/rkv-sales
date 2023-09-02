@@ -19,6 +19,7 @@ const toBase64 = file =>
 
 const Purchases = () => {
   const { t } = useTranslation();
+  const [errors, setErrors] = useState(null);
   const [addPurchase, { isLoading }] = useStorePurchasesMutation();
   const [feedback, setFeedback] = useState({ success: false, error: false, errorMessage: '', successMessage: '' });
   const { success, error, successMessage, errorMessage } = feedback;
@@ -40,11 +41,19 @@ const Purchases = () => {
       setPurchase({ ...purchase, [name]: await toBase64(file), invoiceName: file.name });
     } else {
       setPurchase({ ...purchase, [name]: value });
+      if (name === 'amount' && value) {
+        setErrors({ ...errors, amount: false });
+      }
     }
   };
 
   const submitHandler = async e => {
     e.preventDefault();
+
+    if (!purchase.amount) {
+      setErrors({ ...errors, amount: true });
+      return false;
+    }
 
     try {
       await addPurchase(purchase).unwrap();
@@ -59,14 +68,11 @@ const Purchases = () => {
     }, 10000);
   };
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
   return (
     <div className="purchases">
-      <div className="bg-white" style={{ padding: '2rem', borderRadius: '1.2rem' }}>
+      <div className="bg-white p-sm" style={{ borderRadius: '1.2rem' }}>
         <h1 className="heading-primary">{t('purchases.title')}</h1>
+        {isLoading && <Loader />}
         {success && <Alert severity="success">{successMessage}</Alert>}
         {error && <Alert severity="error">{errorMessage}</Alert>}
         <form encType="multipart/form-data" onSubmit={submitHandler} className="mb-md mt-sm">
@@ -93,6 +99,8 @@ const Purchases = () => {
                 value={amount}
                 label={t('purchases.amount')}
                 required
+                error={errors?.amount}
+                helperText={errors?.amount ? t('required') : ''}
               />
             </Grid>
             <Grid item xs={12} md={3}>

@@ -1,13 +1,15 @@
-import { func, object, shape } from 'prop-types';
+import { bool, func, object, shape } from 'prop-types';
 import React, { useEffect } from 'react';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import { TextField, Alert } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import Loader from '../Loader';
 
 const SalesFormFields = props => {
   const { t } = useTranslation();
-  const { values, handleChange, setFieldValue, handleSubmit, errors, touched } = props;
+  const { values, handleChange, setFieldValue, handleSubmit, errors, touched, feedback, isLoading } = props;
   const { mobile, firstName, lastName, address, items, subTotal, date } = values;
+  const { success, error, successMessage, errorMessage } = feedback;
 
   useEffect(() => {
     const subTotal = items.reduce((total, next) => {
@@ -34,7 +36,10 @@ const SalesFormFields = props => {
       <div className="row col-md-1">
         <h1 className="heading-primary">{t('sales.title')}</h1>
       </div>
-      <div className="row col-md-3 col-sm-1">
+      {isLoading && <Loader />}
+      {success && <Alert severity="success">{successMessage}</Alert>}
+      {error && <Alert severity="error">{errorMessage}</Alert>}
+      <div className="row col-md-3 col-sm-1 mt-sm">
         <TextField
           variant="outlined"
           onChange={handleChange}
@@ -176,7 +181,9 @@ SalesFormFields.propTypes = {
   handleSubmit: func,
   resetForm: func,
   errors: shape(object),
-  touched: shape(object)
+  touched: shape(object),
+  feedback: shape(object),
+  isLoading: bool
 };
 
 export default SalesFormFields;
