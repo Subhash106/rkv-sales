@@ -50,7 +50,9 @@ i18n
             quantity: 'Quantity',
             rate: 'Rate',
             save: 'Save',
-            addItem: 'Add Item'
+            addItem: 'Add Item',
+            savedSuccessfully: 'Sale saved successfully.',
+            savedError: 'Error while saving sale. Please try again.'
           },
           purchases: {
             title: 'Purchases',
@@ -61,6 +63,13 @@ i18n
             save: 'Save',
             savedSuccessfully: 'Purchase saved successfully.',
             savedError: 'Error while saving purchase. Please try again.'
+          },
+          header: {
+            dashboard: 'Dashboard',
+            sales: 'Sales',
+            purchases: 'Purchases',
+            orders: 'Orders',
+            logout: 'Logout'
           }
         }
       },
@@ -106,7 +115,9 @@ i18n
             quantity: 'मात्रा',
             rate: 'दर',
             save: 'सुरक्षित करें',
-            addItem: 'नया समान जोड़ें'
+            addItem: 'नया समान जोड़ें',
+            savedSuccessfully: 'बिक्री सफलतापूर्वक सहेजी गई.',
+            savedError: 'बिक्री सहेजते समय त्रुटि. कृपया पुन: प्रयास करें।'
           },
           purchases: {
             title: 'खरीद',
@@ -117,6 +128,13 @@ i18n
             save: 'सुरक्षित करें',
             savedSuccessfully: 'खरीदारी सफलतापूर्वक सहेजी गई.',
             savedError: 'खरीदारी सहेजते समय त्रुटि. कृपया पुन: प्रयास करें।'
+          },
+          header: {
+            dashboard: 'डैशबोर्ड',
+            sales: 'बिक्री',
+            purchases: 'खरीद',
+            orders: 'बिक्री सारांश',
+            logout: 'लॉग आउट'
           }
         }
       }

@@ -6,11 +6,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem 0;
+    padding: 1.4rem 0;
 
     @media (max-width: 37.5em) {
       justify-content: center;
-      padding: 2rem;
+      padding: 1.4rem;
     }
 
     & .logo-box {
@@ -45,7 +45,7 @@
         @media (max-width: 37.5em) {
           flex-direction: column;
           min-width: 60vw;
-          padding: 2rem;
+          padding: 1.4rem;
           margin-top: 6.2rem;
         }
       }
@@ -80,8 +80,8 @@
 .close {
   display: none;
   position: absolute;
-  left: 2rem;
-  top: 4rem;
+  left: 1.4rem;
+  top: 3.1rem;
 
   @media (max-width: 37.5em) {
     display: block;

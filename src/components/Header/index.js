@@ -1,11 +1,13 @@
 import React, { useRef } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import './style.css';
 import signout from '../../utils/logout';
 
 const Header = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const hamburgerRef = useRef();
@@ -56,7 +58,7 @@ const Header = () => {
                   }}
                   end
                 >
-                  Dashboard
+                  {t('header.dashboard')}
                 </NavLink>
               </li>
               <li>
@@ -67,7 +69,7 @@ const Header = () => {
                     return isActive ? 'active' : '';
                   }}
                 >
-                  Sales
+                  {t('header.sales')}
                 </NavLink>
               </li>
               <li>
@@ -78,7 +80,7 @@ const Header = () => {
                     return isActive ? 'active' : '';
                   }}
                 >
-                  Orders
+                  {t('header.orders')}
                 </NavLink>
               </li>
               <li>
@@ -89,13 +91,13 @@ const Header = () => {
                     return isActive ? 'active' : '';
                   }}
                 >
-                  Purchases
+                  {t('header.purchases')}
                 </NavLink>
               </li>
               {token && (
                 <li>
                   <a href="#" onClick={logoutHandler}>
-                    Logout
+                    {t('header.logout')}
                   </a>
                 </li>
               )}
