@@ -70,8 +70,8 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <div className="bg-white" style={{ padding: '2rem', borderRadius: '1.2rem' }}>
-        <h1 style={{ marginBottom: '4rem' }}>{t('dashboard.title')}</h1>
-        <div style={{ paddingBottom: '2rem' }}>
+        <h1 className="mb-md">{t('dashboard.title')}</h1>
+        <div className="pb-sm">
           <form className="mb-sm">
             <Grid container spacing={2}>
               <Grid item xs={12} lg={6}>

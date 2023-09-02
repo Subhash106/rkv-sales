@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import Grid from '@mui/material/Grid';
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Alert } from '@mui/material';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
+
 import './style.css';
 import PurchasesTable from './PurchasesTable';
 import { useStorePurchasesMutation } from '../../services/base';
+import Loader from '../Loader';
 
 const toBase64 = file =>
   new Promise((resolve, reject) => {
@@ -15,15 +18,17 @@ const toBase64 = file =>
   });
 
 const Purchases = () => {
-  const [addPurchase] = useStorePurchasesMutation();
+  const { t } = useTranslation();
+  const [addPurchase, { isLoading }] = useStorePurchasesMutation();
+  const [feedback, setFeedback] = useState({ success: false, error: false, errorMessage: '', successMessage: '' });
+  const { success, error, successMessage, errorMessage } = feedback;
   const [purchase, setPurchase] = useState({
     date: moment().format('YYYY-MM-DD'),
     amount: '',
-    invoice,
+    invoice: '',
     invoiceName: ''
   });
-
-  const { date, amount, invoice } = purchase;
+  const { date, amount } = purchase;
 
   const changeHandler = async e => {
     const {
@@ -38,44 +43,79 @@ const Purchases = () => {
     }
   };
 
-  const submitHandler = e => {
+  const submitHandler = async e => {
     e.preventDefault();
 
-    addPurchase(purchase);
+    try {
+      await addPurchase(purchase).unwrap();
+      setFeedback({ ...feedback, success: true, successMessage: t('purchases.savedSuccessfully') });
+      setPurchase({ ...purchase, amount: '', invoice: '', invoiceName: '' });
+    } catch (e) {
+      setFeedback({ ...feedback, error: true, errorMessage: t('purchases.savedError') });
+    }
+
+    setTimeout(() => {
+      setFeedback({ ...feedback, success: false, error: false });
+    }, 10000);
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="purchases">
       <div className="bg-white" style={{ padding: '2rem', borderRadius: '1.2rem' }}>
-        <h1 className="heading-primary">Purchases</h1>
-        <form encType="multipart/form-data" onSubmit={submitHandler} style={{ marginBottom: '4rem' }}>
+        <h1 className="heading-primary">{t('purchases.title')}</h1>
+        {success && <Alert severity="success">{successMessage}</Alert>}
+        {error && <Alert severity="error">{errorMessage}</Alert>}
+        <form encType="multipart/form-data" onSubmit={submitHandler} className="mb-md mt-sm">
           <Grid container spacing={2}>
             <Grid item xs={12} md={3}>
-              <TextField onChange={changeHandler} name="date" type="date" id="date" value={date} label="Date" />
+              <TextField
+                fullWidth
+                onChange={changeHandler}
+                name="date"
+                type="date"
+                id="date"
+                value={date}
+                label={t('purchases.date')}
+                required
+              />
             </Grid>
             <Grid item xs={12} md={3}>
               <TextField
+                fullWidth
                 onChange={changeHandler}
                 name="amount"
                 type="number"
                 id="amount"
                 value={amount}
-                label="Amount"
+                label={t('purchases.amount')}
+                required
               />
             </Grid>
             <Grid item xs={12} md={3}>
-              <TextField type="file" name="invoice" min="0" id="invoice" onChange={changeHandler} label="Invoice" />
+              <TextField
+                fullWidth
+                type="file"
+                name="invoice"
+                min="0"
+                id="invoice"
+                onChange={changeHandler}
+                label={t('purchases.invoice')}
+              />
             </Grid>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} md={3} className="text-right">
               <Button onClick={submitHandler} variant="contained" color="success">
-                Save
+                {t('purchases.save')}
               </Button>
             </Grid>
           </Grid>
         </form>
         <Grid container spacing={2}>
           <Grid item xs={12} md={12}>
-            <h1 style={{ marginBottom: '2rem' }}>All Purchases</h1>
+            <h1 className="mb-sm">{t('purchases.allPurchases')}</h1>
             <PurchasesTable />
           </Grid>
         </Grid>
