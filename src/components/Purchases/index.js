@@ -100,7 +100,7 @@ const Purchases = () => {
                 label={t('purchases.amount')}
                 required
                 error={errors?.amount}
-                helperText={t('required')}
+                helperText={errors?.amount ? t('required') : ''}
               />
             </Grid>
             <Grid item xs={12} md={3}>
