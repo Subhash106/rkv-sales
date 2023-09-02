@@ -122,7 +122,12 @@ const Dashboard = () => {
           </form>
           <Grid container spacing={2}>
             <Grid item xs={12} lg={6}>
-              <PurchasesSummary purchasesCount={purchasesCount} purchasesAmount={purchasesAmount} />
+              <PurchasesSummary
+                month={month}
+                year={year}
+                purchasesCount={purchasesCount}
+                purchasesAmount={purchasesAmount}
+              />
             </Grid>
             <Grid item xs={12} lg={6}>
               <SalesSummary month={month} year={year} ordersCount={ordersCount} ordersAmount={ordersAmount} />

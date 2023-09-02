@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import Paper from '@mui/material/Paper';
 import { useSearchParams } from 'react-router-dom';
 import { Grid, Table, TableRow, TableHead, TableContainer, TableCell, TableBody } from '@mui/material';
@@ -10,18 +10,23 @@ export default function PurchasesTable() {
   const { t } = useTranslation();
   const [params] = useSearchParams();
   const { error, isFetching, data = {} } = useGetPurchasesQuery(null, { refetchOnMountOrArgChange: true });
-  let rows = [];
+  const [rows, setRows] = useState([]);
   const month = params.get('month');
   const year = params.get('year');
 
-  if (month && year) {
-    rows = Object.values(data || {}).filter(purchase => {
-      const dateArray = purchase?.date?.split('-');
-      return +month === +dateArray?.[1] && +year === +dateArray?.[0];
-    });
-  } else {
-    rows = Object.values(data || {});
-  }
+  useEffect(() => {
+    if (month && year) {
+      const filteredPurchases = Object.values(data || {}).filter(purchase => {
+        const dateArray = purchase?.date?.split('-');
+        console.log('dateArray', month, year, dateArray);
+        return +month === +dateArray?.[1] && +year === +dateArray?.[0];
+      });
+      setRows(filteredPurchases);
+    } else {
+      const rows = Object.values(data || {});
+      setRows(rows);
+    }
+  }, [month, year]);
 
   if (error) {
     return <p>Oops, Something went wrong!</p>;
@@ -47,7 +52,7 @@ export default function PurchasesTable() {
               {rows.length > 0 &&
                 rows.map(row => (
                   <TableRow
-                    key={`${row.date}_${row.amount}`}
+                    key={`${row.date}_${row.amount}_${row.invoiceName}`}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <TableCell>{row.date}</TableCell>

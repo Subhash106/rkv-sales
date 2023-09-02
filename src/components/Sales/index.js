@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 import moment from 'moment';
 import * as Yup from 'yup';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useStoreOrdersMutation } from '../../services/base';
@@ -10,8 +10,9 @@ import SalesFormFields from './form';
 import './style.css';
 
 const Sales = () => {
+  const [feedback, setFeedback] = useState({ success: false, error: false, errorMessage: '', successMessage: '' });
   const { t } = useTranslation();
-  const [addOrder] = useStoreOrdersMutation();
+  const [addOrder, { isLoading }] = useStoreOrdersMutation();
   const formData = {
     date: moment().format('YYYY-MM-DD'),
     mobile: '',
@@ -35,7 +36,18 @@ const Sales = () => {
 
   const submitHandler = async payload => {
     if (!isOffline()) {
-      addOrder(payload);
+      setTimeout(() => {
+        setFeedback({ ...feedback, error: false, success: false });
+      }, 10000);
+
+      try {
+        await addOrder(payload).unwrap();
+        setFeedback({ ...feedback, success: true, successMessage: t('sales.savedSuccessfully') });
+        return true;
+      } catch (e) {
+        setFeedback({ ...feedback, error: true, errorMessage: t('sales.savedError') });
+        return false;
+      }
     } else {
       //Store Data to indexedDb
       const transactionDB = DB.getTransactionDB();
@@ -52,12 +64,15 @@ const Sales = () => {
       <Formik
         initialValues={formData}
         validationSchema={getValidationSchema()}
-        onSubmit={(values, { resetForm }) => {
-          submitHandler(values);
-          resetForm({ ...formData, items: [] });
+        onSubmit={async (values, { resetForm }) => {
+          const res = await submitHandler(values);
+          console.log('res', res);
+          if (res) {
+            resetForm({ ...formData, items: [] });
+          }
         }}
       >
-        {formProps => <SalesFormFields {...formProps} />}
+        {formProps => <SalesFormFields {...formProps} feedback={feedback} isLoading={isLoading} />}
       </Formik>
     </div>
   );

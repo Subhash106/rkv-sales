@@ -30,7 +30,8 @@
 }
 
 html {
-  font-size: 70%;
+  /* 1rem = 12px */
+  font-size: 75%;
 }
 
 body {
