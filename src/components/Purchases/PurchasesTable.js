@@ -1,19 +1,15 @@
 import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useSearchParams } from 'react-router-dom';
-import { Grid } from '@mui/material';
+import { Grid, Table, TableRow, TableHead, TableContainer, TableCell, TableBody } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import { useGetPurchasesQuery } from '../../services/base';
 
 export default function PurchasesTable() {
+  const { t } = useTranslation();
   const [params] = useSearchParams();
-  const { error, isFetching, data = {} } = useGetPurchasesQuery();
+  const { error, isFetching, data = {} } = useGetPurchasesQuery(null, { refetchOnMountOrArgChange: true });
   let rows = [];
   const month = params.get('month');
   const year = params.get('year');
@@ -42,9 +38,9 @@ export default function PurchasesTable() {
           <Table aria-label="Purchases table">
             <TableHead>
               <TableRow>
-                <TableCell>Date</TableCell>
-                <TableCell align="right">Amount</TableCell>
-                <TableCell align="right">Invoice</TableCell>
+                <TableCell>{t('purchases.date')}</TableCell>
+                <TableCell align="right">{t('purchases.amount')}</TableCell>
+                <TableCell align="right">{t('purchases.invoice')}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

@@ -11,13 +11,14 @@ i18n
       en: {
         translations: {
           required: 'Required',
+          noInternet: 'No internet connection. Please check internet and try again.',
+          somethingWentWrong: 'Something went wrong. Please try again.',
           login: {
             chooseLanguage: 'Choose Language',
             title: 'Login',
             email: 'Email',
             password: 'Password',
             loginBtn: 'Login',
-            noInternet: 'No internet connection. Please check internet and try again.',
             wrongCredentials: 'Email or password is incorrect. Please check and try again.'
           },
           dashboard: {
@@ -50,19 +51,30 @@ i18n
             rate: 'Rate',
             save: 'Save',
             addItem: 'Add Item'
+          },
+          purchases: {
+            title: 'Purchases',
+            date: 'Date',
+            amount: 'Amount',
+            invoice: 'Invoice',
+            allPurchases: 'All Purchases',
+            save: 'Save',
+            savedSuccessfully: 'Purchase saved successfully.',
+            savedError: 'Error while saving purchase. Please try again.'
           }
         }
       },
       hi: {
         translations: {
           required: 'आवश्यक',
+          noInternet: 'कोई इंटरनेट कनेक्शन नहीं। कृपया इंटरनेट जांचें और पुनः प्रयास करें।',
+          somethingWentWrong: 'कुछ गलत हो गया। कृपया पुन: प्रयास करें।',
           login: {
             chooseLanguage: 'भाषा चुनें',
             title: 'लॉग इन',
             email: 'ईमेल',
             password: 'पासवर्ड',
             loginBtn: 'लॉग इन करें',
-            noInternet: 'कोई इंटरनेट कनेक्शन नहीं। कृपया इंटरनेट जांचें और पुनः प्रयास करें।',
             wrongCredentials: 'ईमेल या पासवर्ड गलत है। कृपया जाँच करें और पुनः प्रयास करें।'
           },
           dashboard: {
@@ -93,8 +105,18 @@ i18n
             item: 'समान',
             quantity: 'मात्रा',
             rate: 'दर',
-            save: 'जोड़ना',
+            save: 'सुरक्षित करें',
             addItem: 'नया समान जोड़ें'
+          },
+          purchases: {
+            title: 'खरीद',
+            date: 'तारीख',
+            amount: 'धनराशि',
+            invoice: 'चालान',
+            allPurchases: 'सभी खरीद',
+            save: 'सुरक्षित करें',
+            savedSuccessfully: 'खरीदारी सफलतापूर्वक सहेजी गई.',
+            savedError: 'खरीदारी सहेजते समय त्रुटि. कृपया पुन: प्रयास करें।'
           }
         }
       }
