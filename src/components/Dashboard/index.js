@@ -70,7 +70,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <div className="bg-white page-wrapper">
-        <h1 className="mb-md">{t('dashboard.title')}</h1>
+        <h1 className="heading-primary">{t('dashboard.title')}</h1>
         <div className="pb-sm">
           <form className="mb-sm">
             <Grid container spacing={2}>

@@ -123,7 +123,7 @@ const Purchases = () => {
         </form>
         <Grid container spacing={2}>
           <Grid item xs={12} md={12}>
-            <h1 className="mb-sm">{t('purchases.allPurchases')}</h1>
+            <h2 className="heading-secondary">{t('purchases.allPurchases')}</h2>
             <PurchasesTable />
           </Grid>
         </Grid>

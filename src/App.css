@@ -51,6 +51,7 @@ body {
   font-size: 2.4rem;
   margin-bottom: 1.6rem;
   letter-spacing: -0.75px;
+  color: var(--primary-gray);
 }
 
 .container {
@@ -86,6 +87,14 @@ body {
 
 .text-right {
   text-align: right;
+}
+
+dl {
+  color: var(--primary-gray);
+
+  & dd {
+    font-size: 1.5rem;
+  }
 }
 
 /* LAYOUT */
