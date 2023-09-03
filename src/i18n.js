@@ -70,6 +70,19 @@ i18n
             purchases: 'Purchases',
             orders: 'Orders',
             logout: 'Logout'
+          },
+          salesSummary: {
+            title: 'Sales Summary',
+            onlineSales: 'Online Sales',
+            offlineSales: 'Offline Sales',
+            selectDate: 'Salect Date',
+            customerName: 'Customer Name',
+            mobile: 'Mobile',
+            address: 'Address',
+            items: 'Items',
+            total: 'Total',
+            date: 'Date',
+            sync: 'Sync'
           }
         }
       },
@@ -135,6 +148,19 @@ i18n
             purchases: 'खरीद',
             orders: 'बिक्री सारांश',
             logout: 'लॉग आउट'
+          },
+          salesSummary: {
+            title: 'बिक्री सारांश',
+            onlineSales: 'ऑनलाइन बिक्री',
+            offlineSales: 'ऑफ़लाइन बिक्री',
+            selectDate: 'तारीख़ चुनें',
+            customerName: 'ग्राहक का नाम',
+            mobile: 'मोबाइल',
+            address: 'पता',
+            items: 'सामान',
+            total: 'टोटल',
+            date: 'तारीख',
+            sync: 'Sync'
           }
         }
       }

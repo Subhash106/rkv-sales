@@ -66,7 +66,6 @@ const Sales = () => {
         validationSchema={getValidationSchema()}
         onSubmit={async (values, { resetForm }) => {
           const res = await submitHandler(values);
-          console.log('res', res);
           if (res) {
             resetForm({ ...formData, items: [] });
           }

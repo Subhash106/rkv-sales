@@ -10,7 +10,7 @@ export default function SalesSummary({ ordersCount, ordersAmount, month, year })
 
   return (
     <Card className="p-sm" variant="outlined">
-      <h2 className="mb-sm">{t('dashboard.salesSummary.title')}</h2>
+      <h2 className="heading-secondary">{t('dashboard.salesSummary.title')}</h2>
       <dl>
         <dt>{t('dashboard.salesSummary.salesCount')}</dt>
         <dd className="mb-xs">

@@ -10,7 +10,7 @@ export default function PurchasesSummary({ purchasesCount, purchasesAmount, mont
 
   return (
     <Card className="p-sm" variant="outlined">
-      <h2 className="mb-sm">{t('dashboard.purchasesSummary.title')}</h2>
+      <h2 className="heading-secondary">{t('dashboard.purchasesSummary.title')}</h2>
       <dl>
         <dt>{t('dashboard.purchasesSummary.purchasesCount')}</dt>
         <dd className="mb-xs">

@@ -39,7 +39,6 @@ self.addEventListener('activate', event => {
 
 registerRoute(
   ({ url }) => {
-    console.log(url);
     return url.pathname === '/';
   },
   new NetworkFirst({

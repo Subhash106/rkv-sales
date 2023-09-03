@@ -69,8 +69,8 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <div className="bg-white" style={{ padding: '2rem', borderRadius: '1.2rem' }}>
-        <h1 className="mb-md">{t('dashboard.title')}</h1>
+      <div className="bg-white page-wrapper">
+        <h1 className="heading-primary">{t('dashboard.title')}</h1>
         <div className="pb-sm">
           <form className="mb-sm">
             <Grid container spacing={2}>

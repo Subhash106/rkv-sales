@@ -40,7 +40,6 @@ export default function Login() {
       .then(userCredential => {
         // Signed in
         const tokenResponse = userCredential._tokenResponse;
-        console.log('user', userCredential);
         localStorage.setItem('token', tokenResponse.idToken);
         localStorage.setItem('refreshToken', tokenResponse.refreshToken);
         localStorage.setItem('expiresIn', tokenResponse.expiresIn);
@@ -52,7 +51,6 @@ export default function Login() {
         navigate('/dashboard');
       })
       .catch(error => {
-        console.log('error', error);
         if (/network-request-failed/.test(error.message)) {
           setLoginError(t('login.noInternet'));
         } else {
