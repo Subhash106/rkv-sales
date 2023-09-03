@@ -18,7 +18,6 @@ export default function PurchasesTable() {
     if (month && year) {
       const filteredPurchases = Object.values(data || {}).filter(purchase => {
         const dateArray = purchase?.date?.split('-');
-        console.log('dateArray', month, year, dateArray);
         return +month === +dateArray?.[1] && +year === +dateArray?.[0];
       });
       setRows(filteredPurchases);

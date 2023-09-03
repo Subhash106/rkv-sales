@@ -5,7 +5,6 @@ This is an application to tract the inventory and store the billing details.
 ## To-Do
 
 - Auto refresh token
-- Add Hindi Language support to all pages
 - Webpack optimization
 - Modify side menu opening and closing
 - Fix online and offline status on order sync
