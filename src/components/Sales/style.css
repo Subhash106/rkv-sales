@@ -7,29 +7,26 @@
 }
 
 .sales-form {
-  padding: 2rem;
-  border-radius: 1.2rem;
-}
+  & th {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
 
-.sales-form th {
-  font-size: 1.2rem;
-  font-weight: 500;
-}
+  & .quantity,
+  & .rate {
+    width: 10rem;
+  }
 
-.sales-form .quantity,
-.sales-form .rate {
-  width: 10rem;
-}
-
-.sales-form .sub-total {
-  padding-top: 1.6rem;
-  font-size: 1.8rem;
-  font-weight: 700;
+  & .sub-total {
+    padding-top: 1.6rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
 }
 
 th[class$='quantity'],
 th[class$='rate'] {
   @media (max-width: 37.5em) {
-    max-width: 50px;
+    max-width: 60px;
   }
 }
