@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
+import moment from 'moment';
+import { useTranslation } from 'react-i18next';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+
 import { DB } from '../shared/utilities';
 import OrdersTable from './ordersTable';
 import getOfflineStatus from '../shared/getOfflineStatus';
 import TextInput from '../shared/TextInput';
-import moment from 'moment';
 import { useGetOrdersQuery, useStoreOrdersMutation } from '../../services/base';
-import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const Orders = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const isOffline = getOfflineStatus();
@@ -65,8 +68,8 @@ const Orders = () => {
   const offlineTableHeader = () => {
     return (
       <header className="table-header">
-        <h2 className="heading-secondary">Offline Orders</h2>
-        {!isOffline && <Button onClick={syncOfflineOrders}>Sync</Button>}
+        <h2 className="heading-secondary">{t('salesSummary.offlineSales')}</h2>
+        {!isOffline && <Button onClick={syncOfflineOrders}>{t('salesSummary.sync')}</Button>}
       </header>
     );
   };
@@ -74,7 +77,7 @@ const Orders = () => {
   const onlineTableHeader = () => {
     return (
       <header className="table-header">
-        <h2 className="heading-secondary">Online Orders</h2>
+        <h2 className="heading-secondary">{t('salesSummary.onlineSales')}</h2>
       </header>
     );
   };
@@ -107,8 +110,8 @@ const Orders = () => {
 
   return (
     <div className="orders">
-      <div className="bg-white" style={{ padding: '2rem', borderRadius: '1.2rem' }}>
-        <h1 className="heading-primary">Orders</h1>
+      <div className="bg-white page-wrapper">
+        <h1 className="heading-primary">{t('salesSummary.title')}</h1>
         <div className="filters">
           <TextInput value={date} onChange={dateChangeHandler} type="date" id="date" label="Select Date" />
         </div>

@@ -1,10 +1,12 @@
 import { array, string } from 'prop-types';
 import React from 'react';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
 
 import './style.css';
 
 const OrdersTable = props => {
+  const { t } = useTranslation();
   const { title, orders } = props;
 
   return (
@@ -13,12 +15,12 @@ const OrdersTable = props => {
       <table className="orders-table">
         <thead>
           <tr>
-            <th className="text-left">User Name</th>
-            <th className="text-left">Mobile</th>
-            <th className="text-left">Address</th>
-            <th className="text-left">Items</th>
-            <th className="text-right">Total</th>
-            <th className="text-right">Date (DD/MM/YYYY)</th>
+            <th className="text-left">{t('salesSummary.customerName')}</th>
+            <th className="text-left">{t('salesSummary.mobile')}</th>
+            <th className="text-left">{t('salesSummary.address')}</th>
+            <th className="text-left">{t('salesSummary.items')}</th>
+            <th className="text-right">{t('salesSummary.total')}</th>
+            <th className="text-right">{t('salesSummary.date')}</th>
           </tr>
         </thead>
         <tbody>

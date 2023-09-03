@@ -70,7 +70,7 @@ const Purchases = () => {
 
   return (
     <div className="purchases">
-      <div className="bg-white p-sm" style={{ borderRadius: '1.2rem' }}>
+      <div className="bg-white page-wrapper">
         <h1 className="heading-primary">{t('purchases.title')}</h1>
         {isLoading && <Loader />}
         {success && <Alert severity="success">{successMessage}</Alert>}

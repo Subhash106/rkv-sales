@@ -32,7 +32,7 @@ const SalesFormFields = props => {
   };
 
   return (
-    <div className="sales-form bg-white">
+    <div className="page-wrapper bg-white sales-form">
       <div className="row col-md-1">
         <h1 className="heading-primary">{t('sales.title')}</h1>
       </div>
