@@ -13,6 +13,7 @@ i18n
           required: 'Required',
           noInternet: 'No internet connection. Please check internet and try again.',
           somethingWentWrong: 'Something went wrong. Please try again.',
+          tryAgain: 'Try again',
           login: {
             chooseLanguage: 'Choose Language',
             title: 'Login',
@@ -91,6 +92,7 @@ i18n
           required: 'आवश्यक',
           noInternet: 'कोई इंटरनेट कनेक्शन नहीं। कृपया इंटरनेट जांचें और पुनः प्रयास करें।',
           somethingWentWrong: 'कुछ गलत हो गया। कृपया पुन: प्रयास करें।',
+          tryAgain: 'पुन: प्रयास करें',
           login: {
             chooseLanguage: 'भाषा चुनें',
             title: 'लॉग इन',

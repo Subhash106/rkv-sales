@@ -11,3 +11,4 @@ This is an application to tract the inventory and store the billing details.
 - Show Error message when offline order is not sync successfully
 - Show loader on successfull submission of sales or error in the pop-up
 - Add Backdrop to side menu
+- Add try again on Error page
