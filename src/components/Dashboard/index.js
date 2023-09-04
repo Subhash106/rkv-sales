@@ -13,10 +13,10 @@ const Dashboard = () => {
   const { t } = useTranslation();
   const [filters, setFilters] = useState({ month: moment().month() + 1, year: moment().year() });
   const { month, year } = filters;
-  const [ordersCount, setOrdersCount] = useState(0);
-  const [ordersAmount, setOrdersAmount] = useState(0);
-  const [purchasesCount, setPurchasesCount] = useState(0);
-  const [purchasesAmount, setPurchasesAmount] = useState(0);
+  const [salesCount, setsalesCount] = useState('');
+  const [salesAmount, setsalesAmount] = useState('');
+  const [purchasesCount, setPurchasesCount] = useState('');
+  const [purchasesAmount, setPurchasesAmount] = useState('');
   const { isLoading: loadingOrders, data: orders = {} } = useGetOrdersQuery();
   const { isLoading: loadingPurchases, data: purchases = {} } = useGetPurchasesQuery();
 
@@ -29,20 +29,20 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (!loadingOrders) {
-      setOrdersCount(
+      setsalesCount(
         Object.values(orders || {}).filter(order => {
           const dateArray = order?.date?.split('-');
           return month === +dateArray?.[1] && year === +dateArray?.[0];
         }).length
       );
-      setOrdersAmount(
+      setsalesAmount(
         Object.values(orders || {})
           .filter(order => {
             const dateArray = order?.date?.split('-');
             return month === +dateArray?.[1] && year === +dateArray?.[0];
           })
           .reduce((total, current) => {
-            return total + current.subTotal;
+            return total + +current.subTotal;
           }, 0)
       );
     }
@@ -130,7 +130,7 @@ const Dashboard = () => {
               />
             </Grid>
             <Grid item xs={12} lg={6}>
-              <SalesSummary month={month} year={year} ordersCount={ordersCount} ordersAmount={ordersAmount} />
+              <SalesSummary month={month} year={year} salesCount={salesCount} salesAmount={salesAmount} />
             </Grid>
           </Grid>
         </div>
