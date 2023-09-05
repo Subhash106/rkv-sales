@@ -1,0 +1,24 @@
+.skelton {
+  &--text {
+    background-color: #ccc;
+    height: 1.6rem;
+    width: 4rem;
+    margin-top: 0.5rem;
+    animation: text 2s linear infinite;
+  }
+}
+
+@keyframes text {
+  0% {
+    background-color: #eee;
+  }
+
+  /* 50% {
+    opacity: 0.5;
+    width: 2rem;
+  } */
+
+  100% {
+    background-color: #ccc;
+  }
+}

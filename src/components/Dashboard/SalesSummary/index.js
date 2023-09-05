@@ -4,8 +4,9 @@ import { number } from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
+import Text from '../../Purchases/Skelton/Text';
 
-export default function SalesSummary({ ordersCount, ordersAmount, month, year }) {
+export default function SalesSummary({ salesCount, salesAmount, month, year }) {
   const { t } = useTranslation();
 
   return (
@@ -15,21 +16,21 @@ export default function SalesSummary({ ordersCount, ordersAmount, month, year })
         <dt>{t('dashboard.salesSummary.salesCount')}</dt>
         <dd className="mb-xs">
           <strong>
-            <NavLink to={`/orders?month=${month}&year=${year}`}>{ordersCount}</NavLink>
+            <NavLink to={`/orders?month=${month}&year=${year}`}>
+              {salesCount === 0 || salesCount ? <strong>{salesCount}</strong> : <Text />}
+            </NavLink>
           </strong>
         </dd>
         <dt>{t('dashboard.salesSummary.totalSales')}</dt>
-        <dd>
-          <strong>{ordersAmount}</strong>
-        </dd>
+        <dd>{salesAmount === 0 || salesAmount ? <strong>{salesAmount}</strong> : <Text />}</dd>
       </dl>
     </Card>
   );
 }
 
 SalesSummary.propTypes = {
-  ordersCount: number.isRequired,
-  ordersAmount: number.isRequired,
+  salesCount: number.isRequired,
+  salesAmount: number.isRequired,
   month: number,
   year: number
 };

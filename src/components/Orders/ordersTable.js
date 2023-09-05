@@ -27,13 +27,13 @@ const OrdersTable = props => {
           {orders.map((order, index) => (
             <tr key={index}>
               <td className="text-left">{`${order.firstName} ${order.lastName}`}</td>
-              <td className="text-left">{order.mobile}</td>
+              <td className="text-left word-wrap">{order.mobile}</td>
               <td className="text-left">{order.address}</td>
               <td className="text-left">
                 {order.items.map(item => `${item.quantity}-${item.item}(${item.rate})`).join(', ')}
               </td>
               <td className="text-right">{order.subTotal}</td>
-              <td className="text-right">{moment(order.date).format('DD/MM/YYYY')}</td>
+              <td className="text-right word-wrap">{moment(order.date).format('DD/MM/YYYY')}</td>
             </tr>
           ))}
         </tbody>
