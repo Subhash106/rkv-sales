@@ -1,12 +1,14 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import './style.css';
 import signout from '../../utils/logout';
+import { Backdrop } from '@mui/material';
 
 const Header = () => {
+  const [backdrop, setBackdrop] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -20,11 +22,13 @@ const Header = () => {
   };
 
   const hamburgerClickHandler = () => {
-    topnavRef.current.style.display = 'block';
+    topnavRef.current.style.width = '60vw';
+    setBackdrop(true);
   };
 
   const closeClickHandler = () => {
-    topnavRef.current.style.display = 'none';
+    topnavRef.current.style.width = '0rem';
+    setBackdrop(false);
   };
 
   return (
@@ -42,67 +46,75 @@ const Header = () => {
             </NavLink>
           </div>
 
-          <div ref={topnavRef} className="top-nav">
-            <div onClick={closeClickHandler} ref={closeRef} role="button" tabIndex={0} className="close">
-              <div className="close--top"></div>
-              <div className="close--middle"></div>
-              <div className="close--bottom"></div>
-            </div>
-            <ul>
-              <li>
-                <NavLink
-                  onClick={closeClickHandler}
-                  to="/dashboard"
-                  className={({ isActive }) => {
-                    return isActive ? 'active' : '';
-                  }}
-                  end
-                >
-                  {t('header.dashboard')}
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  onClick={closeClickHandler}
-                  to="/sales"
-                  className={({ isActive }) => {
-                    return isActive ? 'active' : '';
-                  }}
-                >
-                  {t('header.sales')}
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  onClick={closeClickHandler}
-                  to="/orders"
-                  className={({ isActive }) => {
-                    return isActive ? 'active' : '';
-                  }}
-                >
-                  {t('header.orders')}
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  onClick={closeClickHandler}
-                  to="/purchases"
-                  className={({ isActive }) => {
-                    return isActive ? 'active' : '';
-                  }}
-                >
-                  {t('header.purchases')}
-                </NavLink>
-              </li>
-              {token && (
+          <Backdrop
+            onClick={closeClickHandler}
+            sx={{ color: '#fff', zIndex: theme => theme.zIndex.drawer + 1 }}
+            open={backdrop}
+          >
+            <div ref={topnavRef} className="top-nav">
+              <ul>
                 <li>
-                  <a href="#" onClick={logoutHandler}>
-                    {t('header.logout')}
-                  </a>
+                  <div onClick={closeClickHandler} ref={closeRef} role="button" tabIndex={0} className="close">
+                    <div className="close--top"></div>
+                    <div className="close--middle"></div>
+                    <div className="close--bottom"></div>
+                  </div>
                 </li>
-              )}
-            </ul>
-          </div>
+                <li>
+                  <NavLink
+                    onClick={closeClickHandler}
+                    to="/dashboard"
+                    className={({ isActive }) => {
+                      return isActive ? 'active' : '';
+                    }}
+                    end
+                  >
+                    {t('header.dashboard')}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    onClick={closeClickHandler}
+                    to="/sales"
+                    className={({ isActive }) => {
+                      return isActive ? 'active' : '';
+                    }}
+                  >
+                    {t('header.sales')}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    onClick={closeClickHandler}
+                    to="/orders"
+                    className={({ isActive }) => {
+                      return isActive ? 'active' : '';
+                    }}
+                  >
+                    {t('header.orders')}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    onClick={closeClickHandler}
+                    to="/purchases"
+                    className={({ isActive }) => {
+                      return isActive ? 'active' : '';
+                    }}
+                  >
+                    {t('header.purchases')}
+                  </NavLink>
+                </li>
+                {token && (
+                  <li>
+                    <a href="#" onClick={logoutHandler}>
+                      {t('header.logout')}
+                    </a>
+                  </li>
+                )}
+              </ul>
+            </div>
+          </Backdrop>
         </header>
       </div>
     </div>

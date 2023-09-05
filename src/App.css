@@ -97,6 +97,10 @@ dl {
   }
 }
 
+.word-wrap {
+  word-wrap: break-word;
+}
+
 /* LAYOUT */
 .row {
   display: grid;

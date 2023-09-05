@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import { TextField, Button, Alert } from '@mui/material';
 import moment from 'moment';
@@ -18,6 +18,7 @@ const toBase64 = file =>
   });
 
 const Purchases = () => {
+  const invoiceRef = useRef();
   const { t } = useTranslation();
   const [errors, setErrors] = useState(null);
   const [addPurchase, { isLoading }] = useStorePurchasesMutation();
@@ -59,6 +60,7 @@ const Purchases = () => {
       await addPurchase(purchase).unwrap();
       setFeedback({ ...feedback, success: true, successMessage: t('purchases.savedSuccessfully') });
       setPurchase({ ...purchase, amount: '', invoice: '', invoiceName: '' });
+      invoiceRef.current.value = '';
     } catch (e) {
       setFeedback({ ...feedback, error: true, errorMessage: t('purchases.savedError') });
     }
@@ -104,12 +106,12 @@ const Purchases = () => {
               />
             </Grid>
             <Grid item xs={12} md={3}>
-              <TextField
-                fullWidth
+              <input
                 type="file"
                 name="invoice"
                 min="0"
                 id="invoice"
+                ref={invoiceRef}
                 onChange={changeHandler}
                 label={t('purchases.invoice')}
               />
