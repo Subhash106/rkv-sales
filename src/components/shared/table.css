@@ -1,0 +1,32 @@
+.table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--tertiary-gray);
+  margin-bottom: 6.4rem;
+
+  & th,
+  & td {
+    padding: 0.8rem;
+    font-size: 1.2rem;
+  }
+
+  & thead,
+  & tfoot {
+    background-color: var(--tertiary-gray);
+  }
+
+  & tbody tr:nth-child(odd) {
+    background-color: var(--white);
+  }
+
+  & tbody tr:nth-child(even) {
+    background-color: var(--tertiary-gray);
+  }
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

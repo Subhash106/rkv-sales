@@ -60,16 +60,23 @@ i18n
             date: 'Date',
             amount: 'Amount',
             invoice: 'Invoice',
-            allPurchases: 'All Purchases',
             save: 'Save',
             savedSuccessfully: 'Purchase saved successfully.',
             savedError: 'Error while saving purchase. Please try again.'
+          },
+          purchasesSummary: {
+            title: 'Purchases Summary',
+            date: 'Date',
+            amount: 'Amount',
+            invoice: 'Invoice',
+            noRecord: 'No Purchases Found!'
           },
           header: {
             dashboard: 'Dashboard',
             sales: 'Sales',
             purchases: 'Purchases',
             orders: 'Orders',
+            purchasesSummary: 'Purchases Summary',
             logout: 'Logout'
           },
           salesSummary: {
@@ -83,7 +90,8 @@ i18n
             items: 'Items',
             total: 'Total',
             date: 'Date',
-            sync: 'Sync'
+            sync: 'Sync',
+            noRecord: 'No Sales Found!'
           }
         }
       },
@@ -139,16 +147,23 @@ i18n
             date: 'तारीख',
             amount: 'धनराशि',
             invoice: 'चालान',
-            allPurchases: 'सभी खरीद',
             save: 'सुरक्षित करें',
             savedSuccessfully: 'खरीदारी सफलतापूर्वक सहेजी गई.',
             savedError: 'खरीदारी सहेजते समय त्रुटि. कृपया पुन: प्रयास करें।'
+          },
+          purchasesSummary: {
+            title: 'खरीद सारांश',
+            date: 'तारीख',
+            amount: 'धनराशि',
+            invoice: 'चालान',
+            noRecord: 'कोई खरीद नहीं!'
           },
           header: {
             dashboard: 'डैशबोर्ड',
             sales: 'बिक्री',
             purchases: 'खरीद',
             orders: 'बिक्री सारांश',
+            purchasesSummary: 'खरीद सारांश',
             logout: 'लॉग आउट'
           },
           salesSummary: {
@@ -162,7 +177,8 @@ i18n
             items: 'सामान',
             total: 'टोटल',
             date: 'तारीख',
-            sync: 'Sync'
+            sync: 'Sync',
+            noRecord: 'कोई बिक्री नहीं!'
           }
         }
       }

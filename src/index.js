@@ -16,6 +16,7 @@ const Dashboard = React.lazy(() => import('./components/Dashboard'));
 const Login = React.lazy(() => import('./components/Login'));
 import ProtectedRoute from './components/ProtectedRoute';
 import store from './store';
+const PurchasesSummary = React.lazy(() => import('./components/PurchasesSummary'));
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -84,6 +85,14 @@ const router = createBrowserRouter([
             element: (
               <ProtectedRoute>
                 <Purchases />
+              </ProtectedRoute>
+            )
+          },
+          {
+            path: '/purchases-summary',
+            element: (
+              <ProtectedRoute>
+                <PurchasesSummary />
               </ProtectedRoute>
             )
           }
