@@ -4,7 +4,7 @@ import { number } from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
-import Text from '../../Purchases/Skelton/Text';
+import Text from '../../Skelton/Text';
 
 export default function SalesSummary({ salesCount, salesAmount, month, year }) {
   const { t } = useTranslation();
