@@ -2,10 +2,10 @@ import React, { useRef, useState } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { Backdrop } from '@mui/material';
 
 import './style.css';
 import signout from '../../utils/logout';
-import { Backdrop } from '@mui/material';
 
 const Header = () => {
   const [backdrop, setBackdrop] = useState(false);
@@ -103,6 +103,17 @@ const Header = () => {
                     }}
                   >
                     {t('header.purchases')}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    onClick={closeClickHandler}
+                    to="/purchases-summary"
+                    className={({ isActive }) => {
+                      return isActive ? 'active' : '';
+                    }}
+                  >
+                    {t('header.purchasesSummary')}
                   </NavLink>
                 </li>
                 {token && (

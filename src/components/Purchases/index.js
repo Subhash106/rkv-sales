@@ -5,7 +5,6 @@ import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 
 import './style.css';
-import PurchasesTable from './PurchasesTable';
 import { useStorePurchasesMutation } from '../../services/base';
 import Loader from '../Loader';
 
@@ -123,12 +122,6 @@ const Purchases = () => {
             </Grid>
           </Grid>
         </form>
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={12}>
-            <h2 className="heading-secondary">{t('purchases.allPurchases')}</h2>
-            <PurchasesTable />
-          </Grid>
-        </Grid>
       </div>
     </div>
   );

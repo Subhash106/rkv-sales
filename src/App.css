@@ -89,6 +89,10 @@ body {
   text-align: right;
 }
 
+.text-center {
+  text-align: center;
+}
+
 dl {
   color: var(--primary-gray);
 

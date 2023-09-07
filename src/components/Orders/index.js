@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { DB } from '../shared/utilities';
-import OrdersTable from './ordersTable';
+import OrdersTable from './SalesTable';
 import getOfflineStatus from '../shared/getOfflineStatus';
 import TextInput from '../shared/TextInput';
 import { useGetOrdersQuery, useStoreOrdersMutation } from '../../services/base';
@@ -14,6 +14,8 @@ const Orders = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [params] = useSearchParams();
+  const month = params.get('month');
+  const year = params.get('year');
   const isOffline = getOfflineStatus();
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [offlineOrders, setOfflineOrders] = useState([]);
@@ -95,8 +97,8 @@ const Orders = () => {
       const orderDateArray = order?.date?.split('-');
       const dateArray = date?.split('-');
 
-      if (params.get('month') && params.get('year')) {
-        return +orderDateArray?.[0] === +params.get('year') && +orderDateArray?.[1] === +params.get('month');
+      if (month && year) {
+        return +orderDateArray?.[0] === +year && +orderDateArray?.[1] === +month;
       }
 
       return (
@@ -112,7 +114,7 @@ const Orders = () => {
     <div className="orders">
       <div className="bg-white page-wrapper">
         <h1 className="heading-primary">{t('salesSummary.title')}</h1>
-        <div className="filters">
+        <div className="mb-sm">
           <TextInput value={date} onChange={dateChangeHandler} type="date" id="date" label="Select Date" />
         </div>
         <OrdersTable title={offlineTableHeader()} orders={offlineOrders} />
