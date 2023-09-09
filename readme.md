@@ -10,3 +10,4 @@ This is an application to tract the inventory and store the billing details.
 - Show Error message when offline order is not sync successfully
 - Add credit feature to sales
 - Separate Purchase summary and purchase pages
+- Set-up Google cloud storage for storing purchase invoices
