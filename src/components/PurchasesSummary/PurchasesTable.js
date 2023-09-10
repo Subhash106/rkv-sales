@@ -40,9 +40,15 @@ export default function PurchasesTable({ rows }) {
                   <td className="text-left">{row.date}</td>
                   <td className="text-right">{row.amount}</td>
                   <td className="text-left">
-                    <a href="#" onClick={e => getDownloadLink(e, row.invoiceName)}>
-                      {row.invoiceName}
-                    </a>
+                    {row.invoice ? (
+                      <a href={row.invoice} download={row.invoiceName}>
+                        {row.invoiceName}
+                      </a>
+                    ) : (
+                      <a href="#" onClick={e => getDownloadLink(e, row.invoiceName)}>
+                        {row.invoiceName}
+                      </a>
+                    )}
                   </td>
                 </tr>
               ))
