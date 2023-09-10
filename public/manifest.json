@@ -46,7 +46,7 @@
   "start_url": "/",
   "scope": ".",
   "display": "standalone",
-  "orientation": "portrait-primary",
+  "orientation": "natural",
   "background_color": "#ffffff",
   "theme_color": "#2b8a3e",
   "description": "Point of sale app for RKV",
