@@ -1,7 +1,7 @@
 .sales {
   padding: 3.2rem;
 
-  @media (max-width: 37.5em) {
+  @media (max-width: 56.25em) {
     padding: 0;
   }
 }
@@ -26,7 +26,7 @@
 
 th[class$='quantity'],
 th[class$='rate'] {
-  @media (max-width: 37.5em) {
+  @media (max-width: 56.25em) {
     max-width: 60px;
   }
 }

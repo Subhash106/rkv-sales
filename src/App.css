@@ -30,8 +30,10 @@
 }
 
 html {
-  /* 1rem = 12px */
-  font-size: 75%;
+  @media (max-width: 56.25em) {
+    /* 1rem = 11px */
+    font-size: 68.75%;
+  }
 }
 
 body {
@@ -58,7 +60,7 @@ body {
   width: 80%;
   margin: 0 auto;
 
-  @media (max-width: 37.5em) {
+  @media (max-width: 56.25em) {
     width: 100%;
   }
 }
@@ -67,7 +69,7 @@ body {
   padding: 2rem;
   border-radius: 1.2rem;
 
-  @media (max-width: 37.5em) {
+  @media (max-width: 56.25em) {
     padding: 0.8rem;
     border-radius: 0;
   }

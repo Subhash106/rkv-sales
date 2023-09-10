@@ -8,7 +8,7 @@
   &__container {
     width: 40rem;
 
-    @media (max-width: 37.5em) {
+    @media (max-width: 56.25em) {
       width: 80vw;
     }
   }

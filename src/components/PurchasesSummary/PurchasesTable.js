@@ -2,12 +2,25 @@ import React from 'react';
 import { Grid } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { arrayOf } from 'prop-types';
+import { getStorage, ref, getBlob } from 'firebase/storage';
 
 import '../shared/table.css';
 import NoRecord from '../NoRecord';
 
 export default function PurchasesTable({ rows }) {
+  const storage = getStorage();
   const { t } = useTranslation();
+
+  const getDownloadLink = async (e, fileName) => {
+    e.preventDefault();
+
+    const fileRef = ref(storage, `purchases/${fileName}`);
+    const blob = await getBlob(fileRef);
+    console.log('blob', blob);
+    const url = window.URL.createObjectURL(blob);
+    console.log('url', url);
+    window.open(url);
+  };
 
   return (
     <Grid container spacing={2}>
@@ -27,9 +40,15 @@ export default function PurchasesTable({ rows }) {
                   <td className="text-left">{row.date}</td>
                   <td className="text-right">{row.amount}</td>
                   <td className="text-left">
-                    <a download={row.invoiceName} href={row.invoice}>
-                      {row.invoiceName}
-                    </a>
+                    {row.invoice ? (
+                      <a href={row.invoice} download={row.invoiceName}>
+                        {row.invoiceName}
+                      </a>
+                    ) : (
+                      <a href="#" onClick={e => getDownloadLink(e, row.invoiceName)}>
+                        {row.invoiceName}
+                      </a>
+                    )}
                   </td>
                 </tr>
               ))

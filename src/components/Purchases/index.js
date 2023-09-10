@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid';
 import { TextField, Button, Alert } from '@mui/material';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
+import { getStorage, ref, uploadString } from 'firebase/storage';
 
 import './style.css';
 import { useStorePurchasesMutation } from '../../services/base';
@@ -17,6 +18,7 @@ const toBase64 = file =>
   });
 
 const Purchases = () => {
+  const storage = getStorage();
   const invoiceRef = useRef();
   const { t } = useTranslation();
   const [errors, setErrors] = useState(null);
@@ -29,7 +31,7 @@ const Purchases = () => {
     invoice: '',
     invoiceName: ''
   });
-  const { date, amount } = purchase;
+  const { date, amount, invoice, invoiceName } = purchase;
 
   const changeHandler = async e => {
     const {
@@ -56,7 +58,12 @@ const Purchases = () => {
     }
 
     try {
-      await addPurchase(purchase).unwrap();
+      await addPurchase({ date, amount, invoiceName }).unwrap();
+
+      // upload file to google cloud as Data URL string
+      const storageRef = ref(storage, `purchases/${invoiceName}`);
+      await uploadString(storageRef, invoice, 'data_url');
+
       setFeedback({ ...feedback, success: true, successMessage: t('purchases.savedSuccessfully') });
       setPurchase({ ...purchase, amount: '', invoice: '', invoiceName: '' });
       invoiceRef.current.value = '';
