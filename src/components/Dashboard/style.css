@@ -1,7 +1,7 @@
 .dashboard {
   padding: 3.2rem;
 
-  @media (max-width: 37.5em) {
+  @media (max-width: 56.25em) {
     padding: 0;
   }
 }
