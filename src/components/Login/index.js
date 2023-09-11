@@ -10,6 +10,7 @@ import './style.css';
 
 import signout from '../../utils/logout';
 import { login } from '../../store/auth';
+import Loader from '../Loader';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ export default function Login() {
   const { t, i18n } = useTranslation();
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [loginError, setLoginError] = useState('');
+  const [isLoging, setIsLoging] = useState(false);
   const { email, password } = credentials;
   const token = useSelector(state => state.auth.idToken) || localStorage.getItem('token');
 
@@ -34,7 +36,7 @@ export default function Login() {
 
   const loginHandler = e => {
     e.preventDefault();
-
+    setIsLoging(true);
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
@@ -49,13 +51,16 @@ export default function Login() {
           signout(dispatch, navigate);
         }, +tokenResponse.expiresIn * 1000);
         navigate('/dashboard');
+        setIsLoging(false);
       })
       .catch(error => {
         if (/network-request-failed/.test(error.message)) {
-          setLoginError(t('login.noInternet'));
+          setLoginError(t('noInternet'));
         } else {
           setLoginError(t('login.wrongCredentials'));
         }
+
+        setIsLoging(false);
       });
   };
 
@@ -65,6 +70,7 @@ export default function Login() {
     <div className="login bg-white">
       <div className="login__container">
         <div className="change-language">
+          {isLoging && <Loader />}
           <p className="change-language--paragraph">{t('login.chooseLanguage')}</p>
           <div className="change-language--buttons">
             <button onClick={() => changeLanguage('hi')}>हिंदी</button>

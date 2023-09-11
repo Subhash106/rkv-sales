@@ -37,7 +37,7 @@ export default function PurchaseSummary() {
       );
     });
     setRows(filteredData);
-  }, [date, data]);
+  }, [date, month, year]);
 
   const dateChangeHandler = e => {
     const {

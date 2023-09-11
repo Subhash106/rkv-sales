@@ -4,7 +4,7 @@ import { number } from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
-import Text from '../../Skelton/Text';
+import { Skeleton } from '@mui/material';
 
 export default function SalesSummary({ salesCount, salesAmount, month, year }) {
   const { t } = useTranslation();
@@ -16,13 +16,23 @@ export default function SalesSummary({ salesCount, salesAmount, month, year }) {
         <dt>{t('dashboard.salesSummary.salesCount')}</dt>
         <dd className="mb-xs">
           <strong>
-            <NavLink to={`/orders?month=${month}&year=${year}`}>
-              {salesCount === 0 || salesCount ? <strong>{salesCount}</strong> : <Text />}
-            </NavLink>
+            {salesCount === 0 || salesCount ? (
+              <NavLink to={`/orders?month=${month}&year=${year}`}>
+                <strong>{salesCount}</strong>
+              </NavLink>
+            ) : (
+              <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+            )}
           </strong>
         </dd>
         <dt>{t('dashboard.salesSummary.totalSales')}</dt>
-        <dd>{salesAmount === 0 || salesAmount ? <strong>{salesAmount}</strong> : <Text />}</dd>
+        <dd>
+          {salesAmount === 0 || salesAmount ? (
+            <strong>{salesAmount}</strong>
+          ) : (
+            <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+          )}
+        </dd>
       </dl>
     </Card>
   );
