@@ -9,7 +9,7 @@ import { useGetPurchasesQuery } from '../../services/base';
 import TextInput from '../shared/TextInput';
 
 import './style.css';
-import Loader from '../Loader';
+import TableSkelton from '../Loader/TableSkelton';
 
 export default function PurchaseSummary() {
   const { t } = useTranslation();
@@ -37,7 +37,7 @@ export default function PurchaseSummary() {
       );
     });
     setRows(filteredData);
-  }, [date, data]);
+  }, [date, month, year]);
 
   const dateChangeHandler = e => {
     const {
@@ -54,14 +54,13 @@ export default function PurchaseSummary() {
   return (
     <div className="purchases">
       <div className="bg-white page-wrapper">
-        {isLoading && <Loader />}
         <h1 className="heading-primary">{t('purchasesSummary.title')}</h1>
         <div className="mb-sm">
           <TextInput value={date} onChange={dateChangeHandler} type="date" id="date" label="Select Date" />
         </div>
         <Grid container spacing={2}>
           <Grid item xs={12} md={12}>
-            <PurchasesTable rows={rows} />
+            {isLoading ? <TableSkelton columns={3} rows={2} /> : <PurchasesTable rows={rows} />}
           </Grid>
         </Grid>
       </div>
