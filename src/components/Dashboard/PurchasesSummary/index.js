@@ -4,7 +4,7 @@ import { number } from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
-import Text from '../../Skelton/Text';
+import { Skeleton } from '@mui/material';
 
 export default function PurchasesSummary({ purchasesCount, purchasesAmount, month, year }) {
   const { t } = useTranslation();
@@ -16,13 +16,23 @@ export default function PurchasesSummary({ purchasesCount, purchasesAmount, mont
         <dt>{t('dashboard.purchasesSummary.purchasesCount')}</dt>
         <dd className="mb-xs">
           <strong>
-            <NavLink to={`/purchases-summary?month=${month}&year=${year}`}>
-              {purchasesCount === 0 || purchasesCount ? <strong>{purchasesCount}</strong> : <Text />}
-            </NavLink>
+            {purchasesCount === 0 || purchasesCount ? (
+              <NavLink to={`/purchases-summary?month=${month}&year=${year}`}>
+                <strong>{purchasesCount}</strong>
+              </NavLink>
+            ) : (
+              <Skeleton variant="text" sx={{ fontSize: '2rem' }} animation="wave" />
+            )}
           </strong>
         </dd>
         <dt>{t('dashboard.purchasesSummary.totalPurchases')}</dt>
-        <dd>{purchasesAmount === 0 || purchasesAmount ? <strong>{purchasesAmount}</strong> : <Text />}</dd>
+        <dd>
+          {purchasesAmount === 0 || purchasesAmount ? (
+            <strong>{purchasesAmount}</strong>
+          ) : (
+            <Skeleton variant="text" sx={{ fontSize: '2rem' }} animation="wave" />
+          )}
+        </dd>
       </dl>
     </Card>
   );

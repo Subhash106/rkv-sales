@@ -16,6 +16,7 @@ const Dashboard = React.lazy(() => import('./components/Dashboard'));
 const Login = React.lazy(() => import('./components/Login'));
 import ProtectedRoute from './components/ProtectedRoute';
 import store from './store';
+import PageSkeleton from './components/Loader/PageSkeleton';
 const PurchasesSummary = React.lazy(() => import('./components/PurchasesSummary'));
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -48,7 +49,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: (
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<PageSkeleton />}>
             <Login />
           </Suspense>
         )

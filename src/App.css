@@ -239,6 +239,24 @@ dl {
 }
 
 /* paddings */
+.p-xs {
+  padding: 1rem;
+}
+.pt-xs {
+  padding-top: 1rem;
+}
+
+.pb-xs {
+  padding-bottom: 1rem;
+}
+
+.pl-xs {
+  padding-left: 1rem;
+}
+
+.pr-xs {
+  padding-right: 1rem;
+}
 
 .p-sm {
   padding: 2rem;

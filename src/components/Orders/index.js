@@ -20,7 +20,7 @@ const Orders = () => {
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [offlineOrders, setOfflineOrders] = useState([]);
   const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
-  const { data: onlineOrders = [] } = useGetOrdersQuery(null, { refetchOnMountOrArgChange: true });
+  const { data: onlineOrders = [], isLoading } = useGetOrdersQuery();
   const [addOrder] = useStoreOrdersMutation();
 
   const getOfflineOrders = async () => {
@@ -108,7 +108,7 @@ const Orders = () => {
       );
     });
     setFilteredOrders(filteredData);
-  }, [date, onlineOrders]);
+  }, [date, month, year]);
 
   return (
     <div className="orders">
@@ -118,7 +118,7 @@ const Orders = () => {
           <TextInput value={date} onChange={dateChangeHandler} type="date" id="date" label="Select Date" />
         </div>
         <OrdersTable title={offlineTableHeader()} orders={offlineOrders} />
-        <OrdersTable title={onlineTableHeader()} orders={filteredOrders} />
+        <OrdersTable isLoading={isLoading} title={onlineTableHeader()} orders={filteredOrders} />
       </div>
     </div>
   );

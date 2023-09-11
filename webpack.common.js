@@ -55,7 +55,8 @@ module.exports = {
       filename: '[name].css'
     }),
     new PurgeCSSPlugin({
-      paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true })
+      paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
+      safelist: ['html']
     })
   ]
 };
