@@ -12,7 +12,7 @@ export default function TableSkelton({ columns, rows }) {
         <tr>
           {[...Array(columns).keys()].map(el => (
             <th key={el}>
-              <Skeleton sx={{ fontSize: '2rem' }} />
+              <Skeleton sx={{ fontSize: '2rem' }} animation="wave" />
             </th>
           ))}
         </tr>
@@ -22,7 +22,7 @@ export default function TableSkelton({ columns, rows }) {
           <tr key={el}>
             {[...Array(columns).keys()].map(elR => (
               <td key={elR}>
-                <Skeleton sx={{ fontSize: '2rem' }} />
+                <Skeleton sx={{ fontSize: '2rem' }} animation="wave" />
               </td>
             ))}
           </tr>

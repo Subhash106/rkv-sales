@@ -21,7 +21,7 @@ export default function SalesSummary({ salesCount, salesAmount, month, year }) {
                 <strong>{salesCount}</strong>
               </NavLink>
             ) : (
-              <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+              <Skeleton variant="text" sx={{ fontSize: '2rem' }} animation="wave" />
             )}
           </strong>
         </dd>
@@ -30,7 +30,7 @@ export default function SalesSummary({ salesCount, salesAmount, month, year }) {
           {salesAmount === 0 || salesAmount ? (
             <strong>{salesAmount}</strong>
           ) : (
-            <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+            <Skeleton variant="text" sx={{ fontSize: '2rem' }} animation="wave" />
           )}
         </dd>
       </dl>

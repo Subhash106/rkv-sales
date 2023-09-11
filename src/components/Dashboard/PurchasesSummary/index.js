@@ -21,7 +21,7 @@ export default function PurchasesSummary({ purchasesCount, purchasesAmount, mont
                 <strong>{purchasesCount}</strong>
               </NavLink>
             ) : (
-              <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+              <Skeleton variant="text" sx={{ fontSize: '2rem' }} animation="wave" />
             )}
           </strong>
         </dd>
@@ -30,7 +30,7 @@ export default function PurchasesSummary({ purchasesCount, purchasesAmount, mont
           {purchasesAmount === 0 || purchasesAmount ? (
             <strong>{purchasesAmount}</strong>
           ) : (
-            <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+            <Skeleton variant="text" sx={{ fontSize: '2rem' }} animation="wave" />
           )}
         </dd>
       </dl>
