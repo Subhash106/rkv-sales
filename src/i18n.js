@@ -20,6 +20,10 @@ i18n
             email: 'Email',
             password: 'Password',
             loginBtn: 'Login',
+            emailRequired: 'Email is required!',
+            validEmail: 'Please enter valid email!',
+            passwordRequired: 'Password is required!',
+            passwordLength: 'Password must be atleast PASSWORD_LENGTH chars long!',
             wrongCredentials: 'Email or password is incorrect. Please check and try again.'
           },
           dashboard: {
@@ -107,6 +111,10 @@ i18n
             email: 'ईमेल',
             password: 'पासवर्ड',
             loginBtn: 'लॉग इन करें',
+            emailRequired: 'ईमेल दर्ज करना आवश्यक है!',
+            validEmail: 'कृपया वैध ईमेल दर्ज़ करें!',
+            passwordRequired: 'पासवर्ड दर्ज करना आवश्यक है!',
+            passwordLength: 'पासवर्ड कम से कम PASSWORD_LENGTH अक्षर लंबा होना चाहिए!',
             wrongCredentials: 'ईमेल या पासवर्ड गलत है। कृपया जाँच करें और पुनः प्रयास करें।'
           },
           dashboard: {

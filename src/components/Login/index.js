@@ -11,6 +11,8 @@ import './style.css';
 import signout from '../../utils/logout';
 import { login } from '../../store/auth';
 import Loader from '../Loader';
+import validateEmail from '../../utils/validateEmail';
+import { PASSWORD_LENGTH } from '../constant';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -18,6 +20,8 @@ export default function Login() {
   const { t, i18n } = useTranslation();
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [loginError, setLoginError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
   const [isLoging, setIsLoging] = useState(false);
   const { email, password } = credentials;
   const token = useSelector(state => state.auth.idToken) || localStorage.getItem('token');
@@ -31,11 +35,33 @@ export default function Login() {
       target: { name, value }
     } = e;
 
+    if (name === 'email' && value && validateEmail(value)) {
+      setEmailError('');
+    }
+
+    if (name === 'password' && value && value.length === PASSWORD_LENGTH) {
+      setPasswordError('');
+    }
+
     setCredentials({ ...credentials, [name]: value });
   };
 
   const loginHandler = e => {
     e.preventDefault();
+    if (!email) {
+      setEmailError(t('login.emailRequired'));
+      return false;
+    } else if (!validateEmail(email)) {
+      setEmailError(t('login.validEmail'));
+      return false;
+    } else if (!password) {
+      setPasswordError(t('login.passwordRequired'));
+      return false;
+    } else if (password.length < PASSWORD_LENGTH) {
+      setPasswordError(t('login.passwordLength').replace('PASSWORD_LENGTH', PASSWORD_LENGTH));
+      return false;
+    }
+
     setIsLoging(true);
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
@@ -96,6 +122,9 @@ export default function Login() {
               name="email"
               type="text"
               label={t('login.email')}
+              required
+              error={!!emailError}
+              helperText={emailError}
             />
             <TextField
               variant="outlined"
@@ -105,6 +134,9 @@ export default function Login() {
               name="password"
               label={t('login.password')}
               type="password"
+              required
+              error={!!passwordError}
+              helperText={passwordError}
             />
             <Button onClick={loginHandler} variant="contained" color="success">
               {t('login.loginBtn')}
