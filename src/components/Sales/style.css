@@ -14,7 +14,7 @@
 
   & .quantity,
   & .rate {
-    width: 10rem;
+    width: 6rem;
   }
 
   & .sub-total {
@@ -24,8 +24,8 @@
   }
 }
 
-th[class$='quantity'],
-th[class$='rate'] {
+th[id$='.quantity'],
+th[id$='.rate'] {
   @media (max-width: 56.25em) {
     max-width: 60px;
   }
