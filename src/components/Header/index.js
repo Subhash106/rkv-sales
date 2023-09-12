@@ -20,6 +20,7 @@ const Header = () => {
       if (state.auth === null) return false;
       return state.auth.idToken;
     }) || localStorage.getItem('token');
+
   const logoutHandler = e => {
     e.preventDefault();
     signout(dispatch, navigate);
