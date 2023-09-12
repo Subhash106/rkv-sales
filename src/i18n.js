@@ -64,6 +64,7 @@ i18n
             date: 'Date',
             amount: 'Amount',
             invoice: 'Invoice',
+            comment: 'Comment',
             save: 'Save',
             savedSuccessfully: 'Purchase saved successfully.',
             savedError: 'Error while saving purchase. Please try again.'
@@ -155,6 +156,7 @@ i18n
             date: 'तारीख',
             amount: 'धनराशि',
             invoice: 'चालान',
+            comment: 'टिप्पणी',
             save: 'सुरक्षित करें',
             savedSuccessfully: 'खरीदारी सफलतापूर्वक सहेजी गई.',
             savedError: 'खरीदारी सहेजते समय त्रुटि. कृपया पुन: प्रयास करें।'

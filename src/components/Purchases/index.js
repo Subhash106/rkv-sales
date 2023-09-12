@@ -29,9 +29,10 @@ const Purchases = () => {
     date: moment().format('YYYY-MM-DD'),
     amount: '',
     invoice: '',
-    invoiceName: ''
+    invoiceName: '',
+    comment: ''
   });
-  const { date, amount, invoice, invoiceName } = purchase;
+  const { date, amount, invoice, invoiceName, comment } = purchase;
 
   const changeHandler = async e => {
     const {
@@ -58,15 +59,17 @@ const Purchases = () => {
     }
 
     try {
-      await addPurchase({ date, amount, invoiceName }).unwrap();
+      await addPurchase({ date, amount, invoiceName, comment }).unwrap();
 
       // upload file to google cloud as Data URL string
-      const storageRef = ref(storage, `purchases/${invoiceName}`);
-      await uploadString(storageRef, invoice, 'data_url');
+      if (invoice) {
+        const storageRef = ref(storage, `purchases/${invoiceName}`);
+        await uploadString(storageRef, invoice, 'data_url');
+        invoiceRef.current.value = '';
+      }
 
       setFeedback({ ...feedback, success: true, successMessage: t('purchases.savedSuccessfully') });
-      setPurchase({ ...purchase, amount: '', invoice: '', invoiceName: '' });
-      invoiceRef.current.value = '';
+      setPurchase({ ...purchase, amount: '', invoice: '', invoiceName: '', comment: '' });
     } catch (e) {
       setFeedback({ ...feedback, error: true, errorMessage: t('purchases.savedError') });
     }
@@ -120,6 +123,17 @@ const Purchases = () => {
                 ref={invoiceRef}
                 onChange={changeHandler}
                 label={t('purchases.invoice')}
+              />
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <TextField
+                fullWidth
+                type="text"
+                name="comment"
+                id="commnt"
+                onChange={changeHandler}
+                label={t('purchases.comment')}
+                value={comment}
               />
             </Grid>
             <Grid item xs={12} md={3} className="text-right">

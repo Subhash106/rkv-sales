@@ -7,9 +7,9 @@ import moment from 'moment';
 import PurchasesTable from './PurchasesTable';
 import { useGetPurchasesQuery } from '../../services/base';
 import TextInput from '../shared/TextInput';
+import TableSkelton from '../Loader/TableSkelton';
 
 import './style.css';
-import TableSkelton from '../Loader/TableSkelton';
 
 export default function PurchaseSummary() {
   const { t } = useTranslation();

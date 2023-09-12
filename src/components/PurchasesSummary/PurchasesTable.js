@@ -29,25 +29,27 @@ export default function PurchasesTable({ rows }) {
               <th className="text-left">{t('purchases.date')}</th>
               <th className="text-right">{t('purchases.amount')}</th>
               <th className="text-left">{t('purchases.invoice')}</th>
+              <th className="text-left">{t('purchases.comment')}</th>
             </tr>
           </thead>
           <tbody>
             {rows.length > 0 ? (
-              rows.map(row => (
-                <tr key={`${row.date}_${row.amount}_${row.invoiceName}`}>
-                  <td className="text-left">{row.date}</td>
-                  <td className="text-right">{row.amount}</td>
+              rows.map(({ amount, date, invoice, invoiceName, comment }) => (
+                <tr key={`${date}_${amount}_${invoiceName}`}>
+                  <td className="text-left">{date}</td>
+                  <td className="text-right">{amount}</td>
                   <td className="text-left">
-                    {row.invoice ? (
-                      <a href={row.invoice} download={row.invoiceName}>
-                        {row.invoiceName}
+                    {invoice ? (
+                      <a href={invoice} download={invoiceName}>
+                        {invoiceName}
                       </a>
                     ) : (
-                      <a href="#" onClick={e => getDownloadLink(e, row.invoiceName)}>
-                        {row.invoiceName}
+                      <a href="#" onClick={e => getDownloadLink(e, invoiceName)}>
+                        {invoiceName}
                       </a>
                     )}
                   </td>
+                  <td className="text-left">{comment}</td>
                 </tr>
               ))
             ) : (
