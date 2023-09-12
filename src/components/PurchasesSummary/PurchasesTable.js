@@ -16,9 +16,7 @@ export default function PurchasesTable({ rows }) {
 
     const fileRef = ref(storage, `purchases/${fileName}`);
     const blob = await getBlob(fileRef);
-    console.log('blob', blob);
     const url = window.URL.createObjectURL(blob);
-    console.log('url', url);
     window.open(url);
   };
 

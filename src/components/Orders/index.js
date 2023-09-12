@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { DB } from '../shared/utilities';
-import OrdersTable from './SalesTable';
+import SalesTable from './SalesTable';
 import getOfflineStatus from '../shared/getOfflineStatus';
 import TextInput from '../shared/TextInput';
 import { useGetOrdersQuery, useStoreOrdersMutation } from '../../services/base';
@@ -115,10 +115,10 @@ const Orders = () => {
       <div className="bg-white page-wrapper">
         <h1 className="heading-primary">{t('salesSummary.title')}</h1>
         <div className="mb-sm">
-          <TextInput value={date} onChange={dateChangeHandler} type="date" id="date" label="Select Date" />
+          <TextInput value={date} onChange={dateChangeHandler} name="date" type="date" id="date" label="Select Date" />
         </div>
-        <OrdersTable title={offlineTableHeader()} orders={offlineOrders} />
-        <OrdersTable isLoading={isLoading} title={onlineTableHeader()} orders={filteredOrders} />
+        <SalesTable title={offlineTableHeader()} orders={offlineOrders} />
+        <SalesTable isLoading={isLoading} title={onlineTableHeader()} orders={filteredOrders} />
       </div>
     </div>
   );

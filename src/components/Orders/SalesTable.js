@@ -1,4 +1,4 @@
-import { array, string, bool } from 'prop-types';
+import { array, bool, node } from 'prop-types';
 import React from 'react';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
@@ -8,7 +8,7 @@ import './style.css';
 import NoRecord from '../NoRecord';
 import TableSkelton from '../Loader/TableSkelton';
 
-const OrdersTable = props => {
+const SalesTable = props => {
   const { t } = useTranslation();
   const { title, orders, isLoading = false } = props;
 
@@ -57,14 +57,14 @@ const OrdersTable = props => {
   );
 };
 
-OrdersTable.propTypes = {
+SalesTable.propTypes = {
   isLoading: bool,
   orders: array.isRequired,
-  title: string.isRequired
+  title: node.isRequired
 };
 
-OrdersTable.defaultProps = {
+SalesTable.defaultProps = {
   isLoading: false
 };
 
-export default OrdersTable;
+export default SalesTable;
