@@ -49,7 +49,7 @@ export default function Login() {
     setCredentials({ ...credentials, [name]: value });
   };
 
-  const loginHandler = e => {
+  const loginHandler = async e => {
     e.preventDefault();
     if (!email) {
       setEmailError(t('login.emailRequired'));
@@ -65,32 +65,28 @@ export default function Login() {
       return false;
     }
 
-    setIsLoging(true);
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then(userCredential => {
-        // Signed in
-        const tokenResponse = userCredential._tokenResponse;
-        localStorage.setItem('token', tokenResponse.idToken);
-        localStorage.setItem('refreshToken', tokenResponse.refreshToken);
-        localStorage.setItem('expiresIn', tokenResponse.expiresIn);
-        dispatch(login(tokenResponse));
-        // Auto refresh and update token before expiration
-        setTimeout(() => {
-          signout(dispatch, navigate);
-        }, 3600 * 1000);
-        navigate('/dashboard');
-        setIsLoging(false);
-      })
-      .catch(error => {
-        if (/network-request-failed/.test(error.message)) {
-          setLoginError(t('noInternet'));
-        } else {
-          setLoginError(t('login.wrongCredentials'));
-        }
+    setIsLoging(true);
 
-        setIsLoging(false);
-      });
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const tokenResponse = userCredential._tokenResponse;
+      localStorage.setItem('token', tokenResponse.idToken);
+      localStorage.setItem('refreshToken', tokenResponse.refreshToken);
+      localStorage.setItem('expiresIn', tokenResponse.expiresIn);
+      // Auto refresh and update token before expiration
+      setTimeout(() => {
+        signout(dispatch, navigate);
+      }, 3600 * 1000);
+      dispatch(login(tokenResponse));
+    } catch (error) {
+      if (/network-request-failed/.test(error.message)) {
+        setLoginError(t('noInternet'));
+      } else {
+        setLoginError(t('login.wrongCredentials'));
+      }
+    }
+    setIsLoging(false);
   };
 
   useEffect(() => {

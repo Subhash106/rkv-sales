@@ -6,9 +6,11 @@ import { Backdrop } from '@mui/material';
 
 import './style.css';
 import signout from '../../utils/logout';
+import Loader from '../Loader';
 
 const Header = () => {
   const [backdrop, setBackdrop] = useState(false);
+  const [isSigningout, setIsSigningout] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -21,9 +23,11 @@ const Header = () => {
       return state.auth.idToken;
     }) || localStorage.getItem('token');
 
-  const logoutHandler = e => {
+  const logoutHandler = async e => {
     e.preventDefault();
-    signout(dispatch, navigate);
+    setIsSigningout(true);
+    await signout(dispatch, navigate);
+    setIsSigningout(true);
   };
 
   const hamburgerClickHandler = () => {
@@ -39,6 +43,7 @@ const Header = () => {
   return (
     <div className="header">
       <div className="container">
+        {isSigningout && <Loader />}
         <header className="main-header">
           <div onClick={hamburgerClickHandler} ref={hamburgerRef} role="button" tabIndex={0} className="hamburger">
             <div className="hamburger--top"></div>

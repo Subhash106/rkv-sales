@@ -56,7 +56,7 @@ export default function PurchaseSummary() {
       <div className="bg-white page-wrapper">
         <h1 className="heading-primary">{t('purchasesSummary.title')}</h1>
         <div className="mb-sm">
-          <TextInput value={date} onChange={dateChangeHandler} type="date" id="date" label="Select Date" />
+          <TextInput value={date} onChange={dateChangeHandler} name="date" type="date" id="date" label="Select Date" />
         </div>
         <Grid container spacing={2}>
           <Grid item xs={12} md={12}>

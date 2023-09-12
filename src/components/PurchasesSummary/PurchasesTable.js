@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { arrayOf } from 'prop-types';
+import { arrayOf, object } from 'prop-types';
 import { getStorage, ref, getBlob } from 'firebase/storage';
 
 import '../shared/table.css';
@@ -65,5 +65,5 @@ export default function PurchasesTable({ rows }) {
 }
 
 PurchasesTable.propTypes = {
-  rows: arrayOf({})
+  rows: arrayOf(object)
 };
