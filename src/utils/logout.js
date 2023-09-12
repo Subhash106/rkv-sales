@@ -6,10 +6,10 @@ export default function signout(dispatch, navigate) {
   signOut(auth)
     .then(() => {
       // Sign-out successful.
-      dispatch(logout());
       localStorage.removeItem('token');
       localStorage.removeItem('refreshToken');
       localStorage.removeItem('expiresIn');
+      dispatch(logout());
       navigate('/');
     })
     .catch(error => {

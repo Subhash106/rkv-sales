@@ -8,7 +8,9 @@ const dynamicBaseQuery = async (args, api, extraOptions) => {
   const state = api.getState();
   const urlEnd = typeof args === 'string' ? args : args.url;
   // construct a dynamically generated portion of the url
-  const adjustedUrl = `${urlEnd}?auth=${state.auth.idToken || localStorage.getItem('token')}`;
+  const adjustedUrl = `${urlEnd}?auth=${
+    state.auth === null ? '' : state.auth.idToken || localStorage.getItem('token')
+  }`;
   const adjustedArgs = typeof args === 'string' ? adjustedUrl : { ...args, url: adjustedUrl };
   // provide the amended url and other params to the raw base query
   return rawBaseQuery(adjustedArgs, api, extraOptions);

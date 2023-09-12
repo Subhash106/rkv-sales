@@ -15,7 +15,11 @@ const Header = () => {
   const hamburgerRef = useRef();
   const topnavRef = useRef();
   const closeRef = useRef();
-  const token = useSelector(state => state.auth.idToken) || localStorage.getItem('token');
+  const token =
+    useSelector(state => {
+      if (state.auth === null) return false;
+      return state.auth.idToken;
+    }) || localStorage.getItem('token');
   const logoutHandler = e => {
     e.preventDefault();
     signout(dispatch, navigate);

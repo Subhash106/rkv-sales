@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { TextField, Button } from '@mui/material';
 import { Navigate } from 'react-router-dom';
@@ -24,7 +24,11 @@ export default function Login() {
   const [passwordError, setPasswordError] = useState('');
   const [isLoging, setIsLoging] = useState(false);
   const { email, password } = credentials;
-  const token = useSelector(state => state.auth.idToken) || localStorage.getItem('token');
+  const token =
+    useSelector(state => {
+      if (state.auth === null) return false;
+      return state.auth.idToken;
+    }) || localStorage.getItem('token');
 
   const changeLanguage = lng => {
     i18n.changeLanguage(lng);
@@ -75,7 +79,7 @@ export default function Login() {
         // Auto refresh and update token before expiration
         setTimeout(() => {
           signout(dispatch, navigate);
-        }, +tokenResponse.expiresIn * 1000);
+        }, 3600 * 1000);
         navigate('/dashboard');
         setIsLoging(false);
       })
@@ -90,7 +94,11 @@ export default function Login() {
       });
   };
 
-  if (token) return <Navigate to="/dashboard" />;
+  useEffect(() => {
+    if (token) {
+      navigate('/dashboard');
+    }
+  }, [token]);
 
   return (
     <div className="login bg-white">
