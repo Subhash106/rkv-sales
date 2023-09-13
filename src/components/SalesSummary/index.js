@@ -10,7 +10,7 @@ import getOfflineStatus from '../shared/getOfflineStatus';
 import TextInput from '../shared/TextInput';
 import { useGetOrdersQuery, useStoreOrdersMutation } from '../../services/base';
 
-const Orders = () => {
+const SalesSummary = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [params] = useSearchParams();
@@ -124,4 +124,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default SalesSummary;

@@ -96,12 +96,12 @@ const Header = () => {
                 <li>
                   <NavLink
                     onClick={closeClickHandler}
-                    to="/orders"
+                    to="/sales-summary"
                     className={({ isActive }) => {
                       return isActive ? 'active' : '';
                     }}
                   >
-                    {t('header.orders')}
+                    {t('header.salesSummary')}
                   </NavLink>
                 </li>
                 <li>

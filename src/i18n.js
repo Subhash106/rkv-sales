@@ -80,7 +80,7 @@ i18n
             dashboard: 'Dashboard',
             sales: 'Sales',
             purchases: 'Purchases',
-            orders: 'Orders',
+            salesSummary: 'SalesSummary',
             purchasesSummary: 'Purchases Summary',
             logout: 'Logout'
           },
@@ -172,7 +172,7 @@ i18n
             dashboard: 'डैशबोर्ड',
             sales: 'बिक्री',
             purchases: 'खरीद',
-            orders: 'बिक्री सारांश',
+            salesSummary: 'बिक्री सारांश',
             purchasesSummary: 'खरीद सारांश',
             logout: 'लॉग आउट'
           },
