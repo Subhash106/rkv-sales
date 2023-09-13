@@ -108,7 +108,7 @@ const Orders = () => {
       );
     });
     setFilteredOrders(filteredData);
-  }, [date, month, year]);
+  }, [date, month, year, isLoading]);
 
   return (
     <div className="orders">

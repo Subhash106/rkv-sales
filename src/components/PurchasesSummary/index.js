@@ -22,13 +22,33 @@ export default function PurchaseSummary() {
   const year = params.get('year');
 
   useEffect(() => {
+    console.log('inside useEffect', data);
     const filteredData = Object.values(data).filter(order => {
       const orderDateArray = order?.date?.split('-');
       const dateArray = date?.split('-');
 
+      console.log('dateArray', month, year, dateArray);
+
       if (month && year) {
         return +orderDateArray?.[0] === +year && +orderDateArray?.[1] === +month;
       }
+
+      console.log(
+        'orderDateArray',
+        orderDateArray?.[0],
+        orderDateArray?.[1],
+        orderDateArray?.[2],
+        dateArray?.[0],
+        dateArray?.[1],
+        dateArray?.[2],
+        typeof orderDateArray?.[0],
+        typeof orderDateArray?.[1],
+        typeof orderDateArray?.[2],
+        typeof dateArray?.[0],
+        typeof dateArray?.[1],
+        typeof dateArray?.[2],
+        typeof orderDateArray
+      );
 
       return (
         orderDateArray?.[0] === dateArray?.[0] &&
@@ -37,7 +57,7 @@ export default function PurchaseSummary() {
       );
     });
     setRows(filteredData);
-  }, [date, month, year]);
+  }, [date, month, year, isLoading]);
 
   const dateChangeHandler = e => {
     const {

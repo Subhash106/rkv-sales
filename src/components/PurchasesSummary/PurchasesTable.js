@@ -34,8 +34,8 @@ export default function PurchasesTable({ rows }) {
           </thead>
           <tbody>
             {rows.length > 0 ? (
-              rows.map(({ amount, date, invoice, invoiceName, comment }) => (
-                <tr key={`${date}_${amount}_${invoiceName}`}>
+              rows.map(({ amount, date, invoice, invoiceName, comment }, index) => (
+                <tr key={`${index}_${date}_${amount}_${invoiceName}`}>
                   <td className="text-left">{date}</td>
                   <td className="text-right">{amount}</td>
                   <td className="text-left">
@@ -54,7 +54,7 @@ export default function PurchasesTable({ rows }) {
               ))
             ) : (
               <tr>
-                <td colSpan={3}>
+                <td colSpan={4}>
                   <NoRecord message={t('purchasesSummary.noRecord')} />
                 </td>
               </tr>
