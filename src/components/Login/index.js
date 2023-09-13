@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router';
 
 import './style.css';
 
-import signout from '../../utils/logout';
 import { login } from '../../store/auth';
 import Loader from '../Loader';
 import validateEmail from '../../utils/validateEmail';
@@ -74,10 +73,6 @@ export default function Login() {
       localStorage.setItem('token', tokenResponse.idToken);
       localStorage.setItem('refreshToken', tokenResponse.refreshToken);
       localStorage.setItem('expiresIn', tokenResponse.expiresIn);
-      // Auto refresh and update token before expiration
-      setTimeout(() => {
-        signout(dispatch, navigate);
-      }, 3600 * 1000);
       dispatch(login(tokenResponse));
     } catch (error) {
       if (/network-request-failed/.test(error.message)) {
