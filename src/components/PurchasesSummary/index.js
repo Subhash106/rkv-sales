@@ -7,9 +7,9 @@ import moment from 'moment';
 import PurchasesTable from './PurchasesTable';
 import { useGetPurchasesQuery } from '../../services/base';
 import TextInput from '../shared/TextInput';
+import TableSkelton from '../Loader/TableSkelton';
 
 import './style.css';
-import TableSkelton from '../Loader/TableSkelton';
 
 export default function PurchaseSummary() {
   const { t } = useTranslation();
@@ -22,13 +22,33 @@ export default function PurchaseSummary() {
   const year = params.get('year');
 
   useEffect(() => {
+    console.log('inside useEffect', data);
     const filteredData = Object.values(data).filter(order => {
       const orderDateArray = order?.date?.split('-');
       const dateArray = date?.split('-');
 
+      console.log('dateArray', month, year, dateArray);
+
       if (month && year) {
         return +orderDateArray?.[0] === +year && +orderDateArray?.[1] === +month;
       }
+
+      console.log(
+        'orderDateArray',
+        orderDateArray?.[0],
+        orderDateArray?.[1],
+        orderDateArray?.[2],
+        dateArray?.[0],
+        dateArray?.[1],
+        dateArray?.[2],
+        typeof orderDateArray?.[0],
+        typeof orderDateArray?.[1],
+        typeof orderDateArray?.[2],
+        typeof dateArray?.[0],
+        typeof dateArray?.[1],
+        typeof dateArray?.[2],
+        typeof orderDateArray
+      );
 
       return (
         orderDateArray?.[0] === dateArray?.[0] &&
@@ -37,7 +57,7 @@ export default function PurchaseSummary() {
       );
     });
     setRows(filteredData);
-  }, [date, month, year]);
+  }, [date, month, year, isLoading]);
 
   const dateChangeHandler = e => {
     const {
@@ -56,7 +76,7 @@ export default function PurchaseSummary() {
       <div className="bg-white page-wrapper">
         <h1 className="heading-primary">{t('purchasesSummary.title')}</h1>
         <div className="mb-sm">
-          <TextInput value={date} onChange={dateChangeHandler} type="date" id="date" label="Select Date" />
+          <TextInput value={date} onChange={dateChangeHandler} name="date" type="date" id="date" label="Select Date" />
         </div>
         <Grid container spacing={2}>
           <Grid item xs={12} md={12}>

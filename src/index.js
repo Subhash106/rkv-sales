@@ -9,15 +9,15 @@ import { getAnalytics } from 'firebase/analytics';
 import './i18n';
 import App from './App';
 import Error from './components/Error';
-const Orders = React.lazy(() => import('./components/Orders'));
 const Sales = React.lazy(() => import('./components/Sales'));
+const SalesSummary = React.lazy(() => import('./components/SalesSummary'));
 const Purchases = React.lazy(() => import('./components/Purchases'));
+const PurchasesSummary = React.lazy(() => import('./components/PurchasesSummary'));
 const Dashboard = React.lazy(() => import('./components/Dashboard'));
 const Login = React.lazy(() => import('./components/Login'));
 import ProtectedRoute from './components/ProtectedRoute';
 import store from './store';
 import PageSkeleton from './components/Loader/PageSkeleton';
-const PurchasesSummary = React.lazy(() => import('./components/PurchasesSummary'));
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -74,10 +74,10 @@ const router = createBrowserRouter([
             )
           },
           {
-            path: '/orders',
+            path: '/sales-summary',
             element: (
               <ProtectedRoute>
-                <Orders />
+                <SalesSummary />
               </ProtectedRoute>
             )
           },

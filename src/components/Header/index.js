@@ -6,19 +6,28 @@ import { Backdrop } from '@mui/material';
 
 import './style.css';
 import signout from '../../utils/logout';
+import Loader from '../Loader';
 
 const Header = () => {
   const [backdrop, setBackdrop] = useState(false);
+  const [isSigningout, setIsSigningout] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const hamburgerRef = useRef();
   const topnavRef = useRef();
   const closeRef = useRef();
-  const token = useSelector(state => state.auth.idToken) || localStorage.getItem('token');
-  const logoutHandler = e => {
+  const token =
+    useSelector(state => {
+      if (state.auth === null) return false;
+      return state.auth.idToken;
+    }) || localStorage.getItem('token');
+
+  const logoutHandler = async e => {
     e.preventDefault();
-    signout(dispatch, navigate);
+    setIsSigningout(true);
+    await signout(dispatch, navigate);
+    setIsSigningout(true);
   };
 
   const hamburgerClickHandler = () => {
@@ -34,6 +43,7 @@ const Header = () => {
   return (
     <div className="header">
       <div className="container">
+        {isSigningout && <Loader />}
         <header className="main-header">
           <div onClick={hamburgerClickHandler} ref={hamburgerRef} role="button" tabIndex={0} className="hamburger">
             <div className="hamburger--top"></div>
@@ -86,12 +96,12 @@ const Header = () => {
                 <li>
                   <NavLink
                     onClick={closeClickHandler}
-                    to="/orders"
+                    to="/sales-summary"
                     className={({ isActive }) => {
                       return isActive ? 'active' : '';
                     }}
                   >
-                    {t('header.orders')}
+                    {t('header.salesSummary')}
                   </NavLink>
                 </li>
                 <li>

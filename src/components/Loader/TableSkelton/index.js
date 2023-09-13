@@ -5,7 +5,6 @@ import React from 'react';
 import './style.css';
 
 export default function TableSkelton({ columns, rows }) {
-  console.log('[...Array(rows).keys()]', [...Array(rows).keys()]);
   return (
     <table className="skeleton-table">
       <thead>
