@@ -46,7 +46,7 @@ registerRoute(
   })
 );
 registerRoute(
-  ({ url }) => url.pathname.startsWith('/orders'),
+  ({ url }) => url.pathname.startsWith('/sales-summary'),
   new NetworkFirst({
     cacheName: cacheNames.precache
   })
