@@ -1,4 +1,4 @@
-import { array, string, bool } from 'prop-types';
+import { array, bool, node } from 'prop-types';
 import React from 'react';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
@@ -8,7 +8,7 @@ import './style.css';
 import NoRecord from '../NoRecord';
 import TableSkelton from '../Loader/TableSkelton';
 
-const OrdersTable = props => {
+const SalesTable = props => {
   const { t } = useTranslation();
   const { title, orders, isLoading = false } = props;
 
@@ -31,16 +31,16 @@ const OrdersTable = props => {
           </thead>
           <tbody>
             {orders.length > 0 ? (
-              orders.map((order, index) => (
+              orders.map(({ firstName, lastName, mobile, address, items, date, subTotal }, index) => (
                 <tr key={index}>
-                  <td className="text-left">{`${order.firstName} ${order.lastName}`}</td>
-                  <td className="text-left word-wrap">{order.mobile}</td>
-                  <td className="text-left">{order.address}</td>
+                  <td className="text-left">{`${firstName} ${lastName}`}</td>
+                  <td className="text-left word-wrap">{mobile}</td>
+                  <td className="text-left">{address}</td>
                   <td className="text-left">
-                    {order.items.map(item => `${item.quantity}-${item.item}(${item.rate})`).join(', ')}
+                    {items.map(item => `${item.quantity}-${item.item}(${item.rate})`).join(', ')}
                   </td>
-                  <td className="text-right">{order.subTotal}</td>
-                  <td className="text-right word-wrap">{moment(order.date).format('DD/MM/YYYY')}</td>
+                  <td className="text-right">{subTotal}</td>
+                  <td className="text-right word-wrap">{moment(date).format('DD/MM/YYYY')}</td>
                 </tr>
               ))
             ) : (
@@ -57,14 +57,14 @@ const OrdersTable = props => {
   );
 };
 
-OrdersTable.propTypes = {
+SalesTable.propTypes = {
   isLoading: bool,
   orders: array.isRequired,
-  title: string.isRequired
+  title: node.isRequired
 };
 
-OrdersTable.defaultProps = {
+SalesTable.defaultProps = {
   isLoading: false
 };
 
-export default OrdersTable;
+export default SalesTable;

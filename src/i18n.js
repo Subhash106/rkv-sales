@@ -20,6 +20,10 @@ i18n
             email: 'Email',
             password: 'Password',
             loginBtn: 'Login',
+            emailRequired: 'Email is required!',
+            validEmail: 'Please enter valid email!',
+            passwordRequired: 'Password is required!',
+            passwordLength: 'Password must be atleast PASSWORD_LENGTH chars long!',
             wrongCredentials: 'Email or password is incorrect. Please check and try again.'
           },
           dashboard: {
@@ -60,6 +64,7 @@ i18n
             date: 'Date',
             amount: 'Amount',
             invoice: 'Invoice',
+            comment: 'Comment',
             save: 'Save',
             savedSuccessfully: 'Purchase saved successfully.',
             savedError: 'Error while saving purchase. Please try again.'
@@ -75,7 +80,7 @@ i18n
             dashboard: 'Dashboard',
             sales: 'Sales',
             purchases: 'Purchases',
-            orders: 'Orders',
+            salesSummary: 'SalesSummary',
             purchasesSummary: 'Purchases Summary',
             logout: 'Logout'
           },
@@ -107,6 +112,10 @@ i18n
             email: 'ईमेल',
             password: 'पासवर्ड',
             loginBtn: 'लॉग इन करें',
+            emailRequired: 'ईमेल दर्ज करना आवश्यक है!',
+            validEmail: 'कृपया वैध ईमेल दर्ज़ करें!',
+            passwordRequired: 'पासवर्ड दर्ज करना आवश्यक है!',
+            passwordLength: 'पासवर्ड कम से कम PASSWORD_LENGTH अक्षर लंबा होना चाहिए!',
             wrongCredentials: 'ईमेल या पासवर्ड गलत है। कृपया जाँच करें और पुनः प्रयास करें।'
           },
           dashboard: {
@@ -147,6 +156,7 @@ i18n
             date: 'तारीख',
             amount: 'धनराशि',
             invoice: 'चालान',
+            comment: 'टिप्पणी',
             save: 'सुरक्षित करें',
             savedSuccessfully: 'खरीदारी सफलतापूर्वक सहेजी गई.',
             savedError: 'खरीदारी सहेजते समय त्रुटि. कृपया पुन: प्रयास करें।'
@@ -162,7 +172,7 @@ i18n
             dashboard: 'डैशबोर्ड',
             sales: 'बिक्री',
             purchases: 'खरीद',
-            orders: 'बिक्री सारांश',
+            salesSummary: 'बिक्री सारांश',
             purchasesSummary: 'खरीद सारांश',
             logout: 'लॉग आउट'
           },

@@ -1,12 +1,12 @@
 import React from 'react';
 import Card from '@mui/material/Card';
-import { number } from 'prop-types';
+import { number, bool } from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 import { Skeleton } from '@mui/material';
 
-export default function SalesSummary({ salesCount, salesAmount, month, year }) {
+export default function SalesSummary({ salesCount, salesAmount, month, year, isLoading }) {
   const { t } = useTranslation();
 
   return (
@@ -15,22 +15,20 @@ export default function SalesSummary({ salesCount, salesAmount, month, year }) {
       <dl>
         <dt>{t('dashboard.salesSummary.salesCount')}</dt>
         <dd className="mb-xs">
-          <strong>
-            {salesCount === 0 || salesCount ? (
-              <NavLink to={`/orders?month=${month}&year=${year}`}>
-                <strong>{salesCount}</strong>
-              </NavLink>
-            ) : (
-              <Skeleton variant="text" sx={{ fontSize: '2rem' }} animation="wave" />
-            )}
-          </strong>
+          {isLoading ? (
+            <Skeleton variant="text" sx={{ fontSize: '2rem' }} animation="wave" />
+          ) : (
+            <NavLink to={`/orders?month=${month}&year=${year}`}>
+              <strong>{salesCount}</strong>
+            </NavLink>
+          )}
         </dd>
         <dt>{t('dashboard.salesSummary.totalSales')}</dt>
         <dd>
-          {salesAmount === 0 || salesAmount ? (
-            <strong>{salesAmount}</strong>
-          ) : (
+          {isLoading ? (
             <Skeleton variant="text" sx={{ fontSize: '2rem' }} animation="wave" />
+          ) : (
+            <strong>{salesAmount}</strong>
           )}
         </dd>
       </dl>
@@ -42,10 +40,12 @@ SalesSummary.propTypes = {
   salesCount: number.isRequired,
   salesAmount: number.isRequired,
   month: number,
-  year: number
+  year: number,
+  isLoading: bool.isRequired
 };
 
 SalesSummary.defaultProps = {
   month: moment().month() + 1,
-  year: moment().year()
+  year: moment().year(),
+  isLoading: false
 };

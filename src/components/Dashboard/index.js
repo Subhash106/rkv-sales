@@ -13,10 +13,10 @@ const Dashboard = () => {
   const { t } = useTranslation();
   const [filters, setFilters] = useState({ month: moment().month() + 1, year: moment().year() });
   const { month, year } = filters;
-  const [salesCount, setsalesCount] = useState('');
-  const [salesAmount, setsalesAmount] = useState('');
-  const [purchasesCount, setPurchasesCount] = useState('');
-  const [purchasesAmount, setPurchasesAmount] = useState('');
+  const [salesCount, setsalesCount] = useState(0);
+  const [salesAmount, setsalesAmount] = useState(0);
+  const [purchasesCount, setPurchasesCount] = useState(0);
+  const [purchasesAmount, setPurchasesAmount] = useState(0);
   const { isLoading: loadingOrders, data: orders = {} } = useGetOrdersQuery();
   const { isLoading: loadingPurchases, data: purchases = {} } = useGetPurchasesQuery();
 
@@ -127,10 +127,17 @@ const Dashboard = () => {
                 year={year}
                 purchasesCount={purchasesCount}
                 purchasesAmount={purchasesAmount}
+                isLoading={loadingPurchases}
               />
             </Grid>
             <Grid item xs={12} lg={6}>
-              <SalesSummary month={month} year={year} salesCount={salesCount} salesAmount={salesAmount} />
+              <SalesSummary
+                month={month}
+                year={year}
+                salesCount={salesCount}
+                salesAmount={salesAmount}
+                isLoading={loadingOrders}
+              />
             </Grid>
           </Grid>
         </div>
