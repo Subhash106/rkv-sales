@@ -18,7 +18,7 @@ export default function SalesSummary({ salesCount, salesAmount, month, year, isL
           {isLoading ? (
             <Skeleton variant="text" sx={{ fontSize: '2rem' }} animation="wave" />
           ) : (
-            <NavLink to={`/orders?month=${month}&year=${year}`}>
+            <NavLink to={`/sales-summary?month=${month}&year=${year}`}>
               <strong>{salesCount}</strong>
             </NavLink>
           )}

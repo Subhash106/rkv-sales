@@ -89,7 +89,7 @@ const SalesSummary = () => {
       target: { value }
     } = e;
     setDate(value);
-    navigate('/orders');
+    navigate('/sales-summary');
   };
 
   useEffect(() => {
