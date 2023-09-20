@@ -15,8 +15,6 @@ const App = () => {
   useEffect(() => {
     // Auto refresh and update token before expiration
     timeoutId = setTimeout(() => {
-      console.log('loging out');
-
       signout(dispatch, navigate);
     }, 60 * 60 * 1000);
 

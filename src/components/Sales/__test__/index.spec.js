@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import SalesForm from '../form';
-import mock from './mock';
+import mock from './__mocks__/sales.mocks';
 
 //const user = userEvent.setup();
 
@@ -18,6 +18,12 @@ describe('Form test', () => {
   it('Should validate main heading', () => {
     render(<SalesForm {...props} />);
 
-    screen.getByText('Enter sale details and save');
+    screen.getByText('sales.title');
+  });
+
+  it('Should click on add new item', async () => {
+    render(<SalesForm {...props} />);
+
+    await userEvent.click(screen.getByRole('button', { name: 'sales.addItem' }));
   });
 });
