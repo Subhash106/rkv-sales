@@ -5,5 +5,6 @@ module.exports = {
   },
   verbose: true,
   setupFilesAfterEnv: ['./setupTests.js'],
-  testEnvironment: 'jsdom'
+  testEnvironment: 'jsdom',
+  modulePathIgnorePatterns: ['<rootDir>/dist/', '__tests__/__mocks__']
 };
