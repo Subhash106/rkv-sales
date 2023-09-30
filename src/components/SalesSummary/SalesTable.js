@@ -40,7 +40,7 @@ const SalesTable = props => {
                     {items.map(item => `${item.quantity}-${item.item}(${item.rate})`).join(', ')}
                   </td>
                   <td className="text-right">{subTotal}</td>
-                  <td className="text-right word-wrap">{moment(date).format('DD/MM/YYYY')}</td>
+                  <td className="text-right word-wrap">{moment(date).format('DD/MM/YY')}</td>
                 </tr>
               ))
             ) : (
