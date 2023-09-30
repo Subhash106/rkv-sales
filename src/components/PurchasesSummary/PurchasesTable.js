@@ -6,6 +6,7 @@ import { getStorage, ref, getBlob } from 'firebase/storage';
 
 import '../shared/table.css';
 import NoRecord from '../NoRecord';
+import moment from 'moment';
 
 export default function PurchasesTable({ rows }) {
   const storage = getStorage();
@@ -36,7 +37,7 @@ export default function PurchasesTable({ rows }) {
             {rows.length > 0 ? (
               rows.map(({ amount, date, invoice, invoiceName, comment }, index) => (
                 <tr key={`${index}_${date}_${amount}_${invoiceName}`}>
-                  <td className="text-left">{date}</td>
+                  <td className="text-left">{moment(date).format('DD/MM/YY')}</td>
                   <td className="text-right">{amount}</td>
                   <td className="text-left">
                     {invoice ? (
