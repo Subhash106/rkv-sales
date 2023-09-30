@@ -74,7 +74,8 @@ i18n
             date: 'Date',
             amount: 'Amount',
             invoice: 'Invoice',
-            noRecord: 'No Purchases Found!'
+            noRecord: 'No Purchases Found!',
+            view: 'View'
           },
           header: {
             dashboard: 'Dashboard',
@@ -166,7 +167,8 @@ i18n
             date: 'तारीख',
             amount: 'धनराशि',
             invoice: 'चालान',
-            noRecord: 'कोई खरीद नहीं!'
+            noRecord: 'कोई खरीद नहीं!',
+            view: 'देखें'
           },
           header: {
             dashboard: 'डैशबोर्ड',
