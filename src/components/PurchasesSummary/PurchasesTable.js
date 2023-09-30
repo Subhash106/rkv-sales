@@ -41,11 +41,11 @@ export default function PurchasesTable({ rows }) {
                   <td className="text-left">
                     {invoice ? (
                       <a href={invoice} download={invoiceName}>
-                        {invoiceName}
+                        {t('purchasesSummary.view')}
                       </a>
                     ) : (
                       <a href="#" onClick={e => getDownloadLink(e, invoiceName)}>
-                        {invoiceName}
+                        {t('purchasesSummary.view')}
                       </a>
                     )}
                   </td>
