@@ -14,10 +14,14 @@ const SalesSummary = React.lazy(() => import('./components/SalesSummary'));
 const Purchases = React.lazy(() => import('./components/Purchases'));
 const PurchasesSummary = React.lazy(() => import('./components/PurchasesSummary'));
 const Dashboard = React.lazy(() => import('./components/Dashboard'));
+const AdminDashboard = React.lazy(() => import('./admin/pages/Dashboard'));
 const Login = React.lazy(() => import('./components/Login'));
 import ProtectedRoute from './components/ProtectedRoute';
 import store from './store';
 import PageSkeleton from './components/Loader/PageSkeleton';
+import Admin from './admin/pages';
+import AddInventory from './admin/pages/Inventory';
+import InventorySummary from './admin/pages/InventorySummary';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -94,6 +98,36 @@ const router = createBrowserRouter([
             element: (
               <ProtectedRoute>
                 <PurchasesSummary />
+              </ProtectedRoute>
+            )
+          }
+        ]
+      },
+      {
+        element: <Admin />,
+        errorElement: <Error />,
+        children: [
+          {
+            path: '/admin',
+            element: (
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            )
+          },
+          {
+            path: '/add-inventory',
+            element: (
+              <ProtectedRoute>
+                <AddInventory />
+              </ProtectedRoute>
+            )
+          },
+          {
+            path: '/inventory-summary',
+            element: (
+              <ProtectedRoute>
+                <InventorySummary />
               </ProtectedRoute>
             )
           }

@@ -126,6 +126,17 @@ const Header = () => {
                     {t('header.purchasesSummary')}
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink
+                    onClick={closeClickHandler}
+                    to="/admin"
+                    className={({ isActive }) => {
+                      return isActive ? 'active' : '';
+                    }}
+                  >
+                    {t('header.inventory')}
+                  </NavLink>
+                </li>
                 {token && (
                   <li>
                     <a href="#" onClick={logoutHandler}>

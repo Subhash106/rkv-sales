@@ -1,0 +1,27 @@
+.admin-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--secondary-gray);
+  padding: 1rem;
+}
+
+.logo {
+  width: 3.5rem;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  list-style: none;
+  gap: 1rem;
+}
+
+.top-nav {
+  padding: 1rem;
+}
+
+.admin-nav a {
+  text-decoration: none;
+}
