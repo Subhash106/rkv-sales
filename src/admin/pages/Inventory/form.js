@@ -9,7 +9,7 @@ export default function InventoryForm(props) {
   const { t } = useTranslation();
   console.log('formProps', props);
   const { handleChange, /* touched, errors, */ handleSubmit, values, isLoading, feedback } = props;
-  const { date, color, item, unit, price, comment } = values;
+  const { date, color, item, unit, price, quantity, comment } = values;
   const { success, successMessage, error, errorMessage } = feedback;
   //   const errorHandling = fieldName => {
   //     const error = touched?.[fieldName] && !!errors?.[fieldName];
@@ -22,7 +22,7 @@ export default function InventoryForm(props) {
       {isLoading && <Loader />}
       {success && <Alert severity="success">{successMessage}</Alert>}
       {error && <Alert severity="error">{errorMessage}</Alert>}
-      <div className="row col-md-6 col-sm-1 mt-sm">
+      <div className="row col-md-4 col-sm-1 mt-sm">
         <TextField
           variant="outlined"
           type="date"
@@ -65,6 +65,18 @@ export default function InventoryForm(props) {
             ))}
           </Select>
         </FormControl>
+      </div>
+      <div className="row col-md-4 col-sm-1 mt-sm">
+        <TextField
+          variant="outlined"
+          type="number"
+          onChange={handleChange}
+          value={quantity}
+          required
+          id="quantity"
+          name="quantity"
+          label={t('inventory.quantity')}
+        />
         <TextField
           variant="outlined"
           type="number"
@@ -86,7 +98,7 @@ export default function InventoryForm(props) {
           label={t('inventory.comment')}
         />
       </div>
-      <div className="row col-sm-5 col-xs-1 mt-sm">
+      <div className="row col-sm-4 mt-sm">
         <Button variant="contained" onClick={() => handleSubmit(values)}>
           Save
         </Button>

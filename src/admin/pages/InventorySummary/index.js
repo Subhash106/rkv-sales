@@ -38,18 +38,16 @@ export default function InventorySummary() {
   }
 
   return (
-    <div className="Inventory">
-      <div className="bg-white page-wrapper">
-        <h1 className="heading-primary">{t('inventorySummary.title')}</h1>
-        {/* <div className="mb-sm">
+    <div className="inventory">
+      <h1 className="heading-primary">{t('inventorySummary.title')}</h1>
+      {/* <div className="mb-sm">
           <TextInput value={date} onChange={dateChangeHandler} name="date" type="date" id="date" label="Select Date" />
         </div> */}
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={12}>
-            {isLoading ? <TableSkelton columns={3} rows={2} /> : <InventoryTable rows={rows} />}
-          </Grid>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={12}>
+          {isLoading ? <TableSkelton columns={3} rows={2} /> : <InventoryTable rows={rows} />}
         </Grid>
-      </div>
+      </Grid>
     </div>
   );
 }

@@ -7,7 +7,9 @@ export default function AdminDashboard() {
   return (
     <>
       <Header />
-      <Outlet />
+      <div className="p-xs">
+        <Outlet />
+      </div>
     </>
   );
 }

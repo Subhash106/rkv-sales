@@ -17,6 +17,7 @@ export default function AddInventory() {
     color: '',
     unit: '',
     price: '',
+    quantity: '',
     comment: ''
   };
 
@@ -28,7 +29,8 @@ export default function AddInventory() {
       color: Yup.string().required(required),
       unit: Yup.string().required(required),
       date: Yup.string().required(required),
-      price: Yup.number().required(required)
+      price: Yup.number().required(required),
+      quantity: Yup.number().required(required)
     });
   };
 

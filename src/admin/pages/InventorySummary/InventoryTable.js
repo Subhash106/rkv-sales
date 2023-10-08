@@ -20,6 +20,7 @@ export default function InventoryTable({ rows }) {
               <th className="text-left">{t('inventory.item')}</th>
               <th className="text-left">{t('inventory.color')}</th>
               <th className="text-left">{t('inventory.unit')}</th>
+              <th className="text-right">{t('inventory.quantity')}</th>
               <th className="text-left">{t('inventory.comment')}</th>
               <th className="text-right">{t('inventory.price')}</th>
               <th className="text-right">{t('inventory.price10')}</th>
@@ -31,12 +32,13 @@ export default function InventoryTable({ rows }) {
           </thead>
           <tbody>
             {rows.length > 0 ? (
-              rows.map(({ item, price, date, color, unit, comment }, index) => (
+              rows.map(({ item, price, date, color, unit, comment, quantity }, index) => (
                 <tr key={`${index}_${date}_${item}_${color}`}>
                   <td className="text-left">{moment(date).format('DD/MM/YY')}</td>
                   <td className="text-left">{item}</td>
                   <td className="text-left">{color}</td>
                   <td className="text-left">{unit}</td>
+                  <td className="text-right">{quantity}</td>
                   <td className="text-left">{comment}</td>
                   <td className="text-right">{price}</td>
                   <td className="text-right">{parseInt(price * 1.1)}</td>
