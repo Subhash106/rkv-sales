@@ -27,7 +27,8 @@ export default function AddInventory() {
       item: Yup.string().required(required),
       color: Yup.string().required(required),
       unit: Yup.string().required(required),
-      date: Yup.string().required(required)
+      date: Yup.string().required(required),
+      price: Yup.number().required(required)
     });
   };
 
@@ -48,7 +49,7 @@ export default function AddInventory() {
 
   return (
     <div>
-      <h1 className="heading-primary">Add Inventory</h1>
+      <h1 className="heading-primary">{t('inventory.title')}</h1>
       <div>
         <Formik
           initialValues={formData}

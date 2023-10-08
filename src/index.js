@@ -21,6 +21,7 @@ import store from './store';
 import PageSkeleton from './components/Loader/PageSkeleton';
 import Admin from './admin/pages';
 import AddInventory from './admin/pages/Inventory';
+import InventorySummary from './admin/pages/InventorySummary';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -119,6 +120,14 @@ const router = createBrowserRouter([
             element: (
               <ProtectedRoute>
                 <AddInventory />
+              </ProtectedRoute>
+            )
+          },
+          {
+            path: '/inventory-summary',
+            element: (
+              <ProtectedRoute>
+                <InventorySummary />
               </ProtectedRoute>
             )
           }

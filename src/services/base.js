@@ -45,7 +45,7 @@ const baseAPIs = createApi({
     }),
     storeInventroy: builder.mutation({
       query: inventory => ({
-        url: 'inventroy.json',
+        url: 'inventory.json',
         method: 'POST',
         body: inventory
       })

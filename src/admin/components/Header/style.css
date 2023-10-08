@@ -1,3 +1,13 @@
+.admin-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 3.5rem;
+}
+
 .admin-header {
   display: flex;
   align-items: center;
@@ -6,6 +16,10 @@
   gap: 1rem;
 }
 
-.admin-nav {
+.top-nav {
   padding: 1rem;
+}
+
+.admin-nav a {
+  text-decoration: none;
 }

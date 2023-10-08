@@ -1,14 +1,16 @@
 import React from 'react';
-import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Alert, Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { func, object, shape } from 'prop-types';
-import { COLORS, ITEMS, UNITS } from './constants';
+import { bool, func, object, shape } from 'prop-types';
+import { COLORS, ITEMS, UNITS } from '../constants';
+import Loader from '../../../components/Loader';
 
 export default function InventoryForm(props) {
   const { t } = useTranslation();
   console.log('formProps', props);
-  const { handleChange, /* touched, errors, */ handleSubmit, values } = props;
+  const { handleChange, /* touched, errors, */ handleSubmit, values, isLoading, feedback } = props;
   const { date, color, item, unit, price, comment } = values;
+  const { success, successMessage, error, errorMessage } = feedback;
   //   const errorHandling = fieldName => {
   //     const error = touched?.[fieldName] && !!errors?.[fieldName];
   //     const helperText = touched?.[fieldName] && errors?.[fieldName];
@@ -17,7 +19,10 @@ export default function InventoryForm(props) {
 
   return (
     <>
-      <div className="row col-md-5 col-sm-1 mt-sm">
+      {isLoading && <Loader />}
+      {success && <Alert severity="success">{successMessage}</Alert>}
+      {error && <Alert severity="error">{errorMessage}</Alert>}
+      <div className="row col-md-6 col-sm-1 mt-sm">
         <TextField
           variant="outlined"
           type="date"
@@ -97,7 +102,7 @@ InventoryForm.propTypes = {
   handleSubmit: func,
   resetForm: func,
   errors: shape(object),
-  touched: shape(object)
-  //   feedback: shape(object),
-  //   isLoading: bool
+  touched: shape(object),
+  feedback: shape(object),
+  isLoading: bool
 };

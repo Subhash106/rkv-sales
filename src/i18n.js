@@ -84,7 +84,11 @@ i18n
             salesSummary: 'SalesSummary',
             purchasesSummary: 'Purchases Summary',
             inventory: 'Inventory',
-            logout: 'Logout'
+            logout: 'Logout',
+            addInventory: 'Add Inventory',
+            inventorySummary: 'Inventory Summary',
+            adminDashboard: 'Admin Dashboard',
+            saleDashboard: 'Sale Dashboard'
           },
           salesSummary: {
             title: 'Sales Summary',
@@ -101,13 +105,23 @@ i18n
             noRecord: 'No Sales Found!'
           },
           inventory: {
+            title: 'Add Inventory',
             item: 'Item',
             unit: 'Unit',
             date: 'Date',
             price: 'Price',
             color: 'Color',
+            comment: 'Comment',
+            price10: '+ 10%',
+            price20: '+ 20%',
+            price30: '+ 30%',
+            price40: '+ 40%',
+            price50: '+ 50%',
             savedSuccessfully: 'Inventory saved successfully.',
             savedError: 'Error while saving inventory. Please try again.'
+          },
+          inventorySummary: {
+            title: 'Inventory Summary'
           }
         }
       },
@@ -186,8 +200,12 @@ i18n
             purchases: 'खरीद',
             salesSummary: 'बिक्री सारांश',
             purchasesSummary: 'खरीद सारांश',
-            inventory: 'भंडार',
-            logout: 'लॉग आउट'
+            inventory: 'इन्वेंटरी',
+            logout: 'लॉग आउट',
+            addInventory: 'इन्वेंटरी जोड़ें',
+            inventorySummary: 'इन्वेंटरी सारांश',
+            adminDashboard: 'व्यवस्थापक डैशबोर्ड',
+            saleDashboard: 'बिक्री डैशबोर्ड'
           },
           salesSummary: {
             title: 'बिक्री सारांश',
@@ -204,13 +222,23 @@ i18n
             noRecord: 'कोई बिक्री नहीं!'
           },
           inventory: {
+            title: 'इन्वेंटरी जोड़ें',
             item: 'Item',
             unit: 'Unit',
             date: 'Date',
             color: 'Color',
             price: 'Price',
+            comment: 'Comment',
+            price10: '+ 10%',
+            price20: '+ 20%',
+            price30: '+ 30%',
+            price40: '+ 40%',
+            price50: '+ 50%',
             savedSuccessfully: 'इन्वेंटरी सफलतापूर्वक सहेजी गई।',
             savedError: 'इन्वेंटरी सहेजते समय त्रुटि. कृपया पुन: प्रयास करें।'
+          },
+          inventorySummary: {
+            title: 'इन्वेंटरी सारांश'
           }
         }
       }
