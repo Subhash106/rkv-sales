@@ -26,6 +26,9 @@ const baseAPIs = createApi({
     getOrders: builder.query({
       query: () => 'orders.json'
     }),
+    getInventory: builder.query({
+      query: () => 'inventory.json'
+    }),
     storeOrders: builder.mutation({
       query: order => ({
         url: 'orders.json',
@@ -39,9 +42,23 @@ const baseAPIs = createApi({
         method: 'POST',
         body: purchase
       })
+    }),
+    storeInventroy: builder.mutation({
+      query: inventory => ({
+        url: 'inventroy.json',
+        method: 'POST',
+        body: inventory
+      })
     })
   })
 });
 
-export const { useGetPurchasesQuery, useGetOrdersQuery, useStoreOrdersMutation, useStorePurchasesMutation } = baseAPIs;
+export const {
+  useGetPurchasesQuery,
+  useGetOrdersQuery,
+  useGetInventoryQuery,
+  useStoreOrdersMutation,
+  useStorePurchasesMutation,
+  useStoreInventroyMutation
+} = baseAPIs;
 export default baseAPIs;

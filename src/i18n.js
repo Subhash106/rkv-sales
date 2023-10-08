@@ -83,6 +83,7 @@ i18n
             purchases: 'Purchases',
             salesSummary: 'SalesSummary',
             purchasesSummary: 'Purchases Summary',
+            inventory: 'Inventory',
             logout: 'Logout'
           },
           salesSummary: {
@@ -98,6 +99,15 @@ i18n
             date: 'Date',
             sync: 'Sync',
             noRecord: 'No Sales Found!'
+          },
+          inventory: {
+            item: 'Item',
+            unit: 'Unit',
+            date: 'Date',
+            price: 'Price',
+            color: 'Color',
+            savedSuccessfully: 'Inventory saved successfully.',
+            savedError: 'Error while saving inventory. Please try again.'
           }
         }
       },
@@ -176,6 +186,7 @@ i18n
             purchases: 'खरीद',
             salesSummary: 'बिक्री सारांश',
             purchasesSummary: 'खरीद सारांश',
+            inventory: 'भंडार',
             logout: 'लॉग आउट'
           },
           salesSummary: {
@@ -191,6 +202,15 @@ i18n
             date: 'तारीख',
             sync: 'Sync',
             noRecord: 'कोई बिक्री नहीं!'
+          },
+          inventory: {
+            item: 'Item',
+            unit: 'Unit',
+            date: 'Date',
+            color: 'Color',
+            price: 'Price',
+            savedSuccessfully: 'इन्वेंटरी सफलतापूर्वक सहेजी गई।',
+            savedError: 'इन्वेंटरी सहेजते समय त्रुटि. कृपया पुन: प्रयास करें।'
           }
         }
       }

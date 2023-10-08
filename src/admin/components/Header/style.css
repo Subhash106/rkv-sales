@@ -1,0 +1,11 @@
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  list-style: none;
+  gap: 1rem;
+}
+
+.admin-nav {
+  padding: 1rem;
+}
