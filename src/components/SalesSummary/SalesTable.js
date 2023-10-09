@@ -7,6 +7,7 @@ import '../shared/table.css';
 import './style.css';
 import NoRecord from '../NoRecord';
 import TableSkelton from '../Loader/TableSkelton';
+import unitConverter from '../../utils/unitConverter';
 
 const SalesTable = props => {
   const { t } = useTranslation();
@@ -31,13 +32,13 @@ const SalesTable = props => {
           </thead>
           <tbody>
             {orders.length > 0 ? (
-              orders.map(({ firstName, lastName, mobile, address, items, date, subTotal }, index) => (
+              orders.map(({ firstName, lastName, mobile, address, items, date, subTotal, unit }, index) => (
                 <tr key={index}>
                   <td className="text-left">{`${firstName} ${lastName}`}</td>
                   <td className="text-left word-wrap">{mobile}</td>
                   <td className="text-left">{address}</td>
                   <td className="text-left">
-                    {items.map(item => `${item.quantity}-${item.item}(${item.rate})`).join(', ')}
+                    {items.map(item => `${item.quantity} ${unitConverter(unit)}-${item.item}(${item.rate})`).join(', ')}
                   </td>
                   <td className="text-right">{subTotal}</td>
                   <td className="text-right word-wrap">{moment(date).format('DD/MM/YY')}</td>

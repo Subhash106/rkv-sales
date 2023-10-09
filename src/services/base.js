@@ -49,6 +49,17 @@ const baseAPIs = createApi({
         method: 'POST',
         body: inventory
       })
+    }),
+    patchInventroy: builder.mutation({
+      query: payload => {
+        const { id, key, value } = payload;
+        console.log('key', id, key, value, payload);
+        return {
+          url: `inventory/${id}.json`,
+          method: 'PATCH',
+          body: { [key]: value }
+        };
+      }
     })
   })
 });
@@ -59,6 +70,7 @@ export const {
   useGetInventoryQuery,
   useStoreOrdersMutation,
   useStorePurchasesMutation,
-  useStoreInventroyMutation
+  useStoreInventroyMutation,
+  usePatchInventroyMutation
 } = baseAPIs;
 export default baseAPIs;

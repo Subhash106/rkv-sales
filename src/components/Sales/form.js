@@ -1,15 +1,21 @@
 import { bool, func, object, shape } from 'prop-types';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
-import { TextField, Alert } from '@mui/material';
+import { TextField, Alert, Autocomplete, FormControl, Select, MenuItem } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import Loader from '../Loader';
+import { useGetInventoryQuery } from '../../services/base';
+import { UNITS } from '../../admin/pages/constants';
 
 const SalesFormFields = props => {
   const { t } = useTranslation();
   const { values, handleChange, setFieldValue, handleSubmit, errors, touched, feedback, isLoading } = props;
   const { mobile, firstName, lastName, address, items, subTotal, date } = values;
   const { success, error, successMessage, errorMessage } = feedback;
+  const [itemOptions, setItemOptions] = useState([]);
+  const { isLoading: loadingInventory, data = {} } = useGetInventoryQuery();
+
+  console.log('itemOptions', itemOptions);
 
   useEffect(() => {
     const subTotal = items.reduce((total, next) => {
@@ -19,9 +25,19 @@ const SalesFormFields = props => {
     setFieldValue('subTotal', subTotal);
   }, [items]);
 
+  useEffect(() => {
+    console.log('Object.entries(data)', Object.entries(data));
+    if (!loadingInventory)
+      setItemOptions(
+        Object.entries(data)
+          .filter(item => item[1].quantity > 0)
+          .map(item => ({ ...item[1], label: `${item[1].item} - ${item[1].color}`, id: item[0] }))
+      );
+  }, [loadingInventory]);
+
   const addItemHandler = () => {
     const itemsCopy = [...items];
-    itemsCopy.push({ item: '', quantity: '', rate: 0, total: 0 });
+    itemsCopy.push({ item: '', quantity: '', unit: '', rate: '', total: 0 });
     setFieldValue('items', itemsCopy);
   };
 
@@ -29,6 +45,16 @@ const SalesFormFields = props => {
     const error = touched?.[fieldName] && !!errors?.[fieldName];
     const helperText = touched?.[fieldName] && errors?.[fieldName];
     return { error, helperText };
+  };
+
+  const itemChangeHandler = (e, newValue, index) => {
+    console.log('newValue', newValue);
+    const itemsCopy = [...items];
+    itemsCopy[index]['item'] = newValue?.['item'];
+    itemsCopy[index]['unit'] = newValue?.['unit'];
+    itemsCopy[index]['id'] = newValue?.['id'];
+    itemsCopy[index]['totalQuantity'] = newValue?.['quantity'];
+    setFieldValue('items', itemsCopy);
   };
 
   return (
@@ -99,6 +125,7 @@ const SalesFormFields = props => {
             <tr>
               <th className="text-left">{t('sales.serialNumber')}</th>
               <th className="text-center">{t('sales.item')}</th>
+              <th className="text-center">{t('sales.unit')}</th>
               <th className="text-left quantity">{t('sales.quantity')}</th>
               <th className="text-left rate">{t('sales.rate')}</th>
               <th className="text-right">{t('sales.total')}</th>
@@ -109,7 +136,7 @@ const SalesFormFields = props => {
               <tr key={index}>
                 <th>{index + 1}</th>
                 <th className="text-center">
-                  <TextField
+                  {/* <TextField
                     variant="outlined"
                     onChange={handleChange}
                     value={el.item}
@@ -117,7 +144,35 @@ const SalesFormFields = props => {
                     name={`items[${index}].item`}
                     type="text"
                     required={true}
+                  /> */}
+                  <Autocomplete
+                    disablePortal
+                    id={`items[${index}].item`}
+                    name={`items[${index}].item`}
+                    options={itemOptions}
+                    onChange={(e, newValue) => itemChangeHandler(e, newValue, index)}
+                    freeSolo
+                    value={el.item}
+                    sx={{ width: 300 }}
+                    renderInput={params => <TextField {...params} />}
                   />
+                </th>
+                <th>
+                  <FormControl fullWidth>
+                    <Select
+                      labelId={`items[${index}].unit`}
+                      id={`items[${index}].unit`}
+                      name={`items[${index}].unit`}
+                      value={el.unit}
+                      onChange={handleChange}
+                    >
+                      {UNITS.map(unit => (
+                        <MenuItem key={unit} value={unit}>
+                          {unit}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                 </th>
                 <th>
                   <TextField
@@ -130,6 +185,7 @@ const SalesFormFields = props => {
                     type="number"
                     required={true}
                   />
+                  {el.totalQuantity}
                 </th>
                 <th>
                   <TextField
