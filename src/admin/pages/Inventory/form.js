@@ -7,7 +7,6 @@ import Loader from '../../../components/Loader';
 
 export default function InventoryForm(props) {
   const { t } = useTranslation();
-  console.log('formProps', props);
   const { handleChange, /* touched, errors, */ handleSubmit, values, isLoading, feedback } = props;
   const { date, color, item, unit, price, quantity, comment } = values;
   const { success, successMessage, error, errorMessage } = feedback;

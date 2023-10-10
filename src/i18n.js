@@ -58,7 +58,10 @@ i18n
             save: 'Save',
             addItem: 'Add Item',
             savedSuccessfully: 'Sale saved successfully.',
-            savedError: 'Error while saving sale. Please try again.'
+            savedError: 'Error while saving sale. Please try again.',
+            errors: {
+              exceedQuantity: 'Quantity can not be greater than available quantity.'
+            }
           },
           purchases: {
             title: 'Purchases',
@@ -176,8 +179,11 @@ i18n
             rate: 'दर',
             save: 'सुरक्षित करें',
             addItem: 'नया समान जोड़ें',
-            savedSuccessfully: 'बिक्री सफलतापूर्वक सहेजी गई.',
-            savedError: 'बिक्री सहेजते समय त्रुटि. कृपया पुन: प्रयास करें।'
+            savedSuccessfully: 'बिक्री सफलतापूर्वक सहेजी गई।',
+            savedError: 'बिक्री सहेजते समय त्रुटि. कृपया पुन: प्रयास करें।',
+            errors: {
+              exceedQuantity: 'मात्रा उपलब्ध मात्रा से अधिक नहीं हो सकती।'
+            }
           },
           purchases: {
             title: 'खरीद',
@@ -186,7 +192,7 @@ i18n
             invoice: 'चालान',
             comment: 'टिप्पणी',
             save: 'सुरक्षित करें',
-            savedSuccessfully: 'खरीदारी सफलतापूर्वक सहेजी गई.',
+            savedSuccessfully: 'खरीदारी सफलतापूर्वक सहेजी गई।',
             savedError: 'खरीदारी सहेजते समय त्रुटि. कृपया पुन: प्रयास करें।'
           },
           purchasesSummary: {

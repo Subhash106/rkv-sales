@@ -53,7 +53,7 @@ const baseAPIs = createApi({
     patchInventroy: builder.mutation({
       query: payload => {
         const { id, key, value } = payload;
-        console.log('key', id, key, value, payload);
+
         return {
           url: `inventory/${id}.json`,
           method: 'PATCH',
@@ -71,6 +71,7 @@ export const {
   useStoreOrdersMutation,
   useStorePurchasesMutation,
   useStoreInventroyMutation,
-  usePatchInventroyMutation
+  usePatchInventroyMutation,
+  useLazyGetInventoryQuery
 } = baseAPIs;
 export default baseAPIs;

@@ -31,12 +31,17 @@ const Sales = () => {
       firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required(required),
       lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required(required),
       mobile: Yup.string().min(10, 'Too Short!').max(10, 'Too Long!').required(required),
-      address: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required(required)
+      address: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required(required),
+      items: Yup.array().of(
+        Yup.object().shape({
+          // item: Yup.string(),
+          quantity: Yup.number().required(required)
+        })
+      )
     });
   };
 
   const submitHandler = async payload => {
-    console.log('payload', payload);
     if (!isOffline()) {
       setTimeout(() => {
         setFeedback({ ...feedback, error: false, success: false });
@@ -75,10 +80,11 @@ const Sales = () => {
       <Formik
         initialValues={formData}
         validationSchema={getValidationSchema()}
-        onSubmit={async (values, { resetForm }) => {
+        onSubmit={async (values, { resetForm, setFieldValue }) => {
           const res = await submitHandler(values);
           if (res) {
             resetForm({ ...formData, items: [] });
+            setFieldValue('items', [{ item: '', quantity: '', rate: '', unit: '', totalQuantity: '', id: '' }]);
           }
         }}
       >

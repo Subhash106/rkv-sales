@@ -1,21 +1,30 @@
 import { bool, func, object, shape } from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Button from '@mui/material/Button';
-import { TextField, Alert, Autocomplete, FormControl, Select, MenuItem } from '@mui/material';
+import { TextField, Alert, FormControl, Select, MenuItem } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import Loader from '../Loader';
-import { useGetInventoryQuery } from '../../services/base';
+import { useLazyGetInventoryQuery } from '../../services/base';
 import { UNITS } from '../../admin/pages/constants';
+import AsyncSelect from '../../admin/components/AsyncSelect';
 
 const SalesFormFields = props => {
   const { t } = useTranslation();
-  const { values, handleChange, setFieldValue, handleSubmit, errors, touched, feedback, isLoading } = props;
+  const {
+    values,
+    handleChange,
+    setFieldValue,
+    handleSubmit,
+    errors,
+    touched,
+    feedback,
+    isLoading,
+    setTouched,
+    setErrors
+  } = props;
   const { mobile, firstName, lastName, address, items, subTotal, date } = values;
   const { success, error, successMessage, errorMessage } = feedback;
-  const [itemOptions, setItemOptions] = useState([]);
-  const { isLoading: loadingInventory, data = {} } = useGetInventoryQuery();
-
-  console.log('itemOptions', itemOptions);
+  const [getInventory] = useLazyGetInventoryQuery();
 
   useEffect(() => {
     const subTotal = items.reduce((total, next) => {
@@ -25,36 +34,51 @@ const SalesFormFields = props => {
     setFieldValue('subTotal', subTotal);
   }, [items]);
 
-  useEffect(() => {
-    console.log('Object.entries(data)', Object.entries(data));
-    if (!loadingInventory)
-      setItemOptions(
-        Object.entries(data)
-          .filter(item => item[1].quantity > 0)
-          .map(item => ({ ...item[1], label: `${item[1].item} - ${item[1].color}`, id: item[0] }))
-      );
-  }, [loadingInventory]);
-
   const addItemHandler = () => {
     const itemsCopy = [...items];
     itemsCopy.push({ item: '', quantity: '', unit: '', rate: '', total: 0 });
     setFieldValue('items', itemsCopy);
   };
 
-  const errorHandling = fieldName => {
-    const error = touched?.[fieldName] && !!errors?.[fieldName];
-    const helperText = touched?.[fieldName] && errors?.[fieldName];
+  const errorHandling = (fieldName, index = -1) => {
+    let error = '';
+    let helperText = '';
+    if (index > -1) {
+      error = touched?.['items']?.[index]?.[fieldName] && !!errors?.['items']?.[index]?.[fieldName];
+      helperText = touched?.['items']?.[index]?.[fieldName] && errors?.['items']?.[index]?.[fieldName];
+    } else {
+      error = touched?.[fieldName] && !!errors?.[fieldName];
+      helperText = touched?.[fieldName] && errors?.[fieldName];
+    }
     return { error, helperText };
   };
 
   const itemChangeHandler = (e, newValue, index) => {
-    console.log('newValue', newValue);
     const itemsCopy = [...items];
-    itemsCopy[index]['item'] = newValue?.['item'];
-    itemsCopy[index]['unit'] = newValue?.['unit'];
-    itemsCopy[index]['id'] = newValue?.['id'];
-    itemsCopy[index]['totalQuantity'] = newValue?.['quantity'];
+    if (newValue) {
+      itemsCopy[index]['item'] = newValue?.['title'];
+      itemsCopy[index]['unit'] = newValue?.['unit'];
+      itemsCopy[index]['id'] = newValue?.['id'];
+      itemsCopy[index]['totalQuantity'] = newValue?.['quantity'];
+    }
     setFieldValue('items', itemsCopy);
+  };
+
+  const quantityChangeHandler = async (e, index) => {
+    const {
+      target: { value }
+    } = e;
+    const itemsCopy = [...items];
+    itemsCopy[index]['quantity'] = value;
+    setFieldValue('items', itemsCopy);
+    if (value > items[index]['totalQuantity']) {
+      const touchedCopy = touched?.items ? [...touched.items] : [];
+      const errorsCopy = errors?.items ? [...errors.items] : [];
+      touchedCopy[index] = { ...touchedCopy[index], quantity: true };
+      errorsCopy[index] = { ...errorsCopy[index], quantity: t('sales.errors.exceedQuantity') };
+      await setTouched({ ...touched, items: touchedCopy });
+      await setErrors({ ...errors, items: errorsCopy });
+    }
   };
 
   return (
@@ -136,25 +160,13 @@ const SalesFormFields = props => {
               <tr key={index}>
                 <th>{index + 1}</th>
                 <th className="text-center">
-                  {/* <TextField
-                    variant="outlined"
-                    onChange={handleChange}
-                    value={el.item}
+                  <AsyncSelect
+                    changeHandler={itemChangeHandler}
                     id={`items[${index}].item`}
-                    name={`items[${index}].item`}
-                    type="text"
-                    required={true}
-                  /> */}
-                  <Autocomplete
-                    disablePortal
-                    id={`items[${index}].item`}
-                    name={`items[${index}].item`}
-                    options={itemOptions}
-                    onChange={(e, newValue) => itemChangeHandler(e, newValue, index)}
+                    label=""
+                    getOptions={getInventory}
+                    index={index}
                     freeSolo
-                    value={el.item}
-                    sx={{ width: 300 }}
-                    renderInput={params => <TextField {...params} />}
                   />
                 </th>
                 <th>
@@ -177,13 +189,14 @@ const SalesFormFields = props => {
                 <th>
                   <TextField
                     variant="outlined"
-                    onChange={handleChange}
+                    onChange={e => quantityChangeHandler(e, index)}
                     className="text-right"
                     value={el.quantity}
                     id={`items[${index}].quantity`}
                     name={`items[${index}].quantity`}
                     type="number"
                     required={true}
+                    {...errorHandling('quantity', index)}
                   />
                   {el.totalQuantity}
                 </th>
@@ -232,6 +245,8 @@ SalesFormFields.propTypes = {
   values: shape(object),
   handleChange: func,
   setFieldValue: func,
+  setErrors: func,
+  setTouched: func,
   handleSubmit: func,
   resetForm: func,
   errors: shape(object),
