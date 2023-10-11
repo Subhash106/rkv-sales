@@ -10,6 +10,7 @@ i18n
     resources: {
       en: {
         translations: {
+          save: 'Save',
           required: 'Required',
           noInternet: 'No internet connection. Please check internet and try again.',
           somethingWentWrong: 'Something went wrong. Please try again.',
@@ -92,7 +93,9 @@ i18n
             addInventory: 'Add Inventory',
             inventorySummary: 'Inventory Summary',
             adminDashboard: 'Admin Dashboard',
-            saleDashboard: 'Sale Dashboard'
+            saleDashboard: 'Sale Dashboard',
+            item: 'Item',
+            color: 'Color'
           },
           salesSummary: {
             title: 'Sales Summary',
@@ -127,11 +130,24 @@ i18n
           },
           inventorySummary: {
             title: 'Inventory Summary'
+          },
+          item: {
+            title: 'Item',
+            item: 'Item',
+            savedSuccessfully: 'Item saved successfully.',
+            savedError: 'Error while saving item. Please try again.'
+          },
+          color: {
+            title: 'Color',
+            item: 'Color',
+            savedSuccessfully: 'Color saved successfully.',
+            savedError: 'Error while saving color. Please try again.'
           }
         }
       },
       hi: {
         translations: {
+          save: 'सुरक्षित करें',
           required: 'आवश्यक',
           noInternet: 'कोई इंटरनेट कनेक्शन नहीं। कृपया इंटरनेट जांचें और पुनः प्रयास करें।',
           somethingWentWrong: 'कुछ गलत हो गया। कृपया पुन: प्रयास करें।',
@@ -214,7 +230,9 @@ i18n
             addInventory: 'इन्वेंटरी जोड़ें',
             inventorySummary: 'इन्वेंटरी सारांश',
             adminDashboard: 'व्यवस्थापक डैशबोर्ड',
-            saleDashboard: 'बिक्री डैशबोर्ड'
+            saleDashboard: 'बिक्री डैशबोर्ड',
+            item: 'सामान',
+            color: 'कलर'
           },
           salesSummary: {
             title: 'बिक्री सारांश',
@@ -232,7 +250,7 @@ i18n
           },
           inventory: {
             title: 'इन्वेंटरी जोड़ें',
-            item: 'Item',
+            item: 'समान',
             unit: 'Unit',
             date: 'Date',
             color: 'Color',
@@ -249,6 +267,18 @@ i18n
           },
           inventorySummary: {
             title: 'इन्वेंटरी सारांश'
+          },
+          item: {
+            title: 'समान',
+            item: 'समान',
+            savedSuccessfully: 'समान सफलतापूर्वक सहेजा गया.',
+            savedError: 'समान सहेजते समय त्रुटि. कृपया पुन: प्रयास करें।'
+          },
+          color: {
+            title: 'रंग',
+            item: 'रंग',
+            savedSuccessfully: 'रंग सफलतापूर्वक सहेजा गया।',
+            savedError: 'रंग सहेजते समय त्रुटि. कृपया पुन: प्रयास करें।'
           }
         }
       }

@@ -22,6 +22,8 @@ import PageSkeleton from './components/Loader/PageSkeleton';
 import Admin from './admin/pages';
 import AddInventory from './admin/pages/Inventory';
 import InventorySummary from './admin/pages/InventorySummary';
+import Item from './admin/pages/Item';
+import Color from './admin/pages/Color';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -112,6 +114,22 @@ const router = createBrowserRouter([
             element: (
               <ProtectedRoute>
                 <AdminDashboard />
+              </ProtectedRoute>
+            )
+          },
+          {
+            path: '/items',
+            element: (
+              <ProtectedRoute>
+                <Item />
+              </ProtectedRoute>
+            )
+          },
+          {
+            path: '/colors',
+            element: (
+              <ProtectedRoute>
+                <Color />
               </ProtectedRoute>
             )
           },

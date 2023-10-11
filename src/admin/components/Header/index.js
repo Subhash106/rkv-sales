@@ -22,6 +22,12 @@ export default function Header() {
             <NavLink to="/admin">{t('header.adminDashboard')}</NavLink>
           </li>
           <li>
+            <NavLink to="/items">{t('header.item')}</NavLink>
+          </li>
+          <li>
+            <NavLink to="/colors">{t('header.color')}</NavLink>
+          </li>
+          <li>
             <NavLink to="/add-inventory">{t('header.addInventory')}</NavLink>
           </li>
           <li>
