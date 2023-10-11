@@ -49,6 +49,43 @@ const baseAPIs = createApi({
         method: 'POST',
         body: inventory
       })
+    }),
+    patchInventroy: builder.mutation({
+      query: payload => {
+        const { id, key, value } = payload;
+
+        return {
+          url: `inventory/${id}.json`,
+          method: 'PATCH',
+          body: { [key]: value }
+        };
+      }
+    }),
+    addItem: builder.mutation({
+      query: item => {
+        return {
+          url: `items.json`,
+          method: 'POST',
+          body: item
+        };
+      }
+    }),
+    getItem: builder.query({
+      query: () => 'items.json',
+      keepUnusedDataFor: 5
+    }),
+    addColor: builder.mutation({
+      query: color => {
+        return {
+          url: `colors.json`,
+          method: 'POST',
+          body: color
+        };
+      }
+    }),
+    getColor: builder.query({
+      query: () => 'colors.json',
+      keepUnusedDataFor: 5
     })
   })
 });
@@ -59,6 +96,12 @@ export const {
   useGetInventoryQuery,
   useStoreOrdersMutation,
   useStorePurchasesMutation,
-  useStoreInventroyMutation
+  useStoreInventroyMutation,
+  usePatchInventroyMutation,
+  useLazyGetInventoryQuery,
+  useAddItemMutation,
+  useAddColorMutation,
+  useGetColorQuery,
+  useGetItemQuery
 } = baseAPIs;
 export default baseAPIs;
