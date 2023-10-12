@@ -3,55 +3,55 @@ import Grid from '@mui/material/Grid';
 import { TextField, Button, Alert } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
-import './style.css';
-import { useAddItemMutation, useGetItemQuery } from '../../../services/base';
+// import './style.css';
+import { useAddSizeMutation, useGetSizeQuery } from '../../../services/base';
 import Loader from '../../../components/Loader';
 
-const Item = () => {
+const Size = () => {
   const { t } = useTranslation();
   const [errors, setErrors] = useState(null);
-  const [addItem, { isLoading }] = useAddItemMutation();
-  const { data = {}, isLoading: loadingItems } = useGetItemQuery(null, { refetchOnMountOrArgChange: true });
+  const [addSize, { isLoading }] = useAddSizeMutation();
+  const { data = {}, isLoading: loadingSizes } = useGetSizeQuery() || {};
   const [feedback, setFeedback] = useState({ success: false, error: false, errorMessage: '', successMessage: '' });
   const { success, error, successMessage, errorMessage } = feedback;
-  const [item, setItem] = useState('');
-  const [items, setItems] = useState([]);
-  const { item: itemError } = errors || {};
+  const [size, setSize] = useState('');
+  const [sizes, setSizes] = useState([]);
+  const { size: sizeError } = errors || {};
 
   useEffect(() => {
-    console.log('items fteched');
-    if (!loadingItems) {
-      setItems(Object.entries(data || {}).map(([id, { item }]) => ({ id, item })));
+    console.log('size fteched');
+    if (!loadingSizes) {
+      setSizes(Object.entries(data || {}).map(([id, { size }]) => ({ id, size })));
     }
-  }, [loadingItems, data]);
+  }, [loadingSizes, data]);
 
   const changeHandler = async e => {
     const {
       target: { value }
     } = e;
 
-    setItem(value);
+    setSize(value);
 
     if (value) {
-      setErrors({ ...errors, item: '' });
+      setErrors({ ...errors, size: '' });
     }
   };
 
   const submitHandler = async e => {
     e.preventDefault();
 
-    if (!item) {
-      setErrors({ ...errors, item: t('required') });
+    if (!size) {
+      setErrors({ ...errors, size: t('required') });
       return false;
     }
 
     try {
-      await addItem({ item }).unwrap();
+      await addSize({ size }).unwrap();
 
-      setFeedback({ ...feedback, success: true, successMessage: t('item.savedSuccessfully') });
-      setItem('');
+      setFeedback({ ...feedback, success: true, successMessage: t('size.savedSuccessfully') });
+      setSize('');
     } catch (e) {
-      setFeedback({ ...feedback, error: true, errorMessage: t('item.savedError') });
+      setFeedback({ ...feedback, error: true, errorMessage: t('size.savedError') });
     }
 
     setTimeout(() => {
@@ -62,7 +62,7 @@ const Item = () => {
   return (
     <div className="purchases">
       <div className="bg-white page-wrapper">
-        <h1 className="heading-primary">{t('item.title')}</h1>
+        <h1 className="heading-primary">{t('size.title')}</h1>
         {isLoading && <Loader />}
         {success && <Alert severity="success">{successMessage}</Alert>}
         {error && <Alert severity="error">{errorMessage}</Alert>}
@@ -72,14 +72,14 @@ const Item = () => {
               <TextField
                 fullWidth
                 onChange={changeHandler}
-                name="item"
+                name="size"
                 type="text"
-                id="item"
-                value={item}
-                label={t('item.item')}
+                id="size"
+                value={size}
+                label={t('size.size')}
                 required
-                error={!!itemError}
-                helperText={itemError}
+                error={!!sizeError}
+                helperText={sizeError}
               />
             </Grid>
 
@@ -91,9 +91,9 @@ const Item = () => {
           </Grid>
         </form>
         <ul className="items-list">
-          {items.map(({ id, item }) => (
-            <li key={id} className="items-list--item">
-              {item}
+          {sizes.map(({ id, size }) => (
+            <li className="items-list--item" key={id}>
+              {size}
             </li>
           ))}
         </ul>
@@ -102,4 +102,4 @@ const Item = () => {
   );
 };
 
-export default Item;
+export default Size;

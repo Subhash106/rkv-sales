@@ -20,7 +20,7 @@ const Sales = () => {
     firstName: '',
     lastName: '',
     address: '',
-    items: [{ item: '', quantity: '', rate: '', unit: '', totalQuantity: '', id: '' }],
+    items: [{ item: '', quantity: '', color: '', size: '', rate: '', unit: '', totalQuantity: '', id: '' }],
     subTotal: 0
   };
 
@@ -84,7 +84,9 @@ const Sales = () => {
           const res = await submitHandler(values);
           if (res) {
             resetForm({ ...formData, items: [] });
-            setFieldValue('items', [{ item: '', quantity: '', rate: '', unit: '', totalQuantity: '', id: '' }]);
+            setFieldValue('items', [
+              { item: '', quantity: '', size: '', rate: '', unit: '', totalQuantity: '', id: '' }
+            ]);
           }
         }}
       >
