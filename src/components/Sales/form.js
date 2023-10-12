@@ -198,7 +198,6 @@ const SalesFormFields = props => {
                     required={true}
                     {...errorHandling('quantity', index)}
                   />
-                  {el.totalQuantity}
                 </th>
                 <th>
                   <TextField

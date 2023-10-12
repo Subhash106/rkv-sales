@@ -86,6 +86,19 @@ const baseAPIs = createApi({
     getColor: builder.query({
       query: () => 'colors.json',
       keepUnusedDataFor: 5
+    }),
+    addSize: builder.mutation({
+      query: size => {
+        return {
+          url: `sizes.json`,
+          method: 'POST',
+          body: size
+        };
+      }
+    }),
+    getSize: builder.query({
+      query: () => 'sizes.json',
+      keepUnusedDataFor: 5
     })
   })
 });
@@ -102,6 +115,8 @@ export const {
   useAddItemMutation,
   useAddColorMutation,
   useGetColorQuery,
-  useGetItemQuery
+  useGetItemQuery,
+  useAddSizeMutation,
+  useGetSizeQuery
 } = baseAPIs;
 export default baseAPIs;

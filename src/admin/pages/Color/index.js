@@ -16,8 +16,7 @@ const Color = () => {
   const { success, error, successMessage, errorMessage } = feedback;
   const [color, setColor] = useState('');
   const [colors, setColors] = useState([]);
-
-  console.log('colors', colors);
+  const { color: colorError } = errors || {};
 
   useEffect(() => {
     console.log('color fteched');
@@ -34,7 +33,7 @@ const Color = () => {
     setColor(value);
 
     if (value) {
-      setErrors({ ...errors, color: false });
+      setErrors({ ...errors, color: '' });
     }
   };
 
@@ -42,7 +41,7 @@ const Color = () => {
     e.preventDefault();
 
     if (!color) {
-      setErrors({ ...errors, item: true });
+      setErrors({ ...errors, color: t('required') });
       return false;
     }
 
@@ -79,6 +78,8 @@ const Color = () => {
                 value={color}
                 label={t('color.item')}
                 required
+                error={!!colorError}
+                helperText={colorError}
               />
             </Grid>
 

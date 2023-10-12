@@ -16,6 +16,7 @@ export default function AddInventory() {
     item: '',
     color: '',
     unit: '',
+    size: '',
     price: '',
     quantity: '',
     comment: ''

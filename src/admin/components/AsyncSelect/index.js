@@ -21,7 +21,11 @@ export default function AsyncSelect({ label, id, getOptions, changeHandler, inde
 
       const optionsData = Object.entries(data)
         .filter(item => item[1].quantity > 0)
-        .map(item => ({ ...item[1], title: `${item[1].item} - ${item[1].color}`, id: item[0] }));
+        .map(item => ({
+          ...item[1],
+          title: `${item[1].item} - ${item[1].color}${item[1].size ? ' - ' + item[1].size : ''}`,
+          id: item[0]
+        }));
 
       if (active) {
         setOptions([...optionsData]);

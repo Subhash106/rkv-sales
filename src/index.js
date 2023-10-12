@@ -24,6 +24,7 @@ import AddInventory from './admin/pages/Inventory';
 import InventorySummary from './admin/pages/InventorySummary';
 import Item from './admin/pages/Item';
 import Color from './admin/pages/Color';
+import Size from './admin/pages/Size';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -130,6 +131,14 @@ const router = createBrowserRouter([
             element: (
               <ProtectedRoute>
                 <Color />
+              </ProtectedRoute>
+            )
+          },
+          {
+            path: '/sizes',
+            element: (
+              <ProtectedRoute>
+                <Size />
               </ProtectedRoute>
             )
           },

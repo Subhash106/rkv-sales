@@ -41,7 +41,7 @@
         list-style: none;
         display: flex;
         justify-content: space-between;
-        gap: 3.2rem;
+        gap: 1rem;
 
         @media (max-width: 56.25em) {
           flex-direction: column;
@@ -49,6 +49,14 @@
           padding: 1.4rem;
           margin-top: 2rem;
           overflow: hidden;
+        }
+      }
+
+      &--desktop {
+        display: block;
+
+        @media (max-width: 56.25em) {
+          display: none;
         }
       }
     }

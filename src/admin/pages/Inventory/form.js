@@ -4,17 +4,19 @@ import { useTranslation } from 'react-i18next';
 import { bool, func, object, shape } from 'prop-types';
 import { UNITS } from '../constants';
 import Loader from '../../../components/Loader';
-import { useGetColorQuery, useGetItemQuery } from '../../../services/base';
+import { useGetColorQuery, useGetItemQuery, useGetSizeQuery } from '../../../services/base';
 
 export default function InventoryForm(props) {
   const { t } = useTranslation();
   const { handleChange, /* touched, errors, */ handleSubmit, values, isLoading, feedback } = props;
-  const { date, color, item, unit, price, quantity, comment } = values;
+  const { date, color, item, unit, price, quantity, comment, size } = values;
   const { success, successMessage, error, errorMessage } = feedback;
   const [colors, setColors] = useState([]);
   const [items, setItems] = useState([]);
+  const [sizes, setSizes] = useState([]);
   const { data: itemsData = {}, isLoading: loadingItems } = useGetItemQuery();
   const { data: colorsData = {}, isLoading: loadingColors } = useGetColorQuery();
+  const { data: sizesData = {}, isLoading: loadingSizes } = useGetSizeQuery();
   //   const errorHandling = fieldName => {
   //     const error = touched?.[fieldName] && !!errors?.[fieldName];
   //     const helperText = touched?.[fieldName] && errors?.[fieldName];
@@ -28,6 +30,10 @@ export default function InventoryForm(props) {
   useEffect(() => {
     if (!loadingItems) setItems(Object.entries(itemsData || {}).map(([id, { item }]) => ({ id, item })));
   }, [loadingItems]);
+
+  useEffect(() => {
+    if (!loadingSizes) setSizes(Object.entries(sizesData || {}).map(([id, { size }]) => ({ id, size })));
+  }, [loadingSizes]);
 
   return (
     <>
@@ -67,6 +73,19 @@ export default function InventoryForm(props) {
             ))}
           </Select>
         </FormControl>
+
+        <FormControl fullWidth>
+          <InputLabel id="size">Size</InputLabel>
+          <Select labelId="size" id="size" name="size" value={size} label="Size" onChange={handleChange}>
+            {sizes.map(({ id, size }) => (
+              <MenuItem key={id} value={size}>
+                {size}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
+      <div className="row col-md-4 col-sm-1 mt-sm">
         <FormControl fullWidth>
           <InputLabel id="unit">Unit</InputLabel>
           <Select labelId="unit" id="unit" name="unit" value={unit} label="Unit" onChange={handleChange}>
@@ -77,8 +96,7 @@ export default function InventoryForm(props) {
             ))}
           </Select>
         </FormControl>
-      </div>
-      <div className="row col-md-4 col-sm-1 mt-sm">
+
         <TextField
           variant="outlined"
           type="number"

@@ -95,7 +95,8 @@ i18n
             adminDashboard: 'Admin Dashboard',
             saleDashboard: 'Sale Dashboard',
             item: 'Item',
-            color: 'Color'
+            color: 'Color',
+            size: 'Size'
           },
           salesSummary: {
             title: 'Sales Summary',
@@ -142,6 +143,12 @@ i18n
             item: 'Color',
             savedSuccessfully: 'Color saved successfully.',
             savedError: 'Error while saving color. Please try again.'
+          },
+          size: {
+            title: 'Size',
+            size: 'Size',
+            savedSuccessfully: 'Size saved successfully.',
+            savedError: 'Error while saving size. Please try again.'
           }
         }
       },
@@ -196,7 +203,7 @@ i18n
             save: 'सुरक्षित करें',
             addItem: 'नया समान जोड़ें',
             savedSuccessfully: 'बिक्री सफलतापूर्वक सहेजी गई।',
-            savedError: 'बिक्री सहेजते समय त्रुटि. कृपया पुन: प्रयास करें।',
+            savedError: 'बिक्री सहेजते समय त्रुटि। कृपया पुन: प्रयास करें।',
             errors: {
               exceedQuantity: 'मात्रा उपलब्ध मात्रा से अधिक नहीं हो सकती।'
             }
@@ -209,7 +216,7 @@ i18n
             comment: 'टिप्पणी',
             save: 'सुरक्षित करें',
             savedSuccessfully: 'खरीदारी सफलतापूर्वक सहेजी गई।',
-            savedError: 'खरीदारी सहेजते समय त्रुटि. कृपया पुन: प्रयास करें।'
+            savedError: 'खरीदारी सहेजते समय त्रुटि। कृपया पुन: प्रयास करें।'
           },
           purchasesSummary: {
             title: 'खरीद सारांश',
@@ -232,7 +239,8 @@ i18n
             adminDashboard: 'व्यवस्थापक डैशबोर्ड',
             saleDashboard: 'बिक्री डैशबोर्ड',
             item: 'सामान',
-            color: 'कलर'
+            color: 'कलर',
+            size: 'माप'
           },
           salesSummary: {
             title: 'बिक्री सारांश',
@@ -251,19 +259,20 @@ i18n
           inventory: {
             title: 'इन्वेंटरी जोड़ें',
             item: 'समान',
-            unit: 'Unit',
-            date: 'Date',
-            color: 'Color',
-            price: 'Price',
-            quantity: 'Quantity',
-            comment: 'Comment',
+            unit: 'इकाई',
+            date: 'तारीख',
+            color: 'रंग',
+            size: 'माप',
+            price: 'कीमत',
+            quantity: 'मात्रा',
+            comment: 'टिप्पणी',
             price10: '+ 10%',
             price20: '+ 20%',
             price30: '+ 30%',
             price40: '+ 40%',
             price50: '+ 50%',
             savedSuccessfully: 'इन्वेंटरी सफलतापूर्वक सहेजी गई।',
-            savedError: 'इन्वेंटरी सहेजते समय त्रुटि. कृपया पुन: प्रयास करें।'
+            savedError: 'इन्वेंटरी सहेजते समय त्रुटि। कृपया पुन: प्रयास करें।'
           },
           inventorySummary: {
             title: 'इन्वेंटरी सारांश'
@@ -272,13 +281,19 @@ i18n
             title: 'समान',
             item: 'समान',
             savedSuccessfully: 'समान सफलतापूर्वक सहेजा गया.',
-            savedError: 'समान सहेजते समय त्रुटि. कृपया पुन: प्रयास करें।'
+            savedError: 'समान सहेजते समय त्रुटि। कृपया पुन: प्रयास करें।'
           },
           color: {
             title: 'रंग',
             item: 'रंग',
             savedSuccessfully: 'रंग सफलतापूर्वक सहेजा गया।',
-            savedError: 'रंग सहेजते समय त्रुटि. कृपया पुन: प्रयास करें।'
+            savedError: 'रंग सहेजते समय त्रुटि। कृपया पुन: प्रयास करें।'
+          },
+          size: {
+            title: 'माप',
+            size: 'माप',
+            savedSuccessfully: 'आकार सफलतापूर्वक सहेजा गया।',
+            savedError: 'आकार सहेजते समय त्रुटि। कृपया पुन: प्रयास करें।'
           }
         }
       }
