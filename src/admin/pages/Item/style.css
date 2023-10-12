@@ -2,6 +2,11 @@
   list-style: none;
 }
 
+.items-list--item {
+  background-color: var(--tint-3-gray);
+  padding: 0.5rem;
+}
+
 .items-list--item:not(:last-child) {
   margin-bottom: 1rem;
 }

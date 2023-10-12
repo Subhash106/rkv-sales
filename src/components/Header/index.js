@@ -1,17 +1,16 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
 import { Backdrop } from '@mui/material';
 
 import './style.css';
 import signout from '../../utils/logout';
 import Loader from '../Loader';
+import Menu from './menu';
 
 const Header = () => {
   const [backdrop, setBackdrop] = useState(false);
   const [isSigningout, setIsSigningout] = useState(false);
-  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const hamburgerRef = useRef();
@@ -42,7 +41,7 @@ const Header = () => {
 
   return (
     <div className="header">
-      <div className="container">
+      <div className="container--header">
         {isSigningout && <Loader />}
         <header className="main-header">
           <div onClick={hamburgerClickHandler} ref={hamburgerRef} role="button" tabIndex={0} className="hamburger">
@@ -54,6 +53,19 @@ const Header = () => {
             <NavLink to="/">
               <img src="../../../img/logo.jpg" alt="Logo" className="logo" />
             </NavLink>
+          </div>
+
+          <div className="top-nav top-nav--desktop">
+            <ul>
+              <li>
+                <div onClick={closeClickHandler} ref={closeRef} role="button" tabIndex={0} className="close">
+                  <div className="close--top"></div>
+                  <div className="close--middle"></div>
+                  <div className="close--bottom"></div>
+                </div>
+              </li>
+              <Menu closeClickHandler={closeClickHandler} token={token} logoutHandler={logoutHandler} />
+            </ul>
           </div>
 
           <Backdrop
@@ -70,80 +82,7 @@ const Header = () => {
                     <div className="close--bottom"></div>
                   </div>
                 </li>
-                <li>
-                  <NavLink
-                    onClick={closeClickHandler}
-                    to="/dashboard"
-                    className={({ isActive }) => {
-                      return isActive ? 'active' : '';
-                    }}
-                    end
-                  >
-                    {t('header.dashboard')}
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    onClick={closeClickHandler}
-                    to="/sales"
-                    className={({ isActive }) => {
-                      return isActive ? 'active' : '';
-                    }}
-                  >
-                    {t('header.sales')}
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    onClick={closeClickHandler}
-                    to="/sales-summary"
-                    className={({ isActive }) => {
-                      return isActive ? 'active' : '';
-                    }}
-                  >
-                    {t('header.salesSummary')}
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    onClick={closeClickHandler}
-                    to="/purchases"
-                    className={({ isActive }) => {
-                      return isActive ? 'active' : '';
-                    }}
-                  >
-                    {t('header.purchases')}
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    onClick={closeClickHandler}
-                    to="/purchases-summary"
-                    className={({ isActive }) => {
-                      return isActive ? 'active' : '';
-                    }}
-                  >
-                    {t('header.purchasesSummary')}
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    onClick={closeClickHandler}
-                    to="/admin"
-                    className={({ isActive }) => {
-                      return isActive ? 'active' : '';
-                    }}
-                  >
-                    {t('header.inventory')}
-                  </NavLink>
-                </li>
-                {token && (
-                  <li>
-                    <a href="#" onClick={logoutHandler}>
-                      {t('header.logout')}
-                    </a>
-                  </li>
-                )}
+                <Menu closeClickHandler={closeClickHandler} token={token} logoutHandler={logoutHandler} />
               </ul>
             </div>
           </Backdrop>
