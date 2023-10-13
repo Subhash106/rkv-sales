@@ -6,7 +6,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.4rem 0;
+    padding: 1rem 0;
 
     @media (max-width: 56.25em) {
       justify-content: center;

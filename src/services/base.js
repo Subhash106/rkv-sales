@@ -98,7 +98,7 @@ const baseAPIs = createApi({
     }),
     getSize: builder.query({
       query: () => 'sizes.json',
-      keepUnusedDataFor: 5
+      keepUnusedDataFor: 0
     })
   })
 });
