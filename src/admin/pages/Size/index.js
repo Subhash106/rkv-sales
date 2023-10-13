@@ -11,7 +11,7 @@ const Size = () => {
   const { t } = useTranslation();
   const [errors, setErrors] = useState(null);
   const [addSize, { isLoading }] = useAddSizeMutation();
-  const { data = {}, isLoading: loadingSizes } = useGetSizeQuery() || {};
+  const { data = {}, isLoading: loadingSizes } = useGetSizeQuery({}, { refetchOnMountOrArgChange: true }) || {};
   const [feedback, setFeedback] = useState({ success: false, error: false, errorMessage: '', successMessage: '' });
   const { success, error, successMessage, errorMessage } = feedback;
   const [size, setSize] = useState('');
