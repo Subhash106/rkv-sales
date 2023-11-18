@@ -26,6 +26,9 @@ const baseAPIs = createApi({
     getOrders: builder.query({
       query: () => 'orders.json'
     }),
+    getInventory: builder.query({
+      query: () => 'inventory.json'
+    }),
     storeOrders: builder.mutation({
       query: order => ({
         url: 'orders.json',
@@ -39,9 +42,81 @@ const baseAPIs = createApi({
         method: 'POST',
         body: purchase
       })
+    }),
+    storeInventroy: builder.mutation({
+      query: inventory => ({
+        url: 'inventory.json',
+        method: 'POST',
+        body: inventory
+      })
+    }),
+    patchInventroy: builder.mutation({
+      query: payload => {
+        const { id, key, value } = payload;
+
+        return {
+          url: `inventory/${id}.json`,
+          method: 'PATCH',
+          body: { [key]: value }
+        };
+      }
+    }),
+    addItem: builder.mutation({
+      query: item => {
+        return {
+          url: `items.json`,
+          method: 'POST',
+          body: item
+        };
+      }
+    }),
+    getItem: builder.query({
+      query: () => 'items.json',
+      keepUnusedDataFor: 5
+    }),
+    addColor: builder.mutation({
+      query: color => {
+        return {
+          url: `colors.json`,
+          method: 'POST',
+          body: color
+        };
+      }
+    }),
+    getColor: builder.query({
+      query: () => 'colors.json',
+      keepUnusedDataFor: 5
+    }),
+    addSize: builder.mutation({
+      query: size => {
+        return {
+          url: `sizes.json`,
+          method: 'POST',
+          body: size
+        };
+      }
+    }),
+    getSize: builder.query({
+      query: () => 'sizes.json',
+      keepUnusedDataFor: 0
     })
   })
 });
 
-export const { useGetPurchasesQuery, useGetOrdersQuery, useStoreOrdersMutation, useStorePurchasesMutation } = baseAPIs;
+export const {
+  useGetPurchasesQuery,
+  useGetOrdersQuery,
+  useGetInventoryQuery,
+  useStoreOrdersMutation,
+  useStorePurchasesMutation,
+  useStoreInventroyMutation,
+  usePatchInventroyMutation,
+  useLazyGetInventoryQuery,
+  useAddItemMutation,
+  useAddColorMutation,
+  useGetColorQuery,
+  useGetItemQuery,
+  useAddSizeMutation,
+  useGetSizeQuery
+} = baseAPIs;
 export default baseAPIs;

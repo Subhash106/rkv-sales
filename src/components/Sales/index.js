@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useStoreOrdersMutation } from '../../services/base';
+import { usePatchInventroyMutation, useStoreOrdersMutation } from '../../services/base';
 import { DB, isOffline } from '../shared/utilities';
 import SalesFormFields from './form';
 import './style.css';
@@ -13,13 +13,14 @@ const Sales = () => {
   const [feedback, setFeedback] = useState({ success: false, error: false, errorMessage: '', successMessage: '' });
   const { t } = useTranslation();
   const [addOrder, { isLoading }] = useStoreOrdersMutation();
+  const [patchInventroy] = usePatchInventroyMutation();
   const formData = {
     date: moment().format('YYYY-MM-DD'),
     mobile: '',
     firstName: '',
     lastName: '',
     address: '',
-    items: [{ item: '', quantity: '', rate: '' }],
+    items: [{ item: '', quantity: '', color: '', size: '', rate: '', unit: '', totalQuantity: '', id: '' }],
     subTotal: 0
   };
 
@@ -30,7 +31,13 @@ const Sales = () => {
       firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required(required),
       lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required(required),
       mobile: Yup.string().min(10, 'Too Short!').max(10, 'Too Long!').required(required),
-      address: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required(required)
+      address: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required(required),
+      items: Yup.array().of(
+        Yup.object().shape({
+          // item: Yup.string(),
+          quantity: Yup.number().required(required)
+        })
+      )
     });
   };
 
@@ -41,6 +48,15 @@ const Sales = () => {
       }, 10000);
 
       try {
+        // Reduce inventory
+        await Promise.allSettled(
+          payload.items.filter(
+            ({ id, quantity, totalQuantity }) =>
+              id && patchInventroy({ id, key: 'quantity', value: totalQuantity - quantity }).unwrap()
+          )
+        );
+
+        // Add sale
         await addOrder(payload).unwrap();
         setFeedback({ ...feedback, success: true, successMessage: t('sales.savedSuccessfully') });
         return true;
@@ -64,10 +80,13 @@ const Sales = () => {
       <Formik
         initialValues={formData}
         validationSchema={getValidationSchema()}
-        onSubmit={async (values, { resetForm }) => {
+        onSubmit={async (values, { resetForm, setFieldValue }) => {
           const res = await submitHandler(values);
           if (res) {
             resetForm({ ...formData, items: [] });
+            setFieldValue('items', [
+              { item: '', quantity: '', size: '', rate: '', unit: '', totalQuantity: '', id: '' }
+            ]);
           }
         }}
       >
